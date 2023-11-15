@@ -5,6 +5,7 @@ import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.dto.sign.SignInRequest;
 import dmu.dmuclub.dto.sign.SignResponse;
 import dmu.dmuclub.dto.sign.SignUpResquest;
+import dmu.dmuclub.exception.member.MemberNotFoundException;
 import dmu.dmuclub.exception.sign.EmailAlreadyExistsException;
 import dmu.dmuclub.exception.sign.LoginFailureException;
 import dmu.dmuclub.exception.sign.NicknameAlreadyExistsException;
@@ -43,13 +44,13 @@ public class SignService {
             MemberDto memberDto = memberDao.findByEmail(signInRequest.getEmail());
 
             if (memberDto == null)
-                throw new LoginFailureException("가입한 회원정보가 없습니다");
+                throw new MemberNotFoundException("가입한 회원정보가 없습니다");
 
             if (!memberDto.getPassword().equals(signInRequest.getPassword()) )
                 throw new LoginFailureException("비밀번호를 확인해 주세요");
 
             return successResponse();
-        } catch (LoginFailureException e) {
+        } catch (LoginFailureException | MemberNotFoundException e) {
             return new SignResponse(e.getMessage(), "400");
         }
     }
