@@ -14,19 +14,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-@WebServlet(name = "SignInServlet", value = "/sign-in")
+@WebServlet(name = "SignInServlet", value = "/auth/sign-in")
 public class SignInServlet extends HttpServlet {
 
     private final SignService signService;
 
     public SignInServlet() {
         this.signService = new SignService();
-    }
-
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/");
     }
 
     @Override
@@ -40,20 +34,13 @@ public class SignInServlet extends HttpServlet {
             try {
                 JSONObject object = (JSONObject) parser.parse(reader);
                 SignInRequest signInRequest = createSignUpRequest(object, new SignInRequest());
-                signService.signIn(signInRequest);
+
+                SignResponse signResponse = signService.signIn(signInRequest);
 
 
-                /**
-                 * 임시 response
-                 */
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
-
-                SignResponse signResponse = new SignResponse("success", "200");
-                JSONObject jsonResponse = signResponse.toJson();
-
-                response.getWriter().write(jsonResponse.toJSONString());
-
+                response.getWriter().write(signResponse.toJson().toJSONString());
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }

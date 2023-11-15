@@ -14,7 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-@WebServlet(name = "SignUpServlet", value = "/sign-up")
+@WebServlet(name = "SignUpServlet", value = "/auth/sign-up")
 public class SignUpServlet extends HttpServlet {
 
     private final SignService signService;
@@ -23,37 +23,23 @@ public class SignUpServlet extends HttpServlet {
         this.signService = new SignService();
     }
 
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/");
-    }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String contentType = request.getContentType();
 
         if (contentType != null && contentType.contains("application/json")) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
-
             JSONParser parser = new JSONParser();
+
             try {
                 JSONObject requestJson = (JSONObject) parser.parse(reader);
                 SignUpResquest signUpResquest = createSignUpRequest(requestJson, new SignUpResquest());
-                signService.signUp(signUpResquest);
+                SignResponse signResponse = signService.signUp(signUpResquest);
 
 
-                /**
-                 * 임시 response
-                 */
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
-
-                SignResponse signResponse = new SignResponse("success", "200");
-                JSONObject jsonResponse = signResponse.toJson();
-
-                response.getWriter().write(jsonResponse.toJSONString());
-
+                response.getWriter().write(signResponse.toJson().toJSONString());
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }

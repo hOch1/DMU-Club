@@ -2,3 +2,4 @@
 
 > Java version - 11  
 > Tomcat - 9  
+> DB - Mysql
