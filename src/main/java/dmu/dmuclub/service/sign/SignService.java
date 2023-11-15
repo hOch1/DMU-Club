@@ -1,19 +1,20 @@
 package dmu.dmuclub.service.sign;
 
 import dmu.dmuclub.dto.sign.SignInRequest;
+import dmu.dmuclub.dto.sign.SignResponse;
 import dmu.dmuclub.dto.sign.SignUpResquest;
 
 public class SignService {
 
 
 
-    public void signUp(SignUpResquest signUpResquest){
+    public SignResponse signUp(SignUpResquest signUpResquest){
 
-        // DB 저장
+        return new SignResponse();
     }
 
-    public void signIn(SignInRequest signInRequest){
+    public SignResponse signIn(SignInRequest signInRequest){
 
-        // DB 비교
+        return new SignResponse();
     }
 }

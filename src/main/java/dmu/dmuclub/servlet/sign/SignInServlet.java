@@ -1,6 +1,7 @@
 package dmu.dmuclub.servlet.sign;
 
 import dmu.dmuclub.dto.sign.SignInRequest;
+import dmu.dmuclub.dto.sign.SignResponse;
 import dmu.dmuclub.service.sign.SignService;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -18,8 +19,8 @@ public class SignInServlet extends HttpServlet {
 
     private final SignService signService;
 
-    public SignInServlet(SignService signService) {
-        this.signService = signService;
+    public SignInServlet() {
+        this.signService = new SignService();
     }
 
 
@@ -34,14 +35,24 @@ public class SignInServlet extends HttpServlet {
 
         if (contentType != null && contentType.contains("application/json")) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
-
             JSONParser parser = new JSONParser();
+
             try {
                 JSONObject object = (JSONObject) parser.parse(reader);
-
                 SignInRequest signInRequest = createSignUpRequest(object, new SignInRequest());
-
                 signService.signIn(signInRequest);
+
+
+                /**
+                 * 임시 response
+                 */
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+
+                SignResponse signResponse = new SignResponse("success", "200");
+                JSONObject jsonResponse = signResponse.toJson();
+
+                response.getWriter().write(jsonResponse.toJSONString());
 
             } catch (ParseException e) {
                 throw new RuntimeException(e);

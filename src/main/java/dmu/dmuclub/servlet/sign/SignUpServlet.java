@@ -1,5 +1,6 @@
 package dmu.dmuclub.servlet.sign;
 
+import dmu.dmuclub.dto.sign.SignResponse;
 import dmu.dmuclub.dto.sign.SignUpResquest;
 import dmu.dmuclub.service.sign.SignService;
 import org.json.simple.JSONObject;
@@ -18,8 +19,8 @@ public class SignUpServlet extends HttpServlet {
 
     private final SignService signService;
 
-    public SignUpServlet(SignService signService) {
-        this.signService = signService;
+    public SignUpServlet() {
+        this.signService = new SignService();
     }
 
 
@@ -37,11 +38,21 @@ public class SignUpServlet extends HttpServlet {
 
             JSONParser parser = new JSONParser();
             try {
-                JSONObject object = (JSONObject) parser.parse(reader);
-
-                SignUpResquest signUpResquest = createSignUpRequest(object, new SignUpResquest());
-
+                JSONObject requestJson = (JSONObject) parser.parse(reader);
+                SignUpResquest signUpResquest = createSignUpRequest(requestJson, new SignUpResquest());
                 signService.signUp(signUpResquest);
+
+
+                /**
+                 * 임시 response
+                 */
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+
+                SignResponse signResponse = new SignResponse("success", "200");
+                JSONObject jsonResponse = signResponse.toJson();
+
+                response.getWriter().write(jsonResponse.toJSONString());
 
             } catch (ParseException e) {
                 throw new RuntimeException(e);
@@ -49,12 +60,12 @@ public class SignUpServlet extends HttpServlet {
         }
     }
 
-    private SignUpResquest createSignUpRequest(JSONObject object, SignUpResquest signUpResquest){
-        signUpResquest.setEmail(object.get("email").toString());
-        signUpResquest.setPassword(object.get("password").toString());
-        signUpResquest.setNickname(object.get("nickname").toString());
-        signUpResquest.setPhone(object.get("phone").toString());
-        signUpResquest.setUsername(object.get("username").toString());
+    private SignUpResquest createSignUpRequest(JSONObject requestJson, SignUpResquest signUpResquest){
+        signUpResquest.setEmail(requestJson.get("email").toString());
+        signUpResquest.setPassword(requestJson.get("password").toString());
+        signUpResquest.setNickname(requestJson.get("nickname").toString());
+        signUpResquest.setPhone(requestJson.get("phone").toString());
+        signUpResquest.setUsername(requestJson.get("username").toString());
 
         return signUpResquest;
     }
