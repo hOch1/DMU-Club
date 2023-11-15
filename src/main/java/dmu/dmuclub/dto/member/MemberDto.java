@@ -1,5 +1,7 @@
 package dmu.dmuclub.dto.member;
 
+import dmu.dmuclub.dao.member.Role;
+
 public class MemberDto {
 
     private String email;
@@ -7,16 +9,19 @@ public class MemberDto {
     private String username;
     private String nickname;
     private String phone;
+    private String role;
 
     public MemberDto() {
     }
 
-    public MemberDto(String email, String password, String username, String nickname, String phone) {
+
+    public MemberDto(String email, String password, String username, String nickname, String phone, String role) {
         this.email = email;
         this.password = password;
         this.username = username;
         this.nickname = nickname;
         this.phone = phone;
+        this.role = role;
     }
 
     public String getEmail() {
@@ -57,5 +62,13 @@ public class MemberDto {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

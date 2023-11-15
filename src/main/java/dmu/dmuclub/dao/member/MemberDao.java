@@ -1,5 +1,6 @@
 package dmu.dmuclub.dao.member;
 
+import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.dto.sign.SignUpResquest;
 import dmu.dmuclub.exception.sign.EmailAlreadyExistsException;
 import dmu.dmuclub.exception.sign.NicknameAlreadyExistsException;
@@ -44,6 +45,37 @@ public class MemberDao {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public MemberDto findByEmail(String email){
+        MemberDto memberDto = new MemberDto();
+
+        try (Connection connection = getConnection()){
+            String query = "SELECT * FROM member WHERE email = ?";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setString(1, email);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()){
+                        memberDto.setEmail(resultSet.getString("email"));
+                        memberDto.setPassword(resultSet.getString("password"));
+                        memberDto.setNickname(resultSet.getString("nickname"));
+                        memberDto.setPhone(resultSet.getString("phone"));
+                        memberDto.setUsername(resultSet.getString("username"));
+                        memberDto.setRole(resultSet.getString("role"));
+
+                        return memberDto;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
     }
 
 

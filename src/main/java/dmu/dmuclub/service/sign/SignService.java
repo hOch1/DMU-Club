@@ -1,6 +1,7 @@
 package dmu.dmuclub.service.sign;
 
 import dmu.dmuclub.dao.member.MemberDao;
+import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.dto.sign.SignInRequest;
 import dmu.dmuclub.dto.sign.SignResponse;
 import dmu.dmuclub.dto.sign.SignUpResquest;
@@ -39,10 +40,17 @@ public class SignService {
 
     public SignResponse signIn(SignInRequest signInRequest) {
         try {
+            MemberDto memberDto = memberDao.findByEmail(signInRequest.getEmail());
+
+            if (memberDto == null)
+                throw new LoginFailureException("가입한 회원정보가 없습니다");
+
+            if (!memberDto.getPassword().equals(signInRequest.getPassword()) )
+                throw new LoginFailureException("비밀번호를 확인해 주세요");
 
             return successResponse();
         } catch (LoginFailureException e) {
-            return new SignResponse("로그인에 실패하였습니다.", "400");
+            return new SignResponse(e.getMessage(), "400");
         }
     }
 
@@ -63,7 +71,6 @@ public class SignService {
             throw new NicknameAlreadyExistsException("핸드폰 번호가 이미 사용중입니다.");
         return false;
     }
-
 
     private SignResponse successResponse() {
         return new SignResponse("success", "200");
