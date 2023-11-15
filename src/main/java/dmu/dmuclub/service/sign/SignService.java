@@ -21,7 +21,6 @@ public class SignService {
 
     public SignResponse signUp(SignUpResquest signUpRequest) {
         try {
-            // 이메일, 닉네임 중복검사
             emailExistsValidate(signUpRequest.getEmail());
             nicknameExistsValidate(signUpRequest.getNickname());
             phoneExistsValidate(signUpRequest.getPhone());
@@ -49,19 +48,19 @@ public class SignService {
 
     private boolean emailExistsValidate(String email) throws SQLException, ClassNotFoundException {
         if (memberDao.existsByEmail(email))
-            throw new EmailAlreadyExistsException(email + "은 이미 사용중입니다");
+            throw new EmailAlreadyExistsException("이메일이 이미 사용중입니다");
         return false;
     }
 
     private boolean nicknameExistsValidate(String nickname) throws SQLException, ClassNotFoundException {
         if (memberDao.existsByNickname(nickname))
-            throw new NicknameAlreadyExistsException(nickname + "은 이미 사용중입니다.");
+            throw new NicknameAlreadyExistsException("닉네임이 이미 사용중입니다.");
         return false;
     }
 
     private boolean phoneExistsValidate(String phone) throws SQLException, ClassNotFoundException {
         if (memberDao.existsByPhone(phone))
-            throw new NicknameAlreadyExistsException(phone + "은 이미 사용중입니다.");
+            throw new NicknameAlreadyExistsException("핸드폰 번호가 이미 사용중입니다.");
         return false;
     }
 
