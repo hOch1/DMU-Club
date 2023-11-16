@@ -35,7 +35,7 @@ public class SignInServlet extends HttpServlet {
             try {
                 JSONObject object = (JSONObject) parser.parse(reader);
 
-                SignInRequest signInRequest = createSignUpRequest(object, new SignInRequest());
+                SignInRequest signInRequest = createSignUpRequest(object);
                 HttpSession session = request.getSession();
 
                 Response signResponse = signService.signIn(signInRequest, session);
@@ -49,11 +49,9 @@ public class SignInServlet extends HttpServlet {
         }
     }
 
-    private SignInRequest createSignUpRequest(JSONObject object, SignInRequest signInRequest) {
-
-        signInRequest.setEmail(object.get("email").toString());
-        signInRequest.setPassword(object.get("password").toString());
-
-        return signInRequest;
+    private SignInRequest createSignUpRequest(JSONObject object) {
+        return new SignInRequest(
+                object.get("email").toString(),
+                object.get("password").toString());
     }
 }

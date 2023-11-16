@@ -1,7 +1,12 @@
 package dmu.dmuclub.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.json.simple.JSONObject;
 
+@Data
+@AllArgsConstructor
 public class Response {
 
     private String msg;
@@ -16,29 +21,5 @@ public class Response {
 
     public static Response successResponse(){
         return new Response("success", "200");
-    }
-
-    public Response() {
-    }
-
-    public Response(String msg, String code) {
-        this.msg = msg;
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 }

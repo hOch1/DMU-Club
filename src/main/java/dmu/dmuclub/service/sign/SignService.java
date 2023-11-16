@@ -10,9 +10,12 @@ import dmu.dmuclub.exception.sign.EmailAlreadyExistsException;
 import dmu.dmuclub.exception.sign.LoginFailureException;
 import dmu.dmuclub.exception.sign.NicknameAlreadyExistsException;
 import dmu.dmuclub.exception.sign.PhoneAlreadyExistsException;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+
 
 public class SignService {
 

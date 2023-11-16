@@ -46,13 +46,12 @@ public class SignUpServlet extends HttpServlet {
     }
 
     private SignUpResquest createSignUpRequest(JSONObject requestJson){
-        SignUpResquest signUpResquest = new SignUpResquest();
-        signUpResquest.setEmail(requestJson.get("email").toString());
-        signUpResquest.setPassword(requestJson.get("password").toString());
-        signUpResquest.setNickname(requestJson.get("nickname").toString());
-        signUpResquest.setPhone(requestJson.get("phone").toString());
-        signUpResquest.setUsername(requestJson.get("username").toString());
-
-        return signUpResquest;
+        return SignUpResquest.builder()
+                .email(requestJson.get("email").toString())
+                .password(requestJson.get("password").toString())
+                .phone(requestJson.get("phone").toString())
+                .nickname(requestJson.get("nickname").toString())
+                .username(requestJson.get("username").toString())
+                .build();
     }
 }
