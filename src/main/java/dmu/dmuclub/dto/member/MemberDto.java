@@ -1,9 +1,13 @@
 package dmu.dmuclub.dto.member;
 
 import dmu.dmuclub.dao.member.Role;
+import dmu.dmuclub.dto.board.BoardDto;
+
+import java.util.List;
 
 public class MemberDto {
 
+    private int id;
     private String email;
     private String password;
     private String username;
@@ -15,7 +19,8 @@ public class MemberDto {
     }
 
 
-    public MemberDto(String email, String password, String username, String nickname, String phone, String role) {
+    public MemberDto(int id, String email, String password, String username, String nickname, String phone, String role) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.username = username;

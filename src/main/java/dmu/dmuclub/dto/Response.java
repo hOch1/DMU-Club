@@ -1,8 +1,8 @@
-package dmu.dmuclub.dto.sign;
+package dmu.dmuclub.dto;
 
 import org.json.simple.JSONObject;
 
-public class SignResponse {
+public class Response {
 
     private String msg;
     private String code;
@@ -14,10 +14,14 @@ public class SignResponse {
         return json;
     }
 
-    public SignResponse() {
+    public static Response successResponse(){
+        return new Response("success", "200");
     }
 
-    public SignResponse(String msg, String code) {
+    public Response() {
+    }
+
+    public Response(String msg, String code) {
         this.msg = msg;
         this.code = code;
     }

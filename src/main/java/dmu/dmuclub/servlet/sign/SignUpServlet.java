@@ -1,6 +1,6 @@
 package dmu.dmuclub.servlet.sign;
 
-import dmu.dmuclub.dto.sign.SignResponse;
+import dmu.dmuclub.dto.Response;
 import dmu.dmuclub.dto.sign.SignUpResquest;
 import dmu.dmuclub.service.sign.SignService;
 import org.json.simple.JSONObject;
@@ -19,8 +19,8 @@ public class SignUpServlet extends HttpServlet {
 
     private final SignService signService;
 
-    public SignUpServlet() {
-        this.signService = new SignService();
+    public SignUpServlet(SignService signService) {
+        this.signService = signService;
     }
 
     @Override
@@ -33,8 +33,8 @@ public class SignUpServlet extends HttpServlet {
 
             try {
                 JSONObject requestJson = (JSONObject) parser.parse(reader);
-                SignUpResquest signUpResquest = createSignUpRequest(requestJson, new SignUpResquest());
-                SignResponse signResponse = signService.signUp(signUpResquest);
+                SignUpResquest signUpResquest = createSignUpRequest(requestJson);
+                Response signResponse = signService.signUp(signUpResquest);
 
 
                 response.setContentType("application/json");
@@ -46,7 +46,8 @@ public class SignUpServlet extends HttpServlet {
         }
     }
 
-    private SignUpResquest createSignUpRequest(JSONObject requestJson, SignUpResquest signUpResquest){
+    private SignUpResquest createSignUpRequest(JSONObject requestJson){
+        SignUpResquest signUpResquest = new SignUpResquest();
         signUpResquest.setEmail(requestJson.get("email").toString());
         signUpResquest.setPassword(requestJson.get("password").toString());
         signUpResquest.setNickname(requestJson.get("nickname").toString());

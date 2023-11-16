@@ -3,7 +3,7 @@ package dmu.dmuclub.service.sign;
 import dmu.dmuclub.dao.member.MemberDao;
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.dto.sign.SignInRequest;
-import dmu.dmuclub.dto.sign.SignResponse;
+import dmu.dmuclub.dto.Response;
 import dmu.dmuclub.dto.sign.SignUpResquest;
 import dmu.dmuclub.exception.member.MemberNotFoundException;
 import dmu.dmuclub.exception.sign.EmailAlreadyExistsException;
@@ -18,24 +18,24 @@ public class SignService {
 
     private final MemberDao memberDao;
 
-    public SignService() {
-        this.memberDao = new MemberDao();
+    public SignService(MemberDao memberDao) {
+        this.memberDao = memberDao;
     }
 
-    public SignResponse signUp(SignUpResquest signUpRequest) {
+    public Response signUp(SignUpResquest signUpRequest) {
         try {
             existsValidate(signUpRequest.getEmail(), signUpRequest.getNickname(), signUpRequest.getPhone());
 
             memberDao.save(signUpRequest);
-            return successResponse();
+            return Response.successResponse();
         } catch (EmailAlreadyExistsException | NicknameAlreadyExistsException | PhoneAlreadyExistsException e){
-            return new SignResponse(e.getMessage(), "409");
+            return new Response(e.getMessage(), "409");
         } catch (SQLException | ClassNotFoundException e) {
-            return new SignResponse("회원 가입 중 오류가 발생하였습니다.", "500");
+            return new Response("회원 가입 중 오류가 발생하였습니다.", "500");
         }
     }
 
-    public SignResponse signIn(SignInRequest signInRequest, HttpSession session) {
+    public Response signIn(SignInRequest signInRequest, HttpSession session) {
         try {
             MemberDto memberDto = memberDao.findByEmail(signInRequest.getEmail());
             if (memberDto == null)
@@ -45,9 +45,9 @@ public class SignService {
                 throw new LoginFailureException("비밀번호를 확인해 주세요");
 
             session.setAttribute("member", memberDto);
-            return successResponse();
+            return Response.successResponse();
         } catch (LoginFailureException | MemberNotFoundException e) {
-            return new SignResponse(e.getMessage(), "400");
+            return new Response(e.getMessage(), "400");
         }
     }
 
@@ -60,9 +60,5 @@ public class SignService {
             throw new NicknameAlreadyExistsException("핸드폰 번호가 이미 사용중입니다.");
 
         return false;
-    }
-
-    private SignResponse successResponse() {
-        return new SignResponse("success", "200");
     }
 }

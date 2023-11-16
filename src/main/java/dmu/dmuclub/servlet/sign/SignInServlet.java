@@ -1,7 +1,7 @@
 package dmu.dmuclub.servlet.sign;
 
 import dmu.dmuclub.dto.sign.SignInRequest;
-import dmu.dmuclub.dto.sign.SignResponse;
+import dmu.dmuclub.dto.Response;
 import dmu.dmuclub.service.sign.SignService;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -19,8 +19,8 @@ public class SignInServlet extends HttpServlet {
 
     private final SignService signService;
 
-    public SignInServlet() {
-        this.signService = new SignService();
+    public SignInServlet(SignService signService) {
+        this.signService = signService;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class SignInServlet extends HttpServlet {
                 SignInRequest signInRequest = createSignUpRequest(object, new SignInRequest());
                 HttpSession session = request.getSession();
 
-                SignResponse signResponse = signService.signIn(signInRequest, session);
+                Response signResponse = signService.signIn(signInRequest, session);
 
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");

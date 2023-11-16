@@ -2,8 +2,6 @@ package dmu.dmuclub.dao.member;
 
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.dto.sign.SignUpResquest;
-import dmu.dmuclub.exception.sign.EmailAlreadyExistsException;
-import dmu.dmuclub.exception.sign.NicknameAlreadyExistsException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,16 +11,16 @@ import java.sql.SQLException;
 
 public class MemberDao {
 
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/DMUCLUB";
-    private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "admin";
+    private static final String URL = "jdbc:mysql://localhost:3306/DMUCLUB";
+    private static final String USER = "root";
+    private static final String PASSWORD = "admin";
 
     private Connection getConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    public void save(SignUpResquest signUpRequest) {
+    public void save(SignUpResquest signUpRequest) throws ClassNotFoundException, SQLException{
         try (Connection connection = getConnection()) {
             String query = "INSERT INTO member (email, password, username, nickname, phone, role) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -39,10 +37,6 @@ public class MemberDao {
             } finally {
                 connection.close();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
 
     }
