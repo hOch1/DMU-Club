@@ -24,15 +24,10 @@ public class SignService {
 
     public SignResponse signUp(SignUpResquest signUpRequest) {
         try {
-            emailExistsValidate(signUpRequest.getEmail());
-            nicknameExistsValidate(signUpRequest.getNickname());
-            phoneExistsValidate(signUpRequest.getPhone());
-
+            existsValidate(signUpRequest.getEmail(), signUpRequest.getNickname(), signUpRequest.getPhone());
 
             memberDao.save(signUpRequest);
-            System.out.println("member save success");
             return successResponse();
-
         } catch (EmailAlreadyExistsException | NicknameAlreadyExistsException | PhoneAlreadyExistsException e){
             return new SignResponse(e.getMessage(), "409");
         } catch (SQLException | ClassNotFoundException e) {
@@ -56,21 +51,14 @@ public class SignService {
         }
     }
 
-    private boolean emailExistsValidate(String email) throws SQLException, ClassNotFoundException {
+    private boolean existsValidate(String email, String nickname, String phone) throws SQLException, ClassNotFoundException {
         if (memberDao.existsByEmail(email))
             throw new EmailAlreadyExistsException("이메일이 이미 사용중입니다");
-        return false;
-    }
-
-    private boolean nicknameExistsValidate(String nickname) throws SQLException, ClassNotFoundException {
         if (memberDao.existsByNickname(nickname))
             throw new NicknameAlreadyExistsException("닉네임이 이미 사용중입니다.");
-        return false;
-    }
-
-    private boolean phoneExistsValidate(String phone) throws SQLException, ClassNotFoundException {
         if (memberDao.existsByPhone(phone))
             throw new NicknameAlreadyExistsException("핸드폰 번호가 이미 사용중입니다.");
+
         return false;
     }
 
