@@ -1,9 +1,5 @@
 package dmu.dmuclub.dto.member;
 
-import dmu.dmuclub.dao.member.Role;
-import dmu.dmuclub.dto.board.BoardDto;
-
-import java.util.List;
 
 public class MemberDto {
 

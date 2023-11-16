@@ -4,21 +4,17 @@ import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.dto.sign.SignUpResquest;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static dmu.dmuclub.jdbc.JDBCTemplate.*;
+
 public class MemberDao {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/DMUCLUB";
-    private static final String USER = "root";
-    private static final String PASSWORD = "admin";
-
-    private Connection getConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+    public MemberDao() {
     }
+
 
     public void save(SignUpResquest signUpRequest) throws ClassNotFoundException, SQLException{
         try (Connection connection = getConnection()) {
@@ -41,7 +37,7 @@ public class MemberDao {
 
     }
 
-    public MemberDto findByEmail(String email){
+    public MemberDto findByEmail(String email) throws SQLException {
         MemberDto memberDto = new MemberDto();
 
         try (Connection connection = getConnection()){
@@ -63,10 +59,6 @@ public class MemberDao {
                     }
                 }
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
 
         return null;

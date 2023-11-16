@@ -7,24 +7,25 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 
 @WebServlet(name = "SignInServlet", value = "/auth/sign-in")
 public class SignInServlet extends HttpServlet {
 
     private final SignService signService;
 
-    public SignInServlet(SignService signService) {
-        this.signService = signService;
+
+    public SignInServlet() {
+        signService = new SignService();
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String contentType = request.getContentType();
 
         if (contentType != null && contentType.contains("application/json")) {
@@ -42,7 +43,7 @@ public class SignInServlet extends HttpServlet {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(signResponse.toJson().toJSONString());
-            } catch (ParseException e) {
+            } catch (ParseException | SQLException e) {
                 throw new RuntimeException(e);
             }
         }

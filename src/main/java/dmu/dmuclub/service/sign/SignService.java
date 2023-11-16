@@ -18,8 +18,8 @@ public class SignService {
 
     private final MemberDao memberDao;
 
-    public SignService(MemberDao memberDao) {
-        this.memberDao = memberDao;
+    public SignService() {
+        memberDao = new MemberDao();
     }
 
     public Response signUp(SignUpResquest signUpRequest) {
@@ -35,7 +35,7 @@ public class SignService {
         }
     }
 
-    public Response signIn(SignInRequest signInRequest, HttpSession session) {
+    public Response signIn(SignInRequest signInRequest, HttpSession session) throws SQLException {
         try {
             MemberDto memberDto = memberDao.findByEmail(signInRequest.getEmail());
             if (memberDto == null)
@@ -51,14 +51,12 @@ public class SignService {
         }
     }
 
-    private boolean existsValidate(String email, String nickname, String phone) throws SQLException, ClassNotFoundException {
+    private void existsValidate(String email, String nickname, String phone) throws SQLException, ClassNotFoundException {
         if (memberDao.existsByEmail(email))
             throw new EmailAlreadyExistsException("이메일이 이미 사용중입니다");
         if (memberDao.existsByNickname(nickname))
             throw new NicknameAlreadyExistsException("닉네임이 이미 사용중입니다.");
         if (memberDao.existsByPhone(phone))
             throw new NicknameAlreadyExistsException("핸드폰 번호가 이미 사용중입니다.");
-
-        return false;
     }
 }

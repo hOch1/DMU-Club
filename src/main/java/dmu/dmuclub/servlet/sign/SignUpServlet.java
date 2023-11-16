@@ -7,7 +7,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.BufferedReader;
@@ -19,12 +18,12 @@ public class SignUpServlet extends HttpServlet {
 
     private final SignService signService;
 
-    public SignUpServlet(SignService signService) {
-        this.signService = signService;
+    public SignUpServlet() {
+        signService = new SignService();
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String contentType = request.getContentType();
 
         if (contentType != null && contentType.contains("application/json")) {
