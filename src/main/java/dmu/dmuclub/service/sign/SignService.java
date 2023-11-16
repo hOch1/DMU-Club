@@ -11,6 +11,7 @@ import dmu.dmuclub.exception.sign.LoginFailureException;
 import dmu.dmuclub.exception.sign.NicknameAlreadyExistsException;
 import dmu.dmuclub.exception.sign.PhoneAlreadyExistsException;
 
+import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
 public class SignService {
@@ -39,16 +40,16 @@ public class SignService {
         }
     }
 
-    public SignResponse signIn(SignInRequest signInRequest) {
+    public SignResponse signIn(SignInRequest signInRequest, HttpSession session) {
         try {
             MemberDto memberDto = memberDao.findByEmail(signInRequest.getEmail());
-
             if (memberDto == null)
                 throw new MemberNotFoundException("가입한 회원정보가 없습니다");
 
             if (!memberDto.getPassword().equals(signInRequest.getPassword()) )
                 throw new LoginFailureException("비밀번호를 확인해 주세요");
 
+            session.setAttribute("member", memberDto);
             return successResponse();
         } catch (LoginFailureException | MemberNotFoundException e) {
             return new SignResponse(e.getMessage(), "400");

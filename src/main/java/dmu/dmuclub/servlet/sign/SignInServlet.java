@@ -33,13 +33,11 @@ public class SignInServlet extends HttpServlet {
 
             try {
                 JSONObject object = (JSONObject) parser.parse(reader);
-                SignInRequest signInRequest = createSignUpRequest(object, new SignInRequest());
-                SignResponse signResponse = signService.signIn(signInRequest);
 
-                if (signResponse.getCode().equals("200")) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("email", signInRequest.getEmail());
-                }
+                SignInRequest signInRequest = createSignUpRequest(object, new SignInRequest());
+                HttpSession session = request.getSession();
+
+                SignResponse signResponse = signService.signIn(signInRequest, session);
 
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
