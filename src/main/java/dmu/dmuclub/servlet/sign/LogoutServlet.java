@@ -8,13 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/auth/logout")
-public class LogOutServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().removeAttribute("email");
-
-        resp.setContentType("text/plain");
-        resp.getWriter().write("logout");
+        req.getSession().removeAttribute("member");
     }
 }
