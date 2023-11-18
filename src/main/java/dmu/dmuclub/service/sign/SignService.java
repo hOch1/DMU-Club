@@ -1,6 +1,6 @@
 package dmu.dmuclub.service.sign;
 
-import dmu.dmuclub.dao.member.MemberDao;
+import dmu.dmuclub.dao.member.impl.MemberDaoImpl;
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.dto.sign.SignInRequest;
 import dmu.dmuclub.dto.Response;
@@ -10,8 +10,6 @@ import dmu.dmuclub.exception.sign.EmailAlreadyExistsException;
 import dmu.dmuclub.exception.sign.LoginFailureException;
 import dmu.dmuclub.exception.sign.NicknameAlreadyExistsException;
 import dmu.dmuclub.exception.sign.PhoneAlreadyExistsException;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
@@ -19,10 +17,10 @@ import java.sql.SQLException;
 
 public class SignService {
 
-    private final MemberDao memberDao;
+    private final MemberDaoImpl memberDao;
 
     public SignService() {
-        memberDao = new MemberDao();
+        memberDao = new MemberDaoImpl();
     }
 
     public Response signUp(SignUpResquest signUpRequest) {

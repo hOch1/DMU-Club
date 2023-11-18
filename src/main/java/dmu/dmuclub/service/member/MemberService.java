@@ -1,12 +1,12 @@
 package dmu.dmuclub.service.member;
 
-import dmu.dmuclub.dao.member.MemberDao;
+import dmu.dmuclub.dao.member.impl.MemberDaoImpl;
 
 public class MemberService {
 
-    private final MemberDao memberDao;
+    private final MemberDaoImpl memberDao;
 
     public MemberService() {
-        this.memberDao = new MemberDao();
+        this.memberDao = new MemberDaoImpl();
     }
 }
