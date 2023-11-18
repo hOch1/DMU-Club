@@ -15,18 +15,26 @@ public class BoardService {
     private final MemberDao memberDao;
     private final BoardDao boardDao;
 
-    public BoardService(MemberDao memberDao, BoardDao boardDao) {
-        this.memberDao = memberDao;
-        this.boardDao = boardDao;
+    public BoardService() {
+        this.memberDao = new MemberDao();
+        this.boardDao = new BoardDao();
     }
 
     public Response createBoard(BoardDto boardDto, HttpSession session) throws SQLException, ClassNotFoundException {
-        String email = isLoginValidate((MemberDto) session.getAttribute("member"));
+        try {
+            String email = isLoginValidate((MemberDto) session.getAttribute("member"));
+            MemberDto memberDto = memberDao.findByEmail(email);
 
+            boardDto.setMember_id(memberDto.getId());
 
-        boardDao.save(boardDto);
+            boardDao.save(boardDto);
 
-        return Response.successResponse();
+            return Response.successResponse();
+        }catch (HasNotRoleException e){
+            return new Response(e.getMessage(), "400");
+        }catch (Exception e){
+            return new Response("게시물 생성 실패", "500");
+        }
     }
 
     private String isLoginValidate(MemberDto memberDto){

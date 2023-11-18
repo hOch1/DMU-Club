@@ -40,6 +40,7 @@ public class MemberDao {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
+                    memberDto.setId(resultSet.getInt("id"));
                     memberDto.setEmail(resultSet.getString("email"));
                     memberDto.setPassword(resultSet.getString("password"));
                     memberDto.setNickname(resultSet.getString("nickname"));

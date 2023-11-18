@@ -23,8 +23,8 @@ public class CreateBoardServlet extends HttpServlet {
 
     private final BoardService boardService;
 
-    public CreateBoardServlet(BoardService boardService) {
-        this.boardService = boardService;
+    public CreateBoardServlet() {
+        this.boardService = new BoardService();
     }
 
     @Override
