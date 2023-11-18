@@ -1,9 +1,13 @@
 package dmu.dmuclub.dto.sign;
 
 
+import dmu.dmuclub.dao.member.Role;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -26,5 +30,16 @@ public class SignUpResquest {
                 .username(username)
                 .phone(phone)
                 .build();
+    }
+
+    public List<String> toList(SignUpResquest signUpRequest) {
+        List<String> list = new ArrayList<>();
+        list.add(signUpRequest.getEmail());
+        list.add(signUpRequest.getPassword());
+        list.add(signUpRequest.getUsername());
+        list.add(signUpRequest.getNickname());
+        list.add(signUpRequest.getPhone());
+        list.add(Role.NORMAL.toString());
+        return list;
     }
 }

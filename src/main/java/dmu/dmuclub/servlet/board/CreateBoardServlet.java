@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,7 +37,8 @@ public class CreateBoardServlet extends HttpServlet {
 
             try {
                 JSONObject requestJson = (JSONObject) parser.parse(reader);
-                Response boardResponse = boardService.createBoard(BoardDto.toDto(requestJson));
+                HttpSession session = request.getSession();
+                Response boardResponse = boardService.createBoard(BoardDto.toDto(requestJson), session);
 
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
