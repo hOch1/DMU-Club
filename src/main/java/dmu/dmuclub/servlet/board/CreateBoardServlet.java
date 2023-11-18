@@ -1,7 +1,7 @@
 package dmu.dmuclub.servlet.board;
 
 import dmu.dmuclub.dto.Response;
-import dmu.dmuclub.dto.board.BoardDto;
+import dmu.dmuclub.dto.board.CreateBoardRequest;
 import dmu.dmuclub.service.board.BoardService;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -38,7 +38,7 @@ public class CreateBoardServlet extends HttpServlet {
             try {
                 JSONObject requestJson = (JSONObject) parser.parse(reader);
                 HttpSession session = request.getSession();
-                Response boardResponse = boardService.createBoard(BoardDto.toDto(requestJson), session);
+                Response boardResponse = boardService.createBoard(CreateBoardRequest.toDto(requestJson), session);
 
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");

@@ -6,7 +6,7 @@ public class MemberService {
 
     private final MemberDao memberDao;
 
-    public MemberService(MemberDao memberDao) {
-        this.memberDao = memberDao;
+    public MemberService() {
+        this.memberDao = new MemberDao();
     }
 }

@@ -3,7 +3,7 @@ package dmu.dmuclub.service.board;
 import dmu.dmuclub.dao.board.BoardDao;
 import dmu.dmuclub.dao.member.MemberDao;
 import dmu.dmuclub.dto.Response;
-import dmu.dmuclub.dto.board.BoardDto;
+import dmu.dmuclub.dto.board.CreateBoardRequest;
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.exception.member.HasNotRoleException;
 
@@ -20,7 +20,7 @@ public class BoardService {
         this.boardDao = new BoardDao();
     }
 
-    public Response createBoard(BoardDto boardDto, HttpSession session) throws SQLException, ClassNotFoundException {
+    public Response createBoard(CreateBoardRequest boardDto, HttpSession session) throws SQLException, ClassNotFoundException {
         try {
             String email = isLoginValidate((MemberDto) session.getAttribute("member"));
             MemberDto memberDto = memberDao.findByEmail(email);
