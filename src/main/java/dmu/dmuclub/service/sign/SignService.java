@@ -41,11 +41,8 @@ public class SignService {
     public Response signIn(SignInRequest signInRequest, HttpSession session) throws SQLException {
         try {
             MemberDto memberDto = memberDao.findByEmail(signInRequest.getEmail());
-            if (memberDto == null)
-                throw new MemberNotFoundException("가입한 회원정보가 없습니다");
 
-            if (!memberDto.getPassword().equals(signInRequest.getPassword()) )
-                throw new LoginFailureException("비밀번호를 확인해 주세요");
+            signInValidate(memberDto, signInRequest);
 
             session.setAttribute("member", memberDto);
             return Response.successResponse();
@@ -61,5 +58,13 @@ public class SignService {
             throw new NicknameAlreadyExistsException("닉네임이 이미 사용중입니다.");
         if (memberDao.existsByPhone(phone))
             throw new NicknameAlreadyExistsException("핸드폰 번호가 이미 사용중입니다.");
+    }
+
+    private void signInValidate(MemberDto memberDto, SignInRequest signInRequest){
+        if (memberDto == null)
+            throw new MemberNotFoundException("가입한 회원정보가 없습니다");
+
+        if (!memberDto.getPassword().equals(signInRequest.getPassword()) )
+            throw new LoginFailureException("비밀번호를 확인해 주세요");
     }
 }

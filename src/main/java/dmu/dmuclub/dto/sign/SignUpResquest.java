@@ -19,17 +19,13 @@ public class SignUpResquest {
     private String nickname;
     private String phone;
 
-
     @Builder
-    public static SignUpResquest toDto(String email, String password, String username, String nickname, String phone){
-        return SignUpResquest.builder()
-                .email(email)
-                .password(password)
-                .nickname(nickname)
-                .email(email)
-                .username(username)
-                .phone(phone)
-                .build();
+    public SignUpResquest(String email, String password, String username, String nickname, String phone) {
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.nickname = nickname;
+        this.phone = phone;
     }
 
     public List<String> toList(SignUpResquest signUpRequest) {
