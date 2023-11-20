@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/board/view")
+@WebServlet("/board/detail")
 public class ViewDetailBoardServlet extends HttpServlet {
 
     private final BoardService boardService;
@@ -26,11 +26,7 @@ public class ViewDetailBoardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             String boardId = request.getParameter("id");
-            ViewBoardResponse boardResponse = null;
-
-
-            boardResponse = boardService.viewBoardDetail(boardId);
-
+            ViewBoardResponse boardResponse = boardService.viewBoardDetail(boardId);
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");

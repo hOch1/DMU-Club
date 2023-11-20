@@ -57,15 +57,16 @@ public class BoardService {
 
     public ViewBoardResponse viewBoardDetail(String boardId) throws SQLException {
         try {
-            ViewBoardRequest boardRequest = boardDao.findById(boardId);
+            ViewBoardResponse boardResponse = boardDao.findById(boardId);
 
-            if (boardRequest == null)
+            if (boardResponse == null)
                 throw new BoardNotFoundException("게시물을 찾지못하였습니다");
 
-            MemberDto memberDto = memberDao.findById(boardRequest.getMemberId());
+            MemberDto memberDto = memberDao.findById(boardResponse.getAuthor());
+            boardResponse.setAuthor(memberDto.getNickname());
 
 
-            return ViewBoardResponse.toResponse(boardRequest, memberDto.getNickname());
+            return boardResponse;
         } catch (BoardNotFoundException e){
             e.printStackTrace();
         }

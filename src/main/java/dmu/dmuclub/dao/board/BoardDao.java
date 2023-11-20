@@ -54,7 +54,7 @@ public class BoardDao {
         }
     }
 
-    public ViewBoardRequest findById(String boardId) throws SQLException {
+    public ViewBoardResponse findById(String boardId) throws SQLException {
         String query = "SELECT * FROM board WHERE id = ?";
 
         try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
@@ -62,11 +62,12 @@ public class BoardDao {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    return ViewBoardRequest.builder()
+                    return ViewBoardResponse.builder()
+                            .id(resultSet.getInt("id"))
                             .title(resultSet.getString("title"))
                             .content(resultSet.getString("content"))
                             .createDate(resultSet.getString("createDate"))
-                            .memberId(resultSet.getString("member_id"))
+                            .author(resultSet.getString("member_id"))
                             .build();
                 } else {
                     return null;

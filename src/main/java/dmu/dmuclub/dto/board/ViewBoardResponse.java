@@ -11,10 +11,14 @@ import org.json.simple.JSONObject;
 @NoArgsConstructor
 public class ViewBoardResponse {
 
+    private int id;
     private String title;
     private String content;
     private String createDate;
     private String author;
+
+    public ViewBoardResponse(String title, String content, String createDate, String author) {
+    }
 
     public static ViewBoardResponse toResponse(ViewBoardRequest boardRequest, String author){
         return new ViewBoardResponse(
@@ -25,7 +29,8 @@ public class ViewBoardResponse {
     }
 
     @Builder
-    public ViewBoardResponse(String title, String content, String createDate, String author) {
+    public ViewBoardResponse(int id, String title, String content, String createDate, String author) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.createDate = createDate;
@@ -34,6 +39,7 @@ public class ViewBoardResponse {
 
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
+        json.put("id", id);
         json.put("title", title);
         json.put("content", content);
         json.put("createDate", createDate);

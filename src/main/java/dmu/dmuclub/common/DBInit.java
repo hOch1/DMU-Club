@@ -57,10 +57,17 @@ public class DBInit implements ServletContextListener {
     }
 
     private void insertInitialData(Connection connection) throws SQLException {
+        // MEMBER
         executeUpdate(connection, "insert into member(email, password, username, nickname, phone, role) value " +
                 "('user@user.com', 'user123', 'user', 'user', '010-0000-0000', 'NORMAL')");
         executeUpdate(connection, "insert into member(email, password, username, nickname, phone, role) value " +
                 "('admin@admin.com', 'admin123', 'admin', 'admin', '010-1111-1111', 'ADMIN')");
+
+        // BOARD
+        executeUpdate(connection, "insert into board(title, content, member_id) value " +
+                "('title1', 'content1', 1)");
+        executeUpdate(connection, "insert into board(title, content, member_id) value " +
+                "('title2', 'content2', 1)");
     }
 
     private void executeSqlScript(Connection connection, String scriptPath) throws IOException, SQLException {

@@ -25,13 +25,13 @@ public class ViewAllBoardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
-
         try {
             List<ViewBoardResponse> boardResponses = boardService.viewBoardAll();
             JSONArray jsonArray = new JSONArray();
 
             for (ViewBoardResponse boardResponse : boardResponses) {
                 JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", boardResponse.getId());
                 jsonObject.put("title", boardResponse.getTitle());
                 jsonObject.put("content", boardResponse.getContent());
                 jsonObject.put("author", boardResponse.getAuthor());
