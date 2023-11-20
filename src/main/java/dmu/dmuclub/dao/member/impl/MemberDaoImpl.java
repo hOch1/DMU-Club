@@ -44,7 +44,7 @@ public class MemberDaoImpl implements MemberDao {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    mapResultSetToMemberDto(resultSet, memberDto);
+                    resultSetToMemberDto(resultSet, memberDto);
                     return memberDto;
                 }
                 return null;
@@ -62,7 +62,7 @@ public class MemberDaoImpl implements MemberDao {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    mapResultSetToMemberDto(resultSet, memberDto);
+                    resultSetToMemberDto(resultSet, memberDto);
                     return memberDto;
                 }
                 return null;
@@ -70,7 +70,7 @@ public class MemberDaoImpl implements MemberDao {
         }
     }
 
-    private void mapResultSetToMemberDto(ResultSet resultSet, MemberDto memberDto) throws SQLException {
+    private void resultSetToMemberDto(ResultSet resultSet, MemberDto memberDto) throws SQLException {
         memberDto.setId(resultSet.getInt("id"));
         memberDto.setEmail(resultSet.getString("email"));
         memberDto.setPassword(resultSet.getString("password"));

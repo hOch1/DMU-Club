@@ -2,11 +2,13 @@ package dmu.dmuclub.dto.board;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.json.simple.JSONObject;
 
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class ViewBoardResponse {
 
     private String title;
@@ -20,6 +22,14 @@ public class ViewBoardResponse {
                 boardRequest.getContent(),
                 boardRequest.getCreateDate(),
                 author);
+    }
+
+    @Builder
+    public ViewBoardResponse(String title, String content, String createDate, String author) {
+        this.title = title;
+        this.content = content;
+        this.createDate = createDate;
+        this.author = author;
     }
 
     public JSONObject toJson() {

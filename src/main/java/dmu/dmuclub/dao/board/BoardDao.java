@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static dmu.dmuclub.jdbc.JDBCTemplate.*;
 
@@ -30,6 +32,28 @@ public class BoardDao {
         }
     }
 
+    public List<ViewBoardResponse> findAll() throws SQLException {
+        String query = "SELECT * FROM board";
+
+        try (PreparedStatement preparedStatement = CON.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery()){
+
+            List<ViewBoardResponse> boardResponses = new ArrayList<>();
+
+            while(resultSet.next()){
+                ViewBoardResponse  boardResponse = ViewBoardResponse.builder()
+                        .title(resultSet.getString("title"))
+                        .content(resultSet.getString("content"))
+                        .createDate(resultSet.getString("createDate"))
+                        .author(resultSet.getString("member_id"))
+                        .build();
+
+                boardResponses.add(boardResponse);
+            }
+            return boardResponses;
+        }
+    }
+
     public ViewBoardRequest findById(String boardId) throws SQLException {
         String query = "SELECT * FROM board WHERE id = ?";
 
@@ -45,12 +69,10 @@ public class BoardDao {
                             .memberId(resultSet.getString("member_id"))
                             .build();
                 } else {
-                    // 존재하지 않는 레코드에 대한 처리
-                    return null; // 또는 예외를 던질 수 있음
+                    return null;
                 }
             }
         }
     }
-
 }
 

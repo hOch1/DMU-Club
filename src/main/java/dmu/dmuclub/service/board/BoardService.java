@@ -13,6 +13,7 @@ import dmu.dmuclub.exception.member.HasNotRoleException;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.List;
 
 public class BoardService {
 
@@ -41,7 +42,20 @@ public class BoardService {
         }
     }
 
-    public ViewBoardResponse viewBoard(String boardId) throws SQLException {
+    public List<ViewBoardResponse> viewBoardAll(){
+        try{
+            List<ViewBoardResponse> boardResponses = boardDao.findAll();
+
+            if(boardResponses.isEmpty())
+                throw new BoardNotFoundException("게시물을 찾지못하였습니다");
+
+            return boardResponses;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ViewBoardResponse viewBoardDetail(String boardId) throws SQLException {
         try {
             ViewBoardRequest boardRequest = boardDao.findById(boardId);
 
