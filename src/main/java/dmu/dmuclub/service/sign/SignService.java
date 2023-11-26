@@ -3,7 +3,6 @@ package dmu.dmuclub.service.sign;
 import dmu.dmuclub.dao.member.impl.MemberDaoImpl;
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.dto.sign.SignInRequest;
-import dmu.dmuclub.dto.Response;
 import dmu.dmuclub.dto.sign.SignUpResquest;
 import dmu.dmuclub.exception.member.MemberNotFoundException;
 import dmu.dmuclub.exception.sign.EmailAlreadyExistsException;
@@ -17,44 +16,38 @@ import java.sql.SQLException;
 
 public class SignService {
 
-    private final MemberDaoImpl memberDao;
+    private MemberDaoImpl memberDao = new MemberDaoImpl();
 
-    public SignService() {
-        memberDao = new MemberDaoImpl();
-    }
 
-    public Response signUp(SignUpResquest signUpRequest) {
+    public void signUp(SignUpResquest signUpRequest) {
         try {
-            existsValidate(signUpRequest.getEmail(), signUpRequest.getNickname(), signUpRequest.getPhone());
+            existsValidate(signUpRequest);
 
             memberDao.save(signUpRequest);
-            return Response.successResponse();
-        } catch (EmailAlreadyExistsException | NicknameAlreadyExistsException | PhoneAlreadyExistsException e){
-            return new Response(e.getMessage(), "409");
-        } catch (SQLException | ClassNotFoundException e) {
-            return new Response("회원 가입 중 오류가 발생하였습니다.", "500");
+        } catch (EmailAlreadyExistsException | NicknameAlreadyExistsException | PhoneAlreadyExistsException |
+                 SQLException | ClassNotFoundException e){
+            throw new RuntimeException(e.getMessage());
         }
     }
 
-    public Response signIn(SignInRequest signInRequest, HttpSession session) throws SQLException {
+    public void signIn(SignInRequest signInRequest, HttpSession session) throws SQLException {
         try {
             MemberDto memberDto = memberDao.findByEmail(signInRequest.getEmail());
 
             signInValidate(memberDto, signInRequest);
 
             session.setAttribute("member", memberDto);
-            return Response.successResponse();
         } catch (LoginFailureException | MemberNotFoundException e) {
-            return new Response(e.getMessage(), "400");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
-    private void existsValidate(String email, String nickname, String phone) throws SQLException, ClassNotFoundException {
-        if (memberDao.existsByEmail(email))
+    private void existsValidate(SignUpResquest resquest) throws SQLException, ClassNotFoundException {
+        if (memberDao.existsByEmail(resquest.getEmail()))
             throw new EmailAlreadyExistsException("이메일이 이미 사용중입니다");
-        if (memberDao.existsByNickname(nickname))
+        if (memberDao.existsByNickname(resquest.getNickname()))
             throw new NicknameAlreadyExistsException("닉네임이 이미 사용중입니다.");
-        if (memberDao.existsByPhone(phone))
+        if (memberDao.existsByPhone(resquest.getPhone()))
             throw new NicknameAlreadyExistsException("핸드폰 번호가 이미 사용중입니다.");
     }
 

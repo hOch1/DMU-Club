@@ -1,57 +1,40 @@
 package dmu.dmuclub.servlet.sign;
 
-import dmu.dmuclub.dto.Response;
 import dmu.dmuclub.dto.sign.SignUpResquest;
 import dmu.dmuclub.service.sign.SignService;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
-@WebServlet(name = "SignUpServlet", value = "/auth/sign-up")
+@WebServlet("/auth/sign-up")
 public class SignUpServlet extends HttpServlet {
 
-    private final SignService signService;
-
-    public SignUpServlet() {
-        signService = new SignService();
-    }
+    private SignService signService = new SignService();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String contentType = request.getContentType();
 
-        if (contentType != null && contentType.contains("application/json")) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
-            JSONParser parser = new JSONParser();
-
-            try {
-                JSONObject requestJson = (JSONObject) parser.parse(reader);
-                SignUpResquest signUpResquest = createSignUpRequest(requestJson);
-                Response signResponse = signService.signUp(signUpResquest);
+        try {
+            signService.signUp(createSignUpRequest(request));
 
 
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(signResponse.toJson().toJSONString());
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
+            // 임시 Response
+            response.setContentType("text/html");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().println("회원가입 완료");
+        } catch (RuntimeException e){
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR ,e.getMessage());
         }
     }
 
-    private SignUpResquest createSignUpRequest(JSONObject requestJson){
+    private SignUpResquest createSignUpRequest(HttpServletRequest request){
         return SignUpResquest.builder()
-                .email(requestJson.get("email").toString())
-                .password(requestJson.get("password").toString())
-                .phone(requestJson.get("phone").toString())
-                .nickname(requestJson.get("nickname").toString())
-                .username(requestJson.get("username").toString())
+                .email(request.getParameter("email"))
+                .username(request.getParameter("username"))
+                .password(request.getParameter("password"))
+                .nickname(request.getParameter("nickname"))
+                .phone(request.getParameter("phone"))
                 .build();
     }
 }

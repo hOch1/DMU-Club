@@ -1,7 +1,5 @@
 package dmu.dmuclub.servlet.sign;
 
-import dmu.dmuclub.dto.Response;
-
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,10 +14,9 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
         req.getSession().removeAttribute("member");
 
-        Response res = new Response("success", "200");
-
-        response.setContentType("application/json");
+        // 임시 Response
+        response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(res.toJson().toJSONString());
+        response.getWriter().println("로그아웃 완료");
     }
 }
