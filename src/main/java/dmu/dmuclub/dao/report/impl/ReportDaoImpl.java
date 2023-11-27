@@ -2,6 +2,7 @@ package dmu.dmuclub.dao.report.impl;
 
 import dmu.dmuclub.dao.report.ReportDao;
 import dmu.dmuclub.dto.board.ViewBoardResponse;
+import dmu.dmuclub.dto.report.ReportRequest;
 import dmu.dmuclub.dto.report.ReportResponse;
 
 import java.sql.Connection;
@@ -16,9 +17,18 @@ import static dmu.dmuclub.jdbc.JDBCTemplate.getConnection;
 public class ReportDaoImpl implements ReportDao {
 
     private static final Connection CON = getConnection();
-    @Override
-    public void save() {
 
+    @Override
+    public void save(ReportRequest reportRequest) throws SQLException {
+        String query = "INSERT INTO member (title, content, member_id) VALUES (?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
+            preparedStatement.setString(1, reportRequest.getTitle());
+            preparedStatement.setString(2, reportRequest.getContent());
+            preparedStatement.setInt(3, reportRequest.getMember_id());
+
+            preparedStatement.executeUpdate();
+        }
     }
 
     @Override
