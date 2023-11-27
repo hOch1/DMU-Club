@@ -28,6 +28,7 @@ public class DBInit implements ServletContextListener {
 
                 executeSqlScript(connection, "initDB/member.sql");
                 executeSqlScript(connection, "initDB/board.sql");
+                executeSqlScript(connection, "initDB/report.sql");
 
                 insertInitialData(connection);
             } catch (SQLException | IOException e) {
@@ -48,6 +49,7 @@ public class DBInit implements ServletContextListener {
 
                 dropTables(statement, "board");
                 dropTables(statement, "member");
+                dropTables(statement, "report");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -68,6 +70,12 @@ public class DBInit implements ServletContextListener {
                 "('title1', 'content1', 1)");
         executeUpdate(connection, "insert into board(title, content, member_id) value " +
                 "('title2', 'content2', 1)");
+
+        // REPORT
+        executeUpdate(connection, "insert into report(title, content, solve, member_id) value "+
+                "('title1', 'content1', 0, 1)");
+        executeUpdate(connection, "insert into report(title, content, solve, member_id) value "+
+                "('title2', 'content2', 1, 1)");
     }
 
     private void executeSqlScript(Connection connection, String scriptPath) throws IOException, SQLException {

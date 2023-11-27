@@ -5,7 +5,9 @@ import dmu.dmuclub.dao.member.impl.MemberDaoImpl;
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.exception.member.MemberNotFoundException;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class MemberService {
 
@@ -21,5 +23,11 @@ public class MemberService {
 
 
         return memberDto;
+    }
+
+    public List<MemberDto> findAll() throws SQLException {
+        List<MemberDto> memberDtoList = memberDao.findAll();
+
+        return memberDtoList;
     }
 }

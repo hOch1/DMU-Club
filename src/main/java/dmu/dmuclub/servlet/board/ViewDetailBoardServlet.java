@@ -32,7 +32,7 @@ public class ViewDetailBoardServlet extends HttpServlet {
             request.setAttribute("board", boardResponse);
 
             // 임시 Response
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/boardDetail.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("board/boardDetail.jsp");
             dispatcher.forward(request, response);
         } catch (RuntimeException | SQLException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());

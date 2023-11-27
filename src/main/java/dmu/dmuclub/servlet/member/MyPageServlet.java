@@ -5,6 +5,7 @@ import dmu.dmuclub.exception.member.MemberNotFoundException;
 import dmu.dmuclub.service.member.MemberService;
 import org.json.simple.JSONObject;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +28,10 @@ public class MyPageServlet extends HttpServlet {
             if (memberDto == null)
                 throw new MemberNotFoundException("회원을 찾지 못하였습니다");
 
+            request.setAttribute("member", memberDto);
+            // 임시 Response
+            RequestDispatcher dispatcher = request.getRequestDispatcher("member/myPage.jsp");
+            dispatcher.forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }catch (MemberNotFoundException e){

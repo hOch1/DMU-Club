@@ -32,7 +32,7 @@ public class ViewAllBoardServlet extends HttpServlet {
             request.setAttribute("boardList", boardResponses);
 
             // 임시 Response
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/boardList.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("board/boardList.jsp");
             dispatcher.forward(request, response);
         } catch (BoardNotFoundException e){
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());

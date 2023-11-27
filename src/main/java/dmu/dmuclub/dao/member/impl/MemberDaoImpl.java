@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static dmu.dmuclub.jdbc.JDBCTemplate.*;
@@ -63,6 +64,24 @@ public class MemberDaoImpl implements MemberDao {
                 return null;
             }
         }
+    }
+
+    @Override
+    public List<MemberDto> findAll() throws SQLException{
+        List<MemberDto> memberDtoList = new ArrayList<>();
+        String query = "select * from member";
+
+        try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    MemberDto memberDto = new MemberDto();
+                    resultSetToMemberDto(resultSet, memberDto);
+                    memberDtoList.add(memberDto);
+                }
+            }
+        }
+
+        return memberDtoList;
     }
 
     public void deleteById(String id) throws SQLException{
