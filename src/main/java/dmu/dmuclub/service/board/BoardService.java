@@ -1,14 +1,16 @@
 package dmu.dmuclub.service.board;
 
 import dmu.dmuclub.dao.board.BoardDao;
+import dmu.dmuclub.dao.board.impl.BoardDaoImpl;
 import dmu.dmuclub.dao.member.MemberDao;
 import dmu.dmuclub.dao.member.impl.MemberDaoImpl;
-import dmu.dmuclub.dto.Response;
+import dmu.dmuclub.dto.board.BoardResponse;
 import dmu.dmuclub.dto.board.CreateBoardRequest;
-import dmu.dmuclub.dto.board.ViewBoardRequest;
 import dmu.dmuclub.dto.board.ViewBoardResponse;
 import dmu.dmuclub.dto.member.MemberDto;
+import dmu.dmuclub.exception.board.BoardContentNullException;
 import dmu.dmuclub.exception.board.BoardNotFoundException;
+import dmu.dmuclub.exception.board.BoardTitleNullException;
 import dmu.dmuclub.exception.member.HasNotRoleException;
 
 import javax.servlet.http.HttpSession;
@@ -22,23 +24,22 @@ public class BoardService {
 
     public BoardService() {
         this.memberDao = new MemberDaoImpl();
-        this.boardDao = new BoardDao();
+        this.boardDao = new BoardDaoImpl();
     }
 
-    public Response createBoard(CreateBoardRequest boardDto, HttpSession session) throws SQLException, ClassNotFoundException {
+    public void createBoard(CreateBoardRequest boardRequest, HttpSession session) throws SQLException, ClassNotFoundException {
         try {
+            createBoardValidate(boardRequest);
             String email = isLoginValidate((MemberDto) session.getAttribute("member"));
             MemberDto memberDto = memberDao.findByEmail(email);
 
-            boardDto.setMember_id(memberDto.getId());
+            boardRequest.setMember_id(memberDto.getId());
 
-            boardDao.save(boardDto);
-
-            return Response.successResponse();
-        }catch (HasNotRoleException e){
-            return new Response(e.getMessage(), "400");
+            boardDao.save(boardRequest);
+        }catch (HasNotRoleException | BoardTitleNullException | BoardContentNullException e){
+            throw new RuntimeException(e.getMessage());
         }catch (Exception e){
-            return new Response("게시물 생성 실패", "500");
+            throw new RuntimeException("게시물 생성 실패");
         }
     }
 
@@ -65,7 +66,6 @@ public class BoardService {
             MemberDto memberDto = memberDao.findById(boardResponse.getAuthor());
             boardResponse.setAuthor(memberDto.getNickname());
 
-
             return boardResponse;
         } catch (BoardNotFoundException e){
             e.printStackTrace();
@@ -78,5 +78,14 @@ public class BoardService {
             throw new HasNotRoleException("권한이 없습니다");
 
         return memberDto.getEmail();
+    }
+
+    private void createBoardValidate(CreateBoardRequest boardRequest){
+        if(boardRequest.getTitle() == null)
+            throw new BoardTitleNullException("제목을 입력해주세요.");
+
+        if (boardRequest.getContent() == null)
+            throw new BoardContentNullException("내용을 입력해주세요.");
+
     }
 }

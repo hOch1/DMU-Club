@@ -6,6 +6,7 @@ import dmu.dmuclub.service.board.BoardService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,32 +25,17 @@ public class ViewAllBoardServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             List<ViewBoardResponse> boardResponses = boardService.viewBoardAll();
-            JSONArray jsonArray = new JSONArray();
 
-            for (ViewBoardResponse boardResponse : boardResponses) {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("id", boardResponse.getId());
-                jsonObject.put("title", boardResponse.getTitle());
-                jsonObject.put("content", boardResponse.getContent());
-                jsonObject.put("author", boardResponse.getAuthor());
-                jsonObject.put("createDate", boardResponse.getCreateDate());
+            request.setAttribute("boardList", boardResponses);
 
-                jsonArray.add(jsonObject);
-            }
-
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(jsonArray.toJSONString());
+            // 임시 Response
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/boardList.jsp");
+            dispatcher.forward(request, response);
         } catch (BoardNotFoundException e){
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("msg", e.getMessage());
-            jsonObject.put("code", "404");
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(jsonObject.toJSONString());
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 }

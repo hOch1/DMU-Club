@@ -10,4 +10,5 @@ public interface MemberDao {
     void save(SignUpResquest signUpRequest) throws ClassNotFoundException, SQLException;
     MemberDto findByEmail(String email) throws SQLException;
     MemberDto findById(String id) throws SQLException;
+    void deleteById(String id) throws SQLException;
 }

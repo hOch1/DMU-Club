@@ -1,6 +1,6 @@
 package dmu.dmuclub.servlet.board;
 
-import dmu.dmuclub.dto.Response;
+import dmu.dmuclub.dto.board.BoardResponse;
 import dmu.dmuclub.dto.board.CreateBoardRequest;
 import dmu.dmuclub.service.board.BoardService;
 import org.json.simple.JSONObject;
@@ -29,23 +29,16 @@ public class CreateBoardServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String contentType = request.getContentType();
+        try {
+            HttpSession session = request.getSession();
+            boardService.createBoard(CreateBoardRequest.toDto(request), session);
 
-        if (contentType != null && contentType.contains("application/json")) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
-            JSONParser parser = new JSONParser();
-
-            try {
-                JSONObject requestJson = (JSONObject) parser.parse(reader);
-                HttpSession session = request.getSession();
-                Response boardResponse = boardService.createBoard(CreateBoardRequest.toDto(requestJson), session);
-
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(boardResponse.toJson().toJSONString());
-            } catch (ParseException | SQLException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+            // 임시 Response
+            response.setContentType("text/html");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().println("게시물 생성 완료");
+        } catch (RuntimeException | SQLException | ClassNotFoundException e){
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 }

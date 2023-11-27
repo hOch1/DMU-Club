@@ -32,7 +32,20 @@ public class MemberDaoImpl implements MemberDao {
     }
 
     public MemberDto findByEmail(String email) throws SQLException {
-        return findBy("SELECT * FROM member WHERE email = ?", email);
+        MemberDto memberDto = new MemberDto();
+        String query = "SELECT * FROM member WHERE email = ?";
+
+        try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    resultSetToMemberDto(resultSet, memberDto);
+                    return memberDto;
+                }
+                return null;
+            }
+        }
     }
 
     public MemberDto findById(String id) throws SQLException {
@@ -52,23 +65,10 @@ public class MemberDaoImpl implements MemberDao {
         }
     }
 
-
-
-    private MemberDto findBy(String query, String parameter) throws SQLException {
-        MemberDto memberDto = new MemberDto();
-
-        try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
-            preparedStatement.setString(1, parameter);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    resultSetToMemberDto(resultSet, memberDto);
-                    return memberDto;
-                }
-                return null;
-            }
-        }
+    public void deleteById(String id) throws SQLException{
+        String query = "DELETE";
     }
+
 
     private void resultSetToMemberDto(ResultSet resultSet, MemberDto memberDto) throws SQLException {
         memberDto.setId(resultSet.getInt("id"));

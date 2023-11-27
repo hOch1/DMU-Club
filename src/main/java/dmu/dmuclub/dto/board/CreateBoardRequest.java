@@ -2,7 +2,8 @@ package dmu.dmuclub.dto.board;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.json.simple.JSONObject;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Data
 @NoArgsConstructor
@@ -13,10 +14,10 @@ public class CreateBoardRequest {
     private int member_id;
 
 
-    public static CreateBoardRequest toDto(JSONObject json){
+    public static CreateBoardRequest toDto(HttpServletRequest request){
         CreateBoardRequest boardDto = new CreateBoardRequest();
-        boardDto.title = json.get("title").toString();
-        boardDto.content = json.get("content").toString();
+        boardDto.title = request.getParameter("title");
+        boardDto.content = request.getParameter("content");
 
         return boardDto;
     }

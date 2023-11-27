@@ -5,6 +5,7 @@ import dmu.dmuclub.exception.board.BoardNotFoundException;
 import dmu.dmuclub.service.board.BoardService;
 import org.json.simple.JSONObject;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,24 +24,18 @@ public class ViewDetailBoardServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             String boardId = request.getParameter("id");
             ViewBoardResponse boardResponse = boardService.viewBoardDetail(boardId);
 
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(boardResponse.toJson().toJSONString());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (BoardNotFoundException e){
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("msg", e.getMessage());
-            jsonObject.put("code", "404");
+            request.setAttribute("board", boardResponse);
 
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(jsonObject.toJSONString());
+            // 임시 Response
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/boardDetail.jsp");
+            dispatcher.forward(request, response);
+        } catch (RuntimeException | SQLException e) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 }
