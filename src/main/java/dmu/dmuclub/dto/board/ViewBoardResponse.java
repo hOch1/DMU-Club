@@ -1,7 +1,6 @@
 package dmu.dmuclub.dto.board;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,5 +34,15 @@ public class ViewBoardResponse {
         this.content = content;
         this.createDate = createDate;
         this.author = author;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("id", id);
+        json.put("title", title);
+        json.put("content", content);
+        json.put("createDate", createDate);
+        json.put("author", author);
+        return json;
     }
 }
