@@ -17,11 +17,7 @@ import java.sql.SQLException;
 @WebServlet("/board/detail")
 public class ViewDetailBoardServlet extends HttpServlet {
 
-    private final BoardService boardService;
-
-    public ViewDetailBoardServlet() {
-        boardService = new BoardService();
-    }
+    private final BoardService boardService = new BoardService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

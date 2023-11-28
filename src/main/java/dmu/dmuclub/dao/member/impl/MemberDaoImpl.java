@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static dmu.dmuclub.jdbc.JDBCTemplate.*;
+import static dmu.dmuclub.common.JDBCTemplate.*;
 
 @NoArgsConstructor
 public class MemberDaoImpl implements MemberDao {
@@ -29,6 +29,7 @@ public class MemberDaoImpl implements MemberDao {
                 preparedStatement.setString(i + 1, signUpRequestList.get(i));
 
             preparedStatement.executeUpdate();
+            close(preparedStatement, CON);
         }
     }
 
@@ -42,8 +43,10 @@ public class MemberDaoImpl implements MemberDao {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     resultSetToMemberDto(resultSet, memberDto);
+                    close(preparedStatement, CON);
                     return memberDto;
                 }
+                close(preparedStatement, CON);
                 return null;
             }
         }
@@ -59,8 +62,10 @@ public class MemberDaoImpl implements MemberDao {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     resultSetToMemberDto(resultSet, memberDto);
+                    close(preparedStatement, CON);
                     return memberDto;
                 }
+                close(preparedStatement, CON);
                 return null;
             }
         }
@@ -78,9 +83,9 @@ public class MemberDaoImpl implements MemberDao {
                     resultSetToMemberDto(resultSet, memberDto);
                     memberDtoList.add(memberDto);
                 }
+                close(preparedStatement, CON);
             }
         }
-
         return memberDtoList;
     }
 

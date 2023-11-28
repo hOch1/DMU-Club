@@ -12,7 +12,7 @@
 <header class="flex justify-between items-center p-4 bg-blue-500">
     <div class="flex items-center">
       <img
-        src="img/logo.png"
+        src="/img/logo.png"
         height="40"
         width="40"
         alt="DMU Club Logo"

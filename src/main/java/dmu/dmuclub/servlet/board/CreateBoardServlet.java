@@ -21,11 +21,7 @@ import java.sql.SQLException;
 @WebServlet("/board/create")
 public class CreateBoardServlet extends HttpServlet {
 
-    private final BoardService boardService;
-
-    public CreateBoardServlet() {
-        this.boardService = new BoardService();
-    }
+    private final BoardService boardService = new BoardService();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

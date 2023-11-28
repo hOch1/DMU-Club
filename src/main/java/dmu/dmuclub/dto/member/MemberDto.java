@@ -3,7 +3,6 @@ package dmu.dmuclub.dto.member;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.json.simple.JSONObject;
 
 @Data
 @NoArgsConstructor

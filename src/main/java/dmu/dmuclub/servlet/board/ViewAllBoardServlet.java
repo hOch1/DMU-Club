@@ -18,11 +18,7 @@ import java.util.List;
 @WebServlet("/board/all")
 public class ViewAllBoardServlet extends HttpServlet {
 
-    private final BoardService boardService;
-
-    public ViewAllBoardServlet() {
-        boardService = new BoardService();
-    }
+    private final BoardService boardService = new BoardService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

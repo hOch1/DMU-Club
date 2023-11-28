@@ -28,10 +28,9 @@ public class MyPageServlet extends HttpServlet {
             if (memberDto == null)
                 throw new MemberNotFoundException("회원을 찾지 못하였습니다");
 
-            request.setAttribute("member", memberDto);
             // 임시 Response
-            RequestDispatcher dispatcher = request.getRequestDispatcher("member/myPage.jsp");
-            dispatcher.forward(request, response);
+            request.setAttribute("member", memberDto);
+            request.getRequestDispatcher("member/myPage.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }catch (MemberNotFoundException e){

@@ -4,7 +4,6 @@ import dmu.dmuclub.dao.board.BoardDao;
 import dmu.dmuclub.dao.board.impl.BoardDaoImpl;
 import dmu.dmuclub.dao.member.MemberDao;
 import dmu.dmuclub.dao.member.impl.MemberDaoImpl;
-import dmu.dmuclub.dto.board.BoardResponse;
 import dmu.dmuclub.dto.board.CreateBoardRequest;
 import dmu.dmuclub.dto.board.ViewBoardResponse;
 import dmu.dmuclub.dto.member.MemberDto;
@@ -19,13 +18,8 @@ import java.util.List;
 
 public class BoardService {
 
-    private final MemberDao memberDao;
-    private final BoardDao boardDao;
-
-    public BoardService() {
-        this.memberDao = new MemberDaoImpl();
-        this.boardDao = new BoardDaoImpl();
-    }
+    private final MemberDao memberDao = new MemberDaoImpl();
+    private final BoardDao boardDao = new BoardDaoImpl();
 
     public void createBoard(CreateBoardRequest boardRequest, HttpSession session) throws SQLException, ClassNotFoundException {
         try {

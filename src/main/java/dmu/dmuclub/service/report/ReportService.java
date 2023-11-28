@@ -1,5 +1,6 @@
 package dmu.dmuclub.service.report;
 
+import dmu.dmuclub.dao.member.MemberDao;
 import dmu.dmuclub.dao.member.impl.MemberDaoImpl;
 import dmu.dmuclub.dao.report.ReportDao;
 import dmu.dmuclub.dao.report.impl.ReportDaoImpl;
@@ -14,8 +15,8 @@ import java.util.List;
 
 public class ReportService {
 
-    private final ReportDaoImpl reportDao = new ReportDaoImpl();
-    private final MemberDaoImpl memberDao = new MemberDaoImpl();
+    private final ReportDao reportDao = new ReportDaoImpl();
+    private final MemberDao memberDao = new MemberDaoImpl();
 
     public void createReport(ReportRequest reportRequest, HttpSession session) throws SQLException{
         try {

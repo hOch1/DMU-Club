@@ -1,7 +1,6 @@
 package dmu.dmuclub.dao.report.impl;
 
 import dmu.dmuclub.dao.report.ReportDao;
-import dmu.dmuclub.dto.board.ViewBoardResponse;
 import dmu.dmuclub.dto.report.ReportRequest;
 import dmu.dmuclub.dto.report.ReportResponse;
 
@@ -12,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static dmu.dmuclub.jdbc.JDBCTemplate.getConnection;
+import static dmu.dmuclub.common.JDBCTemplate.getConnection;
 
 public class ReportDaoImpl implements ReportDao {
 
