@@ -20,5 +20,4 @@ public class ViewBoardRequest {
         this.createDate = createDate;
         this.memberId = memberId;
     }
-
 }
