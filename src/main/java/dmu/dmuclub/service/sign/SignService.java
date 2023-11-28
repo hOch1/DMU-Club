@@ -42,12 +42,12 @@ public class SignService {
         }
     }
 
-    private void existsValidate(SignUpResquest resquest) throws SQLException, ClassNotFoundException {
-        if (memberDao.existsByEmail(resquest.getEmail()))
+    private void existsValidate(SignUpResquest request) throws SQLException, ClassNotFoundException {
+        if (memberDao.existsByEmail(request.getEmail()))
             throw new EmailAlreadyExistsException("이메일이 이미 사용중입니다");
-        if (memberDao.existsByNickname(resquest.getNickname()))
+        if (memberDao.existsByNickname(request.getNickname()))
             throw new NicknameAlreadyExistsException("닉네임이 이미 사용중입니다.");
-        if (memberDao.existsByPhone(resquest.getPhone()))
+        if (memberDao.existsByPhone(request.getPhone()))
             throw new PhoneAlreadyExistsException("핸드폰 번호가 이미 사용중입니다.");
     }
 
