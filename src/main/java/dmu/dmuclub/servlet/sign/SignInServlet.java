@@ -3,6 +3,7 @@ package dmu.dmuclub.servlet.sign;
 import dmu.dmuclub.dto.sign.SignInRequest;
 import dmu.dmuclub.service.sign.SignService;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
@@ -19,13 +20,17 @@ public class SignInServlet extends HttpServlet {
             HttpSession session = request.getSession();
             signService.signIn(createSignInRequest(request), session);
 
-            // 임시 Response
-            response.setContentType("text/html");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().println("로그인 완료");
+            request.getSession().setAttribute("message", "로그인이 성공적으로 완료되었습니다.");
+            response.sendRedirect("/");
         } catch (RuntimeException | SQLException e) {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+            request.getSession().setAttribute("message", "로그인에 실패했습니다.");
+            response.sendRedirect("/");
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("signIn.jsp");
     }
 
     private SignInRequest createSignInRequest(HttpServletRequest request) {
