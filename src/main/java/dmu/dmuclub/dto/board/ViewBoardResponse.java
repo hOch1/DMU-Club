@@ -18,14 +18,6 @@ public class ViewBoardResponse {
     public ViewBoardResponse(String title, String content, String createDate, String author) {
     }
 
-    public static ViewBoardResponse toResponse(ViewBoardRequest boardRequest, String author){
-        return new ViewBoardResponse(
-                boardRequest.getTitle(),
-                boardRequest.getContent(),
-                boardRequest.getCreateDate(),
-                author);
-    }
-
     @Builder
     public ViewBoardResponse(int id, String title, String content, String createDate, String author) {
         this.id = id;
