@@ -1,6 +1,6 @@
 package dmu.dmuclub.servlet.sign;
 
-import dmu.dmuclub.dto.sign.SignUpResquest;
+import dmu.dmuclub.dto.sign.SignUpRequest;
 import dmu.dmuclub.service.sign.SignService;
 
 import javax.servlet.ServletException;
@@ -15,8 +15,8 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         try {
+            System.out.println(createSignUpRequest(request).toString());
             signService.signUp(createSignUpRequest(request));
             request.getSession().setAttribute("message", "회원가입이 성공적으로 완료되었습니다.");
             response.sendRedirect("/");
@@ -31,13 +31,24 @@ public class SignUpServlet extends HttpServlet {
         resp.sendRedirect("signUp.jsp");
     }
 
-    private SignUpResquest createSignUpRequest(HttpServletRequest request){
-        return SignUpResquest.builder()
+    private SignUpRequest createSignUpRequest(HttpServletRequest request){
+        return SignUpRequest.builder()
                 .email(request.getParameter("email"))
                 .username(request.getParameter("username"))
                 .password(request.getParameter("password"))
                 .nickname(request.getParameter("nickname"))
                 .phone(request.getParameter("phone"))
+                .mbti(createMBTI(request))
+                .hobby(request.getParameter("hobby"))
                 .build();
+    }
+
+    private String createMBTI(HttpServletRequest request){
+        String EI = request.getParameter("EI");
+        String SN = request.getParameter("SN");
+        String FP = request.getParameter("FP");
+        String JP = request.getParameter("JP");
+
+        return EI+SN+FP+JP;
     }
 }

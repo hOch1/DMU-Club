@@ -5,5 +5,7 @@ CREATE TABLE IF NOT EXISTS member (
     username VARCHAR(20) NOT NULL,
     nickname VARCHAR(20) UNIQUE NOT NULL,
     phone VARCHAR(20) UNIQUE NOT NULL,
+    mbti VARCHAR(20),
+    hobby VARCHAR(20),
     role VARCHAR(10) NOT NULL
 );

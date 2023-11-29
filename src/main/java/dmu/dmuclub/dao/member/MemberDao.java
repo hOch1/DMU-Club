@@ -1,14 +1,14 @@
 package dmu.dmuclub.dao.member;
 
 import dmu.dmuclub.dto.member.MemberDto;
-import dmu.dmuclub.dto.sign.SignUpResquest;
+import dmu.dmuclub.dto.sign.SignUpRequest;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface MemberDao {
 
-    void save(SignUpResquest signUpRequest) throws ClassNotFoundException, SQLException;
+    void save(SignUpRequest signUpRequest) throws ClassNotFoundException, SQLException;
     void deleteById(String id) throws SQLException;
 
 

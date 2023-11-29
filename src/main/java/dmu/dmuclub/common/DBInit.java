@@ -48,8 +48,8 @@ public class DBInit implements ServletContextListener {
                  Statement statement = connection.createStatement()) {
 
                 dropTables(statement, "board");
-                dropTables(statement, "member");
                 dropTables(statement, "report");
+                dropTables(statement, "member");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -100,5 +100,6 @@ public class DBInit implements ServletContextListener {
 
     private void dropTables(Statement statement, String tableName) throws SQLException {
         statement.executeUpdate("DROP TABLE IF EXISTS " + tableName);
+        System.out.println(tableName+" drop 완료");
     }
 }

@@ -3,7 +3,7 @@ package dmu.dmuclub.service.sign;
 import dmu.dmuclub.dao.member.impl.MemberDaoImpl;
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.dto.sign.SignInRequest;
-import dmu.dmuclub.dto.sign.SignUpResquest;
+import dmu.dmuclub.dto.sign.SignUpRequest;
 import dmu.dmuclub.exception.member.MemberNotFoundException;
 import dmu.dmuclub.exception.sign.EmailAlreadyExistsException;
 import dmu.dmuclub.exception.sign.LoginFailureException;
@@ -19,7 +19,7 @@ public class SignService {
     private MemberDaoImpl memberDao = new MemberDaoImpl();
 
 
-    public void signUp(SignUpResquest signUpRequest) {
+    public void signUp(SignUpRequest signUpRequest) {
         try {
             existsValidate(signUpRequest);
 
@@ -42,7 +42,7 @@ public class SignService {
         }
     }
 
-    private void existsValidate(SignUpResquest request) throws SQLException, ClassNotFoundException {
+    private void existsValidate(SignUpRequest request) throws SQLException, ClassNotFoundException {
         if (memberDao.existsByEmail(request.getEmail()))
             throw new EmailAlreadyExistsException("이메일이 이미 사용중입니다");
         if (memberDao.existsByNickname(request.getNickname()))

@@ -29,8 +29,6 @@ public class BoardDaoImpl implements BoardDao {
             preparedStatement.setInt(3, boardDto.getMember_id());
 
             preparedStatement.executeUpdate();
-
-            close(preparedStatement, CON);
         }
     }
 
@@ -52,7 +50,6 @@ public class BoardDaoImpl implements BoardDao {
 
                 boardResponses.add(boardResponse);
             }
-            close(preparedStatement, CON);
             return boardResponses;
         }
     }
@@ -65,7 +62,6 @@ public class BoardDaoImpl implements BoardDao {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    close(preparedStatement, CON);
                     return ViewBoardResponse.builder()
                             .id(resultSet.getInt("id"))
                             .title(resultSet.getString("title"))
@@ -74,7 +70,6 @@ public class BoardDaoImpl implements BoardDao {
                             .author(resultSet.getString("member_id"))
                             .build();
                 } else {
-                    close(preparedStatement, CON);
                     return null;
                 }
             }

@@ -28,7 +28,7 @@
         <span class="text-sm">Matching</span>
       </a>
       
-      <a class="text-center" href="message/message.jsp" rel="ugc">
+      <a class="text-center" href="/websocket-servlet" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -48,7 +48,7 @@
         <span class="text-sm">Message</span>
       </a>
       
-      <a class="text-center" href="index.jsp" rel="ugc">
+      <a class="text-center" href="/" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -67,7 +67,7 @@
         <span class="text-sm">Main</span>
       </a>
       
-      <a class="text-center" href="community/community.jsp" rel="ugc">
+      <a class="text-center" href="/board/all" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -89,7 +89,7 @@
       </a>
       
       
-      <a class="text-center" href="info/info.jsp" rel="ugc">
+      <a class="text-center" href="/member/my-page" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

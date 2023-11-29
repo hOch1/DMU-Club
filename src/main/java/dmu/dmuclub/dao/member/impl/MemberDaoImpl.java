@@ -2,7 +2,7 @@ package dmu.dmuclub.dao.member.impl;
 
 import dmu.dmuclub.dao.member.MemberDao;
 import dmu.dmuclub.dto.member.MemberDto;
-import dmu.dmuclub.dto.sign.SignUpResquest;
+import dmu.dmuclub.dto.sign.SignUpRequest;
 import lombok.NoArgsConstructor;
 
 import java.sql.Connection;
@@ -19,8 +19,8 @@ public class MemberDaoImpl implements MemberDao {
 
     private static final Connection CON = getConnection();
 
-    public void save(SignUpResquest signUpRequest) throws ClassNotFoundException, SQLException {
-        String query = "INSERT INTO member (email, password, username, nickname, phone, role) VALUES (?, ?, ?, ?, ?, ?)";
+    public void save(SignUpRequest signUpRequest) throws ClassNotFoundException, SQLException {
+        String query = "INSERT INTO member (email, password, username, nickname, phone, mbti, hobby, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
 
@@ -29,7 +29,6 @@ public class MemberDaoImpl implements MemberDao {
                 preparedStatement.setString(i + 1, signUpRequestList.get(i));
 
             preparedStatement.executeUpdate();
-            close(preparedStatement, CON);
         }
     }
 
@@ -43,10 +42,8 @@ public class MemberDaoImpl implements MemberDao {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     resultSetToMemberDto(resultSet, memberDto);
-                    close(preparedStatement, CON);
                     return memberDto;
                 }
-                close(preparedStatement, CON);
                 return null;
             }
         }
@@ -62,10 +59,8 @@ public class MemberDaoImpl implements MemberDao {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     resultSetToMemberDto(resultSet, memberDto);
-                    close(preparedStatement, CON);
                     return memberDto;
                 }
-                close(preparedStatement, CON);
                 return null;
             }
         }
@@ -83,7 +78,6 @@ public class MemberDaoImpl implements MemberDao {
                     resultSetToMemberDto(resultSet, memberDto);
                     memberDtoList.add(memberDto);
                 }
-                close(preparedStatement, CON);
             }
         }
         return memberDtoList;
