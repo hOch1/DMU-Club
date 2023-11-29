@@ -30,13 +30,13 @@ public class SignService {
         }
     }
 
-    public void signIn(SignInRequest signInRequest, HttpSession session) throws SQLException {
+    public MemberDto signIn(SignInRequest signInRequest, HttpSession session) throws SQLException {
         try {
             MemberDto memberDto = memberDao.findByEmail(signInRequest.getEmail());
             aleadyLoginValidation(session);
             signInValidate(memberDto, signInRequest);
 
-            session.setAttribute("member", memberDto);
+            return memberDto;
         } catch (LoginFailureException | MemberNotFoundException | PhoneAlreadyExistsException e) {
             throw new RuntimeException(e.getMessage());
         }

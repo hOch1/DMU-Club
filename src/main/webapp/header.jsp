@@ -10,7 +10,7 @@
 </head>
 <body>
 <header class="flex justify-between items-center p-4 bg-blue-500">
-    <div class="flex items-center" style=cursor:pointer; onclick="location.href='main/index.jsp'" >
+    <div class="flex items-center" style=cursor:pointer; onclick="location.href='signIn.jsp'" >
       <img
         src="${pageContext.request.contextPath}/img/default_img.jpg"
         height="40"

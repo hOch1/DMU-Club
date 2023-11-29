@@ -81,8 +81,10 @@ public class DBInit implements ServletContextListener {
                 "('title2', 'content2', 1, 1)");
 
         // FRIEND
-        executeUpdate(connection, "insert into friend(member1, member2) value "+
+        executeUpdate(connection, "insert into friend(member1_id, member2_id) value "+
                 "(1,2)");
+        executeUpdate(connection, "insert into friend(member1_id, member2_id) value "+
+                "(2,1)");
     }
 
     private void executeSqlScript(Connection connection, String scriptPath) throws IOException, SQLException {

@@ -1,5 +1,6 @@
 package dmu.dmuclub.servlet.sign;
 
+import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.dto.sign.SignInRequest;
 import dmu.dmuclub.service.sign.SignService;
 
@@ -18,9 +19,10 @@ public class SignInServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             HttpSession session = request.getSession();
-            signService.signIn(createSignInRequest(request), session);
+            MemberDto memberDto = signService.signIn(createSignInRequest(request), session);
 
-            request.getSession().setAttribute("message", "로그인이 성공적으로 완료되었습니다.");
+            session.setAttribute("message", "로그인이 성공적으로 완료되었습니다.");
+            session.setAttribute("member", memberDto.getNickname());
             response.sendRedirect("/");
         } catch (RuntimeException | SQLException e) {
             request.getSession().setAttribute("message", "로그인에 실패했습니다.");

@@ -1,29 +1,72 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="dmu.dmuclub.dto.member.MemberDto" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>로그인</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script> <!--테일윈드 라이브러리-->
+    <meta charset="UTF-8">
+    <title>DMU Club</title>
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-<div class="bg-white p-8 rounded shadow-md w-96">
-  <h2 class="text-2xl font-bold mb-6">로그인</h2>
-  <form action="/auth/sign-in" method="post">
-    <div class="mb-4">
-      <label for="email" class="block text-sm font-medium text-gray-600">이메일</label>
-      <input type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md" required>
-    </div>
-    <div class="mb-4">
-      <label for="password" class="block text-sm font-medium text-gray-600">비밀번호</label>
-      <input type="password" id="password" name="password" class="mt-1 p-2 w-full border rounded-md" required>
-    </div>
-    <div class="mb-6">
-      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">로그인</button>
-    </div>
-  </form>
-  <p class="text-sm text-gray-600">계정이 없으신가요? <a href="signUp.jsp" class="text-blue-500">회원가입</a></p>
-</div>
+<body>
+
+<!-- 성공 메시지가 있다면 Alert를 띄우고 세션에서 메시지를 삭제 -->
+<% if (session.getAttribute("message") != null) { %>
+<script>
+    alert("<%= session.getAttribute("message") %>");
+</script>
+<% session.removeAttribute("message"); %>
+<% } %>
+
+<%
+    MemberDto memberDto = (MemberDto) session.getAttribute("member");
+
+    if (memberDto != null) {
+        String nickname = memberDto.getNickname();
+%>
+<p>Welcome, <%= nickname %>!</p>
+<%
+    }
+%>
+    <!-- 메인영역  -->
+
+
+<section class="flex flex-col h-screen">
+    <header class="flex justify-center items-center p-4 bg-blue-500">
+        <div class="flex items-center">
+            <img
+                    alt="DMU Club Logo"
+                    class="rounded-full"
+                    height="40"
+                    width="40"
+                    src="/placeholder.svg"
+                    style="aspect-ratio: 40 / 40; object-fit: cover;"
+            />
+        </div>
+    </header>
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <form class="space-y-4 w-1/2" action="/auth/sign-in" method="post">
+            <input class="border rounded p-2 w-full" placeholder="ID" type="text" name="email" required />
+            <input class="border rounded p-2 w-full" placeholder="PW" type="password" name="password" required />
+                <button
+                    class="inline-flex items-center justify-center font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 w-full py-2 mt-4 bg-blue-500 text-white rounded text-sm"
+                    type="button"
+                    onclick="window.location.href='<%= request.getContextPath() %>/auth/sign-up'"
+            >
+                Sign up
+            </button>
+            <button
+                    class="inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 w-full py-2 mt-4 bg-blue-500 text-white rounded"
+                    type="submit"
+            >
+                Login
+            </button>
+        </form>
+    </main>
+</section>
+
+    <!--  footer 부분  -->
+
+
 </body>
 </html>

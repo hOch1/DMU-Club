@@ -3,70 +3,60 @@
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <script src="https://cdn.tailwindcss.com"></script> <!--테일윈드 라이브러리-->
-    <meta charset="UTF-8">
-    <title>DMU Club</title>
-</head>
+<jsp:include page="header.jsp" flush="false" />
 <body>
 
-<!-- 성공 메시지가 있다면 Alert를 띄우고 세션에서 메시지를 삭제 -->
+<%
+    if (session.getAttribute("member") == null)
+        response.sendRedirect("/auth/sign-in");
+%>
+
 <% if (session.getAttribute("message") != null) { %>
 <script>
-    alert("<%= session.getAttribute("message") %>");
+  alert("<%= session.getAttribute("message") %>");
 </script>
-<% session.removeAttribute("message"); %>
-<% } %>
-
-<%
-    MemberDto memberDto = (MemberDto) session.getAttribute("member");
-
-    if (memberDto != null) {
-        String nickname = memberDto.getNickname();
+<% session.removeAttribute("message");
+ }
 %>
-<p>Welcome, <%= nickname %>!</p>
-<%
-    }
-%>
-    <!-- 메인영역  -->
 
 
-<section class="flex flex-col h-screen">
-    <header class="flex justify-center items-center p-4 bg-blue-500">
-        <div class="flex items-center">
-            <img
-                    alt="DMU Club Logo"
-                    class="rounded-full"
-                    height="40"
-                    width="40"
-                    src="/placeholder.svg"
-                    style="aspect-ratio: 40 / 40; object-fit: cover;"
-            />
+<p>Welcome, <%= session.getAttribute("member") %>!</p>
+
+
+ <!-- 헤더 영역 -->
+ <section class="flex flex-col h-screen">
+  
+  
+  <!-- 메인영역  -->
+  <main class="flex-grow p-4 overflow-y-auto">
+    <h2 class="text-2xl font-bold mb-4">오늘의 추천</h2>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      
+      <!-- 프로필 1 -->
+      <div class="border bg-card text-card-foreground rounded-lg shadow-md overflow-hidden" data-v0-t="card">
+        <img
+          src="<%= request.getContextPath() %>/img/default_img.jpg"
+          height="200"
+          width="300"
+          alt="상대방의 프로필사진이 보이는 이미지"
+          class="w-full h-48 object-cover"
+          style="aspect-ratio:300/200;object-fit:cover"
+        />
+        <div class="p-4">
+          <h3 class="text-lg font-bold">김준성</h3>
+          <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80 mt-2">
+            Online
+          </div>
         </div>
-    </header>
-    <main class="flex-grow flex flex-col items-center justify-center p-4">
-        <form class="space-y-4 w-1/2" action="/auth/sign=in" method="post">
-            <input class="border rounded p-2 w-full" placeholder="ID" type="text" name="email" required />
-            <input class="border rounded p-2 w-full" placeholder="PW" type="password" name="password" required />
-                <button
-                    class="inline-flex items-center justify-center font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 w-full py-2 mt-4 bg-blue-500 text-white rounded text-sm"
-                    type="button"
-                    onclick="window.location.href='<%= request.getContextPath() %>/signup.jsp'"
-            >
-                Sign up
-            </button>
-            <button
-                    class="inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 w-full py-2 mt-4 bg-blue-500 text-white rounded"
-                    type="submit"
-            >
-                Login
-            </button>
-        </form>
-    </main>
+      </div>
+
+    </div>
+  </main>
+  
+  <!--  footer 부분  -->
+  <jsp:include page="footer.jsp" flush="false" />
+  
 </section>
-
-    <!--  footer 부분  -->
-
 
 </body>
 </html>

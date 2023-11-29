@@ -33,14 +33,17 @@
 
   <main class="flex-grow p-4 overflow-y-auto">
     <h2 class="text-2xl font-bold mb-4">회원가입</h2>
-    <form class="space-y-4" action="/auth/sign-up" method="post" >
-      <input class="border rounded p-2 w-full" placeholder="Email" type="email" name="email"/>
-      <input class="border rounded p-2 w-full" placeholder="Password" type="password" name="password"/>
-      <input class="border rounded p-2 w-full" placeholder="Confirm Password" type="confirm_pwd" />
-      <input class="border rounded p-2 w-full" placeholder="username" type="text" name="username" />
-      <input class="border rounded p-2 w-full" placeholder="nickname" type="text" name="nickname"/>
-      <input class="border rounded p-2 w-full" placeholder="phone" type="text" name="phone"/>
-      <input class="border rounded p-2 w-full" maxlength="10" placeholder="취미를 10글자 이내로 작성 ex(축구, 카페)" type="text" name="hobby"/>
+    <form class="space-y-4" onsubmit="return checkData()" action="/auth/sign-up" method="post">
+      <input class="border rounded p-2 w-full" placeholder="아이디" type="text" name="id" required/>
+      <input class="border rounded p-2 w-full" placeholder="이메일" type="email" name="email" required/>
+      <input class="border rounded p-2 w-full" id="pw1" placeholder="비밀번호" type="password" name="password" required/>
+      <input class="border rounded p-2 w-full" id="pw2" placeholder="비밀번호 재입력" type="password" required/>
+      <input class="border rounded p-2 w-full" placeholder="이름" type="text" name="username" required/>
+      <input class="border rounded p-2 w-full" placeholder="별명" type="text" name="nickname" required/>
+      <input class="border rounded p-2 w-full" placeholder="핸드폰 번호" type="text" name="phone" required/>
+      <input class="border rounded p-2 w-full" maxlength="10"
+             placeholder="취미를 10글자 이내로 작성 ex(축구, 카페)"
+             type="text" name="hobby" required oninput="limitText(this,10)"/>
 
       <!-- mbti 설정 부분 -->
       <h1 class="text-2xl font-bold mb-4">본인의 mbti를 골라주세요</h1>
@@ -58,10 +61,10 @@
           <input type="radio" value="N" name="SN" /> N
         </label>
         <label class="border p-2 rounded text-center">
-          <input type="radio" value="F" name="FP" /> F
+          <input type="radio" value="F" name="FT" /> F
         </label>
         <label class="border p-2 rounded text-center">
-          <input type="radio" value="T" name="FP" /> T
+          <input type="radio" value="T" name="FT" /> T
         </label>
         <label class="border p-2 rounded text-center">
           <input type="radio" value="P" name="JP" /> P
@@ -80,6 +83,30 @@
       >
         확인
       </button>
+
+      <script>
+        //각종 체크
+        function checkData(){
+          var pw1 = document.getElementById("pw1").value;
+          var pw2 = document.getElementById("pw2").value;
+
+          // 비밀번호
+          if(pw1 !== pw2){
+            alert("비밀번호가 다릅니다 다시 입력해주세요");
+            return false;
+          }
+          return true;
+        }
+
+        // 텍스트 수 제한
+        function limitText(element, maxLength){
+          var value = element.value;
+
+          if (value.length > maxLength){
+            element.value=value.slice(0, maxLength);
+          }
+        }
+      </script>
     </form>
   </main>
 </section>
