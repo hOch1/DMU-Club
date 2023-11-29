@@ -3,7 +3,7 @@ package dmu.dmuclub.servlet.chat;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint("/websocket")
+@ServerEndpoint("/chatSocket")
 public class MyWebSocketHandler {
 
     @OnOpen

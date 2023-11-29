@@ -38,7 +38,7 @@
 
 <!-- WebSocket 연결 및 메세지 전송을 위한 스크립트 -->
 <script>
-  const socket = new WebSocket("ws://localhost:8080/your-websocket-endpoint");
+  const socket = new WebSocket("ws://localhost:8080/chatSocket");
   const chatMessages = document.getElementById("chat-messages");
   const messageInput = document.getElementById("message");
 

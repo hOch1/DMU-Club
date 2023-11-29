@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 import java.io.IOException;
 
-@WebServlet("/websocket-servlet")
+@WebServlet("/chat")
 public class WebSocketServlet extends HttpServlet {
 
     @Override
