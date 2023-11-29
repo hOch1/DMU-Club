@@ -10,16 +10,16 @@
 </head>
 <body>
 <header class="flex justify-between items-center p-4 bg-blue-500">
-    <div class="flex items-center">
+    <div class="flex items-center" style=cursor:pointer; onclick="location.href='main/index.jsp'" >
       <img
-        src="img/logo.png"
+        src="${pageContext.request.contextPath}/img/default_img.jpg"
         height="40"
         width="40"
-        alt="DMU Club Logo"
+        alt="로고가 나타남"
         class="rounded-full"
         style="aspect-ratio:40/40;object-fit:cover"
       />
-      <h1 class="text-2xl text-white ml-2">DMU Club</h1>
+      <h1 class="text-2xl text-white ml-2" >DMU Club</h1>
     </div>
   </header>
 </body>
