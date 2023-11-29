@@ -34,7 +34,6 @@
   <main class="flex-grow p-4 overflow-y-auto">
     <h2 class="text-2xl font-bold mb-4">회원가입</h2>
     <form class="space-y-4" onsubmit="return checkData()" action="/auth/sign-up" method="post">
-      <input class="border rounded p-2 w-full" placeholder="아이디" type="text" name="id" required/>
       <input class="border rounded p-2 w-full" placeholder="이메일" type="email" name="email" required/>
       <input class="border rounded p-2 w-full" id="pw1" placeholder="비밀번호" type="password" name="password" required/>
       <input class="border rounded p-2 w-full" id="pw2" placeholder="비밀번호 재입력" type="password" required/>
