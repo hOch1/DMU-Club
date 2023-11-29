@@ -11,6 +11,8 @@
         response.sendRedirect("/auth/sign-in");
 %>
 
+
+// Alert
 <% if (session.getAttribute("message") != null) { %>
 <script>
   alert("<%= session.getAttribute("message") %>");

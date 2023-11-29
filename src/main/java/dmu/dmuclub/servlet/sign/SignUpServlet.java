@@ -16,7 +16,6 @@ public class SignUpServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            System.out.println(createSignUpRequest(request).toString());
             signService.signUp(createSignUpRequest(request));
             request.getSession().setAttribute("message", "회원가입이 성공적으로 완료되었습니다.");
             response.sendRedirect("/");
@@ -46,7 +45,7 @@ public class SignUpServlet extends HttpServlet {
     private String createMBTI(HttpServletRequest request){
         String EI = request.getParameter("EI");
         String SN = request.getParameter("SN");
-        String FP = request.getParameter("FP");
+        String FP = request.getParameter("FT");
         String JP = request.getParameter("JP");
 
         return EI+SN+FP+JP;
