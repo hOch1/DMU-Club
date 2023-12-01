@@ -6,9 +6,6 @@
 
 
 
-<body>
-
-
 <!-- footer 영역 -->
 <jsp:include page="../footer.jsp" flush="false" />
 
