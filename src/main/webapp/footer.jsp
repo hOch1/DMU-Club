@@ -48,7 +48,7 @@
         <span class="text-sm">Message</span>
       </a>
       
-      <a class="text-center" href="<%= request.getContextPath() %>/main/main.jsp" rel="ugc">
+      <a class="text-center" href="<%= request.getContextPath() %>/index.jsp" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

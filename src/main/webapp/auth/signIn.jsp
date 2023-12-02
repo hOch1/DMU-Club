@@ -45,7 +45,7 @@
         </div>
     </header>
     <main class="flex-grow flex flex-col items-center justify-center p-4">
-        <form class="space-y-4 w-1/2" action="/auth/sign-in" method="post">
+        <form class="space-y-4 w-1/6" action="/auth/sign-in" method="post">
             <input class="border rounded p-2 w-full" placeholder="ID" type="text" name="email" required />
             <input class="border rounded p-2 w-full" placeholder="PW" type="password" name="password" required />
                 <button
@@ -53,13 +53,13 @@
                     type="button"
                     onclick="window.location.href='<%= request.getContextPath() %>/auth/sign-up'"
             >
-                Sign up
+                회원가입
             </button>
             <button
                     class="inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 w-full py-2 mt-4 bg-blue-500 text-white rounded"
                     type="submit"
             >
-                Login
+                로그인
             </button>
         </form>
     </main>
