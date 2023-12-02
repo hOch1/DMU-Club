@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.List;
 
 @WebListener
 public class DBInit implements ServletContextListener {
@@ -62,13 +64,33 @@ public class DBInit implements ServletContextListener {
     }
 
     private void insertInitialData(Connection connection) throws SQLException {
-        // MEMBER
         executeUpdate(connection, "insert into member(email, password, username, nickname, phone, role) value " +
-                "('user@user.com', 'user123', 'user', 'user', '010-0000-0000', 'NORMAL')");
-        executeUpdate(connection, "insert into member(email, password, username, nickname, phone, role) value " +
-                "('admin@admin.com', 'admin123', 'admin', 'admin', '010-1111-1111', 'ADMIN')");
+                "('admin@admin.com', 'admin', 'admin', 'admin', '010-1111-1111', 'ADMIN')");
 
-        // BOARD
+        for (int i = 0; i < 30; i++) {
+            String email = "user" + i + "@user.com";
+            String password = "1234";
+            String username = "user" + i;
+            String nickname = "user" + i;
+            String role = "NORMAL";
+            String phone;
+
+            if (i < 10)
+                phone = "010-0000-000"+i;
+            else
+                phone = "010-0000-00"+i;
+
+            List<String> mbtiList = Arrays.asList("ISTJ", "ISFJ", "ESTJ", "ESFJ", "ISTP", "ISFP", "ESTP", "ESFP",
+                    "INFJ", "INTJ", "ENFJ", "ENTJ", "INTP", "ISFP", "ENFP", "ESFP");
+            String mbti = mbtiList.get(i % 16);
+
+            String sql = "insert into member(email, password, username, nickname, phone, mbti, role) value " +
+                    "('" + email + "', '" + password + "', '" + username + "', '" + nickname + "', '" + phone + "', '" + mbti + "', '" + role + "')";
+            executeUpdate(connection, sql);
+        }
+
+
+            // BOARD
         executeUpdate(connection, "insert into board(title, content, member_id) value " +
                 "('title1', 'content1', 1)");
         executeUpdate(connection, "insert into board(title, content, member_id) value " +

@@ -3,6 +3,7 @@ package dmu.dmuclub.service.member;
 import dmu.dmuclub.dao.member.MemberDao;
 import dmu.dmuclub.dao.member.impl.MemberDaoImpl;
 import dmu.dmuclub.dto.member.MemberDto;
+import dmu.dmuclub.exception.member.MemberNotFoundException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -24,5 +25,47 @@ public class MemberService {
         List<MemberDto> memberDtoList = memberDao.findAll();
 
         return memberDtoList;
+    }
+
+    public List<MemberDto> matchMember(String mbti) throws SQLException {
+        List<MemberDto> memberDtoList = memberDao.findByMBTI(matchMBTI(mbti));
+
+        if (memberDtoList.isEmpty())
+            throw new MemberNotFoundException("회원들이 없습니다");
+
+        return memberDtoList;
+    }
+
+    private String matchMBTI(String mbti){
+        if (mbti.equals("INFP"))
+            return "ENFJ";
+        else if (mbti.equals("ENFP"))
+            return "INFJ";
+        else if (mbti.equals("INFJ"))
+            return "ENFP";
+        else if (mbti.equals("ENFJ"))
+            return "ISFP";
+        else if (mbti.equals("INTJ"))
+            return "ENTP";
+        else if (mbti.equals("INTP"))
+            return "ESTJ";
+        else if (mbti.equals("ENTP"))
+            return "INTJ";
+        else if (mbti.equals("ISFP"))
+            return "ESFJ";
+        else if (mbti.equals("ESFP"))
+            return "ISTJ";
+        else if (mbti.equals("ISTP"))
+            return "ESFJ";
+        else if (mbti.equals("ESTP"))
+            return "ISFJ";
+        else if (mbti.equals("ESFJ"))
+            return "ISFP";
+        else if (mbti.equals("ISTJ"))
+            return "ESFP";
+        else if (mbti.equals("ESTJ"))
+            return "ISTP";
+        else
+            return "";
     }
 }

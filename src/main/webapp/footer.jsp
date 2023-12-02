@@ -89,7 +89,7 @@
       </a>
       
       
-      <a class="text-center" href="<%= request.getContextPath() %>/info/info.jsp" rel="ugc">
+      <a class="text-center" href="<%= request.getContextPath() %>/info/myPage" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

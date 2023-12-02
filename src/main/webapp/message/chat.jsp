@@ -12,7 +12,7 @@
     <section class="flex h-screen">
       <aside class="w-1/4 bg-gray-200 dark:bg-gray-800 overflow-y-auto" id="userListContainer">
         <ul class="divide-y divide-gray-300 dark:divide-gray-700">
-          <!-- 유저 목록 추가 -->
+          <!-- 유저 목록이 여기에 동적으로 추가될 것입니다. -->
         </ul>
       </aside>
 
@@ -110,15 +110,15 @@
             //( 3 ) 가져온 채팅 데이터를 이용하여 동적으로 채팅 추가
             data.chats.forEach((chat) => {
             const chatItem = document.createElement("div");
-            chatItem.className = `flex flex-col items-${chat.sender == "user" ? "end" : "start"} mt-2`;
+            chatItem.className = `flex flex-col items-${chat.sender === "user" ? "end" : "start"} mt-2`;
             chatItem.innerHTML = `
                 <div class="rounded p-3 ${
-                chat.sender == "user"
+                chat.sender === "user"
                     ? "bg-white dark:bg-gray-900"
                     : "bg-blue-500 text-white self-end"
                 } inline-block">
                     <p class="${
-                chat.sender == "user" ? "text-gray-700 dark:text-gray-300" : ""
+                chat.sender === "user" ? "text-gray-700 dark:text-gray-300" : ""
             }">${chat.message}</p>
                 </div>
                 <small class="text-gray-500 dark:text-gray-400 text-xs">${formatMessageTime(chat.time)}</small>`;

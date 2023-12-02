@@ -18,16 +18,16 @@ public class SignUpServlet extends HttpServlet {
         try {
             signService.signUp(createSignUpRequest(request));
             request.getSession().setAttribute("message", "회원가입이 성공적으로 완료되었습니다.");
-            response.sendRedirect("/");
+            response.sendRedirect("/main");
         } catch (RuntimeException e){
             request.getSession().setAttribute("message", "회원가입도중 오류가 발생했습니다.");
-            response.sendRedirect("/");
+            response.sendRedirect("/main");
         }
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("signUp.jsp");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/auth/signUp.jsp").forward(request, response);
     }
 
     private SignUpRequest createSignUpRequest(HttpServletRequest request){
