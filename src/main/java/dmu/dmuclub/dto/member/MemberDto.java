@@ -20,5 +20,4 @@ public class MemberDto {
     public void updateNickname(String nickname){
         this.nickname = nickname;
     }
-
 }

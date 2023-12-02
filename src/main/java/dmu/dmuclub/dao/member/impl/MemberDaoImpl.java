@@ -83,9 +83,30 @@ public class MemberDaoImpl implements MemberDao {
         return memberDtoList;
     }
 
+    @Override
+    public List<MemberDto> findByMBTI(String mbti) throws SQLException {
+        List<MemberDto> memberDtoList = new ArrayList<>();
+        String query = "SELECT * FROM member WHERE mbti = ?";
+
+        try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
+            preparedStatement.setString(1, mbti);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    MemberDto memberDto = new MemberDto();
+                    resultSetToMemberDto(resultSet, memberDto);
+                    memberDtoList.add(memberDto);
+                }
+            }
+        }
+        return memberDtoList;
+    }
+
     public void deleteById(String id) throws SQLException{
         String query = "DELETE";
     }
+
+
 
 
     private void resultSetToMemberDto(ResultSet resultSet, MemberDto memberDto) throws SQLException {
@@ -95,6 +116,7 @@ public class MemberDaoImpl implements MemberDao {
         memberDto.setNickname(resultSet.getString("nickname"));
         memberDto.setPhone(resultSet.getString("phone"));
         memberDto.setUsername(resultSet.getString("username"));
+        memberDto.setMbti(resultSet.getString("mbti"));
         memberDto.setRole(resultSet.getString("role"));
     }
 

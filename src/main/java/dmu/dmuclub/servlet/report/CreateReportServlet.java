@@ -1,7 +1,6 @@
 package dmu.dmuclub.servlet.report;
 
 import dmu.dmuclub.dto.report.ReportRequest;
-import dmu.dmuclub.dto.sign.SignInRequest;
 import dmu.dmuclub.service.report.ReportService;
 
 import javax.servlet.ServletException;

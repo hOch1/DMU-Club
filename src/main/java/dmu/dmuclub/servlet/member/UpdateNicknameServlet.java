@@ -1,4 +1,4 @@
-package dmu.dmuclub.servlet.match;
+package dmu.dmuclub.servlet.member;
 
 import dmu.dmuclub.service.member.MemberService;
 
@@ -9,13 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/match")
-public class MatchServlet extends HttpServlet {
+@WebServlet("/member/updateNickname")
+public class UpdateNicknameServlet extends HttpServlet {
 
     private final MemberService memberService = new MemberService();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String nickname = req.getParameter("nickname");
+
     }
 }

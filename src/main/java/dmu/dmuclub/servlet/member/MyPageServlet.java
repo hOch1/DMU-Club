@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/member/my-page")
+@WebServlet("/info/myPage")
 public class MyPageServlet extends HttpServlet {
 
     private final MemberService memberService = new MemberService();
@@ -30,7 +30,7 @@ public class MyPageServlet extends HttpServlet {
 
             // 임시 Response
             request.setAttribute("member", memberDto);
-            request.getRequestDispatcher("member/myPage.jsp").forward(request, response);
+            request.getRequestDispatcher("info/info.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }catch (MemberNotFoundException e){

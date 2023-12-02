@@ -19,20 +19,21 @@ public class SignInServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             HttpSession session = request.getSession();
-            MemberDto memberDto = signService.signIn(createSignInRequest(request), session);
+            MemberDto memberDto = signService.signIn(createSignInRequest(request));
 
             session.setAttribute("message", "로그인이 성공적으로 완료되었습니다.");
-            session.setAttribute("member", memberDto.getNickname());
-            response.sendRedirect("/");
+            session.setAttribute("member", memberDto);
+
+            response.sendRedirect("/main");
         } catch (RuntimeException | SQLException e) {
             request.getSession().setAttribute("message", "로그인에 실패했습니다.");
-            response.sendRedirect("/");
+            response.sendRedirect("/auth/sign-in");
         }
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("signIn.jsp");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/auth/signIn.jsp").forward(request, response);
     }
 
     private SignInRequest createSignInRequest(HttpServletRequest request) {

@@ -23,10 +23,6 @@ public class CreateBoardServlet extends HttpServlet {
             HttpSession session = request.getSession();
             boardService.createBoard(createBoardRequest(request), session);
 
-            // 임시 Response
-            response.setContentType("text/html");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().println("게시물 생성 완료");
         } catch (RuntimeException | SQLException | ClassNotFoundException e){
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }

@@ -12,7 +12,9 @@ public interface MemberDao {
     void deleteById(String id) throws SQLException;
 
 
+
     MemberDto findByEmail(String email) throws SQLException;
     MemberDto findById(String id) throws SQLException;
     List<MemberDto> findAll() throws SQLException;
+    List<MemberDto> findByMBTI(String mbti) throws SQLException;
 }

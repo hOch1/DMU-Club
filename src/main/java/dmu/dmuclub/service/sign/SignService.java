@@ -30,10 +30,9 @@ public class SignService {
         }
     }
 
-    public MemberDto signIn(SignInRequest signInRequest, HttpSession session) throws SQLException {
+    public MemberDto signIn(SignInRequest signInRequest) throws SQLException {
         try {
             MemberDto memberDto = memberDao.findByEmail(signInRequest.getEmail());
-            aleadyLoginValidation(session);
             signInValidate(memberDto, signInRequest);
 
             return memberDto;
@@ -57,10 +56,5 @@ public class SignService {
 
         if (!memberDto.getPassword().equals(signInRequest.getPassword()) )
             throw new LoginFailureException("비밀번호를 확인해 주세요");
-    }
-
-    private void aleadyLoginValidation(HttpSession session){
-        if (session.getAttribute("member") != null)
-            throw new LoginFailureException("이미 로그인 되어있습니다");
     }
 }
