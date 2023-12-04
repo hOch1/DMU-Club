@@ -3,9 +3,27 @@
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<jsp:include page="header.jsp" flush="false" />
-<body>
+<head>
+    <script src="https://cdn.tailwindcss.com"></script> <!--테일윈드 라이브러리-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>DMU Club</title>
+</head>
+<body>
+<header class="flex justify-between items-center p-4 bg-blue-500">
+    <div class="flex items-center" style=cursor:pointer; onclick="location.href='signIn.jsp'" >
+        <img
+                src="${pageContext.request.contextPath}/img/default_img.jpg"
+                height="40"
+                width="40"
+                alt="로고가 나타남"
+                class="rounded-full"
+                style="aspect-ratio:40/40;object-fit:cover"
+        />
+        <h1 class="text-2xl text-white ml-2" >DMU Club</h1>
+    </div>
+</header>
 <%
     if (session.getAttribute("member") == null)
         response.sendRedirect("/auth/sign-in");

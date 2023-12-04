@@ -23,6 +23,11 @@
       />
       <h1 class="text-2xl text-white ml-2" >DMU Club</h1>
     </div>
+    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input
+        bg-background hover:text-accent-foound h-10 px-4 py-2 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700">
+        Logout
+    </button>
   </header>
 </body>
 </html>
