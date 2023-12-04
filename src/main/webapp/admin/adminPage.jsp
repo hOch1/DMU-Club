@@ -2,8 +2,7 @@
 <html>
 <head>
     <title>admin Page</title>
-    <jsp:include page="/header.jsp" flush="false" />
-
+    <script src="https://cdn.tailwindcss.com"></script> <!--테일윈드 라이브러리-->
 </head>
 <body>
 <div class="flex flex-col w-full min-h-screen bg-white dark:bg-gray-900">

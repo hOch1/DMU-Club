@@ -5,6 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Report List</title>
+  <script src="https://cdn.tailwindcss.com"></script> <!--테일윈드 라이브러리-->
 </head>
 <body>
 <h2>Reports</h2>

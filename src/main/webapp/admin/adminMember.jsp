@@ -1,68 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: 99dos
+  Date: 2023-12-04
+  Time: 오후 8:24
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Page</title>
-  <!-- 테일윈드 CSS 파일 import -->
-  <link rel="stylesheet" href="path/to/your/tailwind.css">
+    <script src="https://cdn.tailwindcss.com"></script> <!--테일윈드 라이브러리-->
+    <title>admin Page</title>
 </head>
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<body>
+<!-- component -->
+<div class="bg-white p-8 rounded-md w-full">
+    <div class=" flex items-center justify-between pb-6">
+        <div>
+            <h2 class="text-gray-600 font-semibold">회원 목록</h2>
+            <span class="text-xs">전체 회원</span>
+        </div>
+        <div class="flex items-center justify-between">
+            <div class="flex bg-gray-50 items-center p-2 rounded-md">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+                     fill="currentColor">
+                    <path fill-rule="evenodd"
+                          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                          clip-rule="evenodd" />
+                </svg>
+                <input class="bg-gray-50 outline-none ml-1 block " type="text" name="" id="" placeholder="search...">
+            </div>
+            <div class="lg:ml-40 ml-10 space-x-8">
+                <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Remove</button>
+                <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Logout</button>
 
-<!-- 네비게이션 바 -->
-<nav id="header" class="fixed w-full z-10 top-0">
-
-  <div id="progress" class="h-1 z-20 top-0"
-       style="background:linear-gradient(to right, #4dc0b5 var(--scroll), transparent 0);"></div>
-
-  <div class="w-full md:max-w-4xl mx-auto flex flex-wrap items-center justify-between mt-0 py-3">
-
-    <div class="pl-4">
-      <a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold text-xl" href="#">
-        Admin Page
-      </a>
+            </div>
+        </div>
     </div>
+    <div>
+        <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+            <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                <table class="min-w-full leading-normal">
+                    <thead>
+                    <tr>
+                        <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            이름
+                        </th>
+                        <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            이메일
+                        </th>
+                        <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            별명
+                        </th>
+                        <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            선택
+                        </th>
+                        <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            상태
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 w-10 h-10">
+                                    <img class="w-full h-full rounded-full"
+                                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+                                         alt="" />
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-900 whitespace-no-wrap">
+                                        김준성
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <p class="text-gray-900 whitespace-no-wrap">junsung@naver.com</p>
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <p class="text-gray-900 whitespace-no-wrap">
+                                한다면 하는남자
+                            </p>
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <input type="checkbox" class="ml-2 form-checkbox h-5 w-5 text-green-600" />
 
-    <div class="block lg:hidden pr-4">
-      <button id="nav-toggle"
-              class="flex items-center p-1 text-orange-800 hover:text-gray-900">
-        <svg class="fill-current h-6 w-6"
-             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path fill="none" d="M0 0h24v24H0z"/>
-          <path d="M4 6h16M4 12h16m-7 6h7"></path>
-        </svg>
-      </button>
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+									<span
+                                            class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                        <span aria-hidden
+                                              class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+									<span class="relative">활동중</span>
+									</span>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+                <div
+                        class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
+						<span class="text-xs xs:text-sm text-gray-900">
+                            n개의 항목 중 1 - 10까지
+                        </span>
+                    <!-- 버튼 -->
+                    <div class="inline-flex mt-2 xs:mt-0">
+                        <button
+                                class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l">
+                            이전
+                        </button>
+                        &nbsp; &nbsp;
+                        <button
+                                class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r">
+                            다음
+                        </button>
+                    </div>ㅣㄷ
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</nav>
-
-<!-- 콘텐츠 영역 -->
-<div class="container w-full mx-auto pt-20">
-  <div class="w-full px-4 md:px-0 md:mt-8 mb-16 text-gray-800 leading-normal">
-    <!-- 콘텐츠 내용을 추가합니다. -->
-    <h1 class="text-3xl font-bold mb-4">Welcome to Admin Page</h1>
-    <p class="mb-4">This is a simple admin page created with Tailwind CSS.</p>
-    <!-- 추가적인 콘텐츠 및 기능을 구현하세요. -->
-  </div>
 </div>
-
-<!-- 푸터 -->
-<footer class="bg-white border-t border-gray-400 shadow">
-  <div class="container mx-auto flex py-8">
-
-    <div class="w-full mx-auto flex flex-wrap">
-      <div class="flex w-full lg:w-1/2 ">
-        <!-- 푸터 내용을 추가합니다. -->
-        <p class="text-sm text-gray-500 font-bold items-center mb-2">
-          &copy; 2023 Admin Page. All rights reserved.
-        </p>
-        <!-- 추가적인 푸터 내용을 구현하세요. -->
-      </div>
-    </div>
-  </div>
-</footer>
-
-<!-- 테일윈드와 관련된 JavaScript 파일을 import합니다. -->
-<script src="path/to/your/tailwind.js"></script>
 </body>
 </html>
