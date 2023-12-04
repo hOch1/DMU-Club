@@ -24,11 +24,13 @@ public class IndexServlet extends HttpServlet {
             MemberDto memberDto = (MemberDto) session.getAttribute("member");
 
             if (memberDto != null) {
-                List<MemberDto> memberDtoList = memberService.matchMember(memberDto.getMbti());
-                session.setAttribute("memberList", memberDtoList);
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
-            }else if (memberDto.getRole().equals("ADMIN")){
-                response.sendRedirect("/admin");
+                if(memberDto.getRole().equals("ADMIN"))
+                    response.sendRedirect("/admin");
+                else {
+                    List<MemberDto> memberDtoList = memberService.matchMember(memberDto.getMbti());
+                    session.setAttribute("memberList", memberDtoList);
+                    request.getRequestDispatcher("/index.jsp").forward(request, response);
+                }
             }else {
                 response.sendRedirect("/auth/sign-in");
             }
