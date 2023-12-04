@@ -14,20 +14,7 @@
 </head>
 <body>
 <section class="flex flex-col h-screen">
-  <header class="flex justify-between items-center p-4 bg-blue-500">
-    <div class="flex items-center">
-      <img
-              alt="DMU Club Logo"
-              class="rounded-full"
-              height="40"
-              src="placeholder.svg"
-              width="40"
-              style="aspect-ratio: 40 / 40; object-fit: cover;"
-      />
-      <h1 class="text-2xl text-white ml-2">DMU Club</h1>
-    </div>
-  </header>
-
+  <jsp:include page="/header.jsp" flush="false" />
 
   <!-- email, nickname, phone 중복 금지 -->
 
