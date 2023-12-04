@@ -13,6 +13,7 @@
   <title>회원가입</title>
 </head>
 <body>
+<<<<<<< HEAD
 <section class="bg-white dark:bg-gray-900">
   <div class="flex justify-center min-h-screen">
     <div class="hidden bg-cover lg:block lg:w-2/5" style="background-image: url('https://images.unsplash.com/photo-1494621930069-4fd4b2e24a11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80')">
@@ -23,6 +24,10 @@
         <h1 class="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
           회원가입을 시작해보세요.
         </h1>
+=======
+<section class="flex flex-col h-screen">
+  <jsp:include page="/header.jsp" flush="false" />
+>>>>>>> 3975ca47f1f64de434ecbec7b14c3ec0b0dbcb72
 
         <p class="mt-4 text-gray-500 dark:text-gray-400">
           로그인하여 더 많은 정보 더 많은 사람들을 만나보세요!

@@ -30,20 +30,9 @@
 %>
     <!-- 메인영역  -->
 
+<jsp:include page="/header.jsp" flush="false" />
 
 <section class="flex flex-col h-screen">
-    <header class="flex justify-center items-center p-4 bg-blue-500">
-        <div class="flex items-center">
-            <img
-                    alt="DMU Club Logo"
-                    class="rounded-full"
-                    height="40"
-                    width="40"
-                    src="/placeholder.svg"
-                    style="aspect-ratio: 40 / 40; object-fit: cover;"
-            />
-        </div>
-    </header>
     <main class="flex-grow flex flex-col items-center justify-center p-4">
         <form class="space-y-4 w-1/6" action="/auth/sign-in" method="post">
             <input class="border rounded p-2 w-full" placeholder="ID" type="text" name="email" required />
