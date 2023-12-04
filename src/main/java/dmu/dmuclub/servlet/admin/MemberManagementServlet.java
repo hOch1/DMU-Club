@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/admin/member")
+@WebServlet("/admin")
 public class MemberManagementServlet extends HttpServlet {
 
     private final MemberService memberService = new MemberService();
@@ -25,7 +25,7 @@ public class MemberManagementServlet extends HttpServlet {
 
             request.setAttribute("memberList", memberDtoList);
             // 임시 response
-            RequestDispatcher dispatcher = request.getRequestDispatcher("adminMember.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/adminMember.jsp");
             dispatcher.forward(request, response);
         }catch (SQLException e){
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());

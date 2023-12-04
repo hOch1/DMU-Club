@@ -9,7 +9,7 @@ import javax.websocket.DeploymentException;
 import javax.websocket.server.ServerContainer;
 import java.io.IOException;
 
-@WebServlet("/chat")
+@WebServlet("/message")
 public class WebSocketServlet extends HttpServlet {
 
     @Override
@@ -25,6 +25,6 @@ public class WebSocketServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, IOException {
-        req.getRequestDispatcher("chat/chat.jsp").forward(req, resp);
+        req.getRequestDispatcher("/message/message.jsp").forward(req, resp);
     }
 }

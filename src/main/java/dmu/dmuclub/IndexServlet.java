@@ -27,12 +27,12 @@ public class IndexServlet extends HttpServlet {
                 List<MemberDto> memberDtoList = memberService.matchMember(memberDto.getMbti());
                 session.setAttribute("memberList", memberDtoList);
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
+            }else if (memberDto.getRole().equals("ADMIN")){
+                response.sendRedirect("/admin");
             }else {
                 response.sendRedirect("/auth/sign-in");
             }
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
+        } catch (RuntimeException | SQLException e) {
             throw new RuntimeException(e);
         }
     }

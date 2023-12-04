@@ -15,7 +15,9 @@ public class MatchServlet extends HttpServlet {
     private final MemberService memberService = new MemberService();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+        request.getRequestDispatcher("/matching/matching.jsp").forward(request, response);
     }
 }

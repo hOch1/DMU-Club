@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/member/updateNickname")
+@WebServlet("/info/updateNickname")
 public class UpdateNicknameServlet extends HttpServlet {
 
     private final MemberService memberService = new MemberService();

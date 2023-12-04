@@ -10,7 +10,7 @@
   
   <!-- nav 부분 -->
     <nav class="flex justify-around">
-      <a class="text-center" href="<%= request.getContextPath() %>/matching/matching.jsp" rel="ugc">
+      <a class="text-center" href="<%= request.getContextPath() %>/matching" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -28,7 +28,7 @@
         <span class="text-sm">Matching</span>
       </a>
       
-      <a class="text-center" href="<%= request.getContextPath() %>/message/message.jsp" rel="ugc">
+      <a class="text-center" href="<%= request.getContextPath() %>/message" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -48,7 +48,7 @@
         <span class="text-sm">Message</span>
       </a>
       
-      <a class="text-center" href="<%= request.getContextPath() %>/index.jsp" rel="ugc">
+      <a class="text-center" href="index.jsp" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -67,7 +67,7 @@
         <span class="text-sm">Main</span>
       </a>
       
-      <a class="text-center" href="<%= request.getContextPath() %>/community/community.jsp" rel="ugc">
+      <a class="text-center" href="<%= request.getContextPath() %>/community" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -89,7 +89,7 @@
       </a>
       
       
-      <a class="text-center" href="<%= request.getContextPath() %>/info/info.jsp" rel="ugc">
+      <a class="text-center" href="<%= request.getContextPath() %>/info" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

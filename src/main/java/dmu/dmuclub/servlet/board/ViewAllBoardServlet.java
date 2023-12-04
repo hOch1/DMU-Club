@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/board/all")
+@WebServlet("/community")
 public class ViewAllBoardServlet extends HttpServlet {
 
     private final BoardService boardService = new BoardService();
@@ -27,9 +27,7 @@ public class ViewAllBoardServlet extends HttpServlet {
 
             request.setAttribute("boardList", boardResponses);
 
-            // 임시 Response
-            RequestDispatcher dispatcher = request.getRequestDispatcher("boardList.jsp");
-            dispatcher.forward(request, response);
+            request.getRequestDispatcher("/community/community.jsp").forward(request, response);
         } catch (BoardNotFoundException e){
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/board/create")
+@WebServlet("/community/write")
 public class CreateBoardServlet extends HttpServlet {
 
     private final BoardService boardService = new BoardService();
@@ -26,6 +26,11 @@ public class CreateBoardServlet extends HttpServlet {
         } catch (RuntimeException | SQLException | ClassNotFoundException e){
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/community/write.jsp").forward(req, resp);
     }
 
     private CreateBoardRequest createBoardRequest(HttpServletRequest request){
