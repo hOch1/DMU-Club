@@ -6,13 +6,14 @@
     <meta charset="UTF-8">
 </head>
 <body>
+<div class="flex">
 <jsp:include page="sideBar.jsp"/>
 
 <div class="flex flex-col w-full min-h-screen bg-white">
     <header class="flex items-center justify-between h-16 px-4 border-b bg-gray-100 dark:bg-gray-800">
         <div class="flex items-center space-x-2">
             <img
-                    src="/placeholder.svg"
+                    src="${pageContext.request.contextPath}/img/logo.png"
                     alt="Admin Profile Image"
                     height="32"
                     width="32"
@@ -21,9 +22,6 @@
             />
             <h1 class="font-bold text-lg">Admin</h1>
         </div>
-        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:text-accent-foreground h-10 px-4 py-2 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700">
-            Logout
-        </button>
     </header>
     <main class="flex-1 p-4">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -59,12 +57,13 @@
                 </div>
                 <div class="p-6">
                     <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground h-10 px-4 py-2 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700">
-                        <a href="<%= request.getContextPath() %>/admin/adminMember.jsp">Manage Members</a>
+                        <a href="<%= request.getContextPath() %>/admin/adminMember2.jsp">Manage Members</a>
                     </button>
                 </div>
             </div>
         </div>
     </main>
+</div>
 </div>
 </body>
 </html>

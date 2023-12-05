@@ -14,7 +14,7 @@
 <header class="flex justify-between items-center p-4 bg-blue-500">
     <div class="flex items-center" style=cursor:pointer; onclick="location.href='/auth/sign-in'" >
       <img
-        src="${pageContext.request.contextPath}/img/default_img.jpg"
+        src="${pageContext.request.contextPath}/img/logo.png"
         height="40"
         width="40"
         alt="로고가 나타남"

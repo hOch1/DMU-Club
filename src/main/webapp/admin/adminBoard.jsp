@@ -7,6 +7,14 @@
   <title>Board List</title>
 </head>
 <body>
+<div class="flex">
+  <jsp:include page="sideBar.jsp" flush="false"/>
+
+
+
+
+
+</div>
 <h2>Board List</h2>
 <%= request.getAttribute("boardList") %>
 </body>

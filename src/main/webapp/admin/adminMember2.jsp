@@ -13,8 +13,8 @@
     <title>admin Page</title>
 </head>
 <body>
+<div class="flex">
 <jsp:include page="sideBar.jsp" flush="false" />
-
 <!-- component -->
 <div class="bg-white p-8 rounded-md w-full">
     <div class=" flex items-center justify-between pb-6">
@@ -31,7 +31,6 @@
             </div>
             <div class="lg:ml-40 ml-10 space-x-8">
                 <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Remove</button>
-                <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Logout</button>
             </div>
         </div>
     </div>
@@ -112,6 +111,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

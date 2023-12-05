@@ -9,7 +9,7 @@
 <html>
 <head>
   <script src="https://cdn.tailwindcss.com"></script> <!--테일윈드 라이브러리-->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> <!-- sweetalert2 -->
   <title>회원가입</title>
 </head>
 <body>
@@ -50,7 +50,7 @@
             <input class="border rounded p-2 w-full" id="pw2" placeholder="비밀번호 재입력" type="password" required/>
             <input class="border rounded p-2 w-full" placeholder="이름" type="text" name="username" required/>
             <input class="border rounded p-2 w-full" placeholder="별명" type="text" name="nickname" required/>
-            <input class="border rounded p-2 w-full" placeholder="핸드폰 번호" type="text" name="phone" required/>
+            <input class="border rounded p-2 w-full" placeholder="핸드폰 번호 -를 제외하고 입력 예시)) 01012345678" type="text" name="phone" oninput="validatePhoneNumber(this)" required/>
             <input class="border rounded p-2 w-full" maxlength="10"
                    placeholder="취미를 10글자 이내로 작성 ex(축구, 카페)"
                    type="text" name="hobby" required oninput="limitText(this,10)"/>
@@ -100,9 +100,20 @@
                 var pw1 = document.getElementById("pw1").value;
                 var pw2 = document.getElementById("pw2").value;
 
+                // mbti
+                var ei = document.querySelector('input[name="EI"]:checked');
+                var sn = document.querySelector('input[name="SN"]:checked');
+                var ft = document.querySelector('input[name="FT"]:checked');
+                var jp= document.querySelector('input[name="JP"]:checked');
+
+
                 // 비밀번호
-                if(pw1 !== pw2){
+                if(pw1 !== pw2) {
                   alert("비밀번호가 다릅니다 다시 입력해주세요");
+                  return false;
+                }
+                if (!ei || !sn || !ft || !jp ) {
+                  alert("mbti를 골라주세요!.");
                   return false;
                 }
                 return true;
@@ -116,10 +127,24 @@
                   element.value=value.slice(0, maxLength);
                 }
               }
+
+              // 핸드폰번호 숫자 입력 예제
+              function validatePhoneNumber(input) {
+                // 입력된 값에서 숫자만 추출
+                var phoneNumber = input.value.replace(/\D/g, '');
+
+                // 추출된 값과 원래 값이 다르다면 숫자가 아닌 문자가 포함된 것이므로 경고 표시
+                if (phoneNumber !== input.value) {
+                  alert("숫자만 입력해주세요.");
+                  // 숫자가 아닌 문자를 제거한 값으로 필드를 업데이트
+                  input.value = phoneNumber;
+                }
+              }
             </script>
           </form>
         </main>
-        </div>
+</section>
+      </div>
     </div>
   </div>
 </section>

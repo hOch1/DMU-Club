@@ -8,13 +8,14 @@
   <script src="https://cdn.tailwindcss.com"></script> <!--테일윈드 라이브러리-->
 </head>
 <body>
+<div class="flex">
+  <jsp:include page="sideBar.jsp" flush="false"/>
 <h2>Reports</h2>
-
 <div class="flex flex-col w-full min-h-screen bg-white dark:bg-gray-900">
   <header class="flex items-center justify-between h-16 px-4 border-b bg-gray-100 dark:bg-gray-800">
     <div class="flex items-center space-x-2">
       <img
-              src="/placeholder.svg"
+              src="${pageContext.request.contextPath}/img/logo.png"
               alt="Admin Profile Image"
               height="32"
               width="32"
@@ -38,6 +39,7 @@
       </ul>
     </div>
   </main>
+</div>
 </div>
 <%= request.getAttribute("reportList") %>
 </body>
