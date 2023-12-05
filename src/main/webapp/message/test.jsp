@@ -8,6 +8,10 @@
   <title>WebSocket Chat</title>
 </head>
 <body>
+
+<%
+
+%>
 <h1>WebSocket Chat</h1>
 <input type="text" id="message" placeholder="메시지를 입력하세요.">
 <button onsubmit="sendMessage()" onclick="sendMessage()">메시지 보내기</button>
@@ -16,7 +20,9 @@
 <script>
   var ws = new WebSocket("ws://localhost:8080/messagePoint");
 
-  ws.onopen = function() {
+  ws.onopen = function(event) {
+    var message = event.data;
+    document.getElementById("messages").innerHTML += "<p>" + message + "</p>";
     console.log("WebSocket 연결 성공");
   };
 

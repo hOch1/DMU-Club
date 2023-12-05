@@ -27,18 +27,19 @@ public class WebSocket {
     public void onOpen(Session session, EndpointConfig config) {
         this.httpSession = (HttpSession) config.getUserProperties().get("httpSession");
         clients.add(session);
-
     }
 
     @OnMessage
     public void onMessage(String message) {
         synchronized (clients){
-            MemberDto memberDto = (MemberDto) httpSession.getAttribute("member");
+            MemberDto sendMember = (MemberDto) httpSession.getAttribute("member");
 
             try {
                 for (Session client : clients) {
-                    String msg = "["+memberDto.getNickname()+"] : "+message;
+                    HttpSession session = (HttpSession) client.getUserProperties().get("httpSession");
+                    MemberDto memberDto = (MemberDto) session.getAttribute("member");
 
+                    String msg = "[" + sendMember.getNickname() + "] : " + message;
                     client.getBasicRemote().sendText(msg);
                 }
             }catch(Exception e){
