@@ -36,6 +36,10 @@ public class MemberService {
         return memberDtoList;
     }
 
+    public void deleteMember(String member_id) throws SQLException {
+        memberDao.deleteById(member_id);
+    }
+
     private String matchMBTI(String mbti){
         if (mbti.equals("INFP"))
             return "ENFJ";

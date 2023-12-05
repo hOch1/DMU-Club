@@ -103,7 +103,11 @@ public class MemberDaoImpl implements MemberDao {
     }
 
     public void deleteById(String id) throws SQLException{
-        String query = "DELETE";
+        String query = "DELETE FROM member WHERE id = ?";
+        try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
+            preparedStatement.setInt(1, Integer.parseInt(id));
+            preparedStatement.executeUpdate();
+        }
     }
 
 
