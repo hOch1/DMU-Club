@@ -67,6 +67,10 @@ public class BoardService {
         return null;
     }
 
+    public void deleteById(String id) throws SQLException {
+        boardDao.deleteById(id);
+    }
+
     private String isLoginValidate(MemberDto memberDto){
         if (memberDto == null)
             throw new HasNotRoleException("권한이 없습니다");

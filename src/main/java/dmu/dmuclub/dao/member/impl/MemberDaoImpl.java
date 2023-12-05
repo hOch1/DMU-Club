@@ -112,7 +112,6 @@ public class MemberDaoImpl implements MemberDao {
 
 
 
-
     private void resultSetToMemberDto(ResultSet resultSet, MemberDto memberDto) throws SQLException {
         memberDto.setId(resultSet.getInt("id"));
         memberDto.setEmail(resultSet.getString("email"));

@@ -40,6 +40,7 @@ public class MemberService {
         memberDao.deleteById(member_id);
     }
 
+
     private String matchMBTI(String mbti){
         if (mbti.equals("INFP"))
             return "ENFJ";

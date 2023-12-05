@@ -73,7 +73,15 @@ public class BoardDaoImpl implements BoardDao {
                     return null;
                 }
             }
+        }
+    }
 
+    @Override
+    public void deleteById(String id) throws SQLException {
+        String query = "DELETE FROM board WHERE id = ?";
+        try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
+            preparedStatement.setInt(1, Integer.parseInt(id));
+            preparedStatement.executeUpdate();
         }
     }
 }
