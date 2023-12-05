@@ -2,6 +2,7 @@
 <head>
     <script src="https://cdn.tailwindcss.com"></script> <!--테일윈드 라이브러리-->
     <title>admin Page</title>
+    <meta charset="UTF-8">
 </head>
 <body>
 <div class="flex">
@@ -68,7 +69,6 @@
 
 <script>
 
-    <% request.getParameter('id')%>
 </script>
 </body>
 </html>
