@@ -10,14 +10,14 @@
     <div class="w-1/6 bg-gray-200 p-4">
         <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
             <div class="mb-2 p-4">
-                <a href="<%= request.getContextPath() %>/admin/adminPage.jsp">
+                <a href="<%= request.getContextPath() %>/admin">
                 <h5 class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-gray-900">Admin</h5>
                 </a>
             </div>
             <nav class="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal text-gray-700">
 
 
-                <a href="<%= request.getContextPath() %>/admin/adminBoard.jsp">
+                <a href="<%= request.getContextPath() %>/admin/board">
                     <div role="button" tabindex="0" class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-blue-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
                         <div class="grid place-items-center mr-4">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -31,7 +31,7 @@
                     </div>
                 </a>
 
-                <a href="<%= request.getContextPath() %>/admin/adminMember2.jsp">
+                <a href="<%= request.getContextPath() %>/admin/member">
                     <div role="button" tabindex="0" class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-blue-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
                         <div class="grid place-items-center mr-4">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5">
@@ -41,7 +41,7 @@
                     </div>
                 </a>
 
-                <a href="<%= request.getContextPath() %>/admin/adminReport.jsp">
+                <a href="<%= request.getContextPath() %>/admin/report">
                     <div role="button" tabindex="0" class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-blue-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
                         <div class="grid place-items-center mr-4">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
