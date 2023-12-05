@@ -40,9 +40,14 @@ public class BoardService {
     public List<ViewBoardResponse> viewBoardAll(){
         try{
             List<ViewBoardResponse> boardResponses = boardDao.findAll();
-
             if(boardResponses.isEmpty())
                 throw new BoardNotFoundException("게시물을 찾지못하였습니다");
+
+
+            for (ViewBoardResponse boardResponse : boardResponses){
+                MemberDto memberDto = memberDao.findById(boardResponse.getAuthor());
+                boardResponse.setAuthor(memberDto.getNickname());
+            }
 
             return boardResponses;
         } catch (SQLException e) {

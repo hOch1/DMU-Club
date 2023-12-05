@@ -1,7 +1,7 @@
 <%@ page import="dmu.dmuclub.dto.board.ViewBoardResponse" %>
 <%@ page import="java.util.List" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <jsp:include page="/header.jsp" flush="false" />
@@ -26,14 +26,14 @@
         </tr>
         </thead>
         <tbody>
-        <% for(ViewBoardResponse boardResponse : boardResponses){ %>
+        <c:forEach items="${boardList}" var="board">
         <tr class="border-t border-gray-300">
-            <td class="py-4"><%=boardResponse.getId()%></td>
-            <td><%=boardResponse.getTitle()%></td>
-            <td><%=boardResponse.getAuthor()%></td>
-            <td><%=boardResponse.getCreateDate()%></td>
+            <td class="py-4">${board.id}</td>
+            <td>${board.title}</td>
+            <td>${board.author}</td>
+            <td>${board.createDate}</td>
         </tr>
-        <%}%>
+        </c:forEach>
         </tbody>
     </table>
     <div class="flex justify-end mt-4">
