@@ -1,8 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>admin Page</title>
     <script src="https://cdn.tailwindcss.com"></script> <!--테일윈드 라이브러리-->
+    <meta charset="UTF-8">
 </head>
 <body>
 <jsp:include page="sideBar.jsp"/>
