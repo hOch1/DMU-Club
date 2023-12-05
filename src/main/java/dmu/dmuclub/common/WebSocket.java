@@ -1,41 +1,60 @@
 package dmu.dmuclub.common;
 
+import dmu.dmuclub.config.ChatConfig;
+import dmu.dmuclub.dto.member.MemberDto;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.websocket.*;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.Collections.*;
 
-@ServerEndpoint("/messageServer")
+@ServerEndpoint(value = "/messagePoint", configurator = ChatConfig.class)
 public class WebSocket {
 
-    private static Set<Session> clients = synchronizedSet(new HashSet<Session>());
+    private static Set<Session> clients = Collections.synchronizedSet(new HashSet<>());
+    private HttpSession httpSession;
+
 
     @OnOpen
-    public void onOpen(Session session){
+    public void onOpen(Session session, EndpointConfig config) {
+        this.httpSession = (HttpSession) config.getUserProperties().get("httpSession");
         clients.add(session);
+
     }
 
     @OnMessage
-    public void onMessage(String message, Session session) throws IOException{
+    public void onMessage(String message) {
         synchronized (clients){
-            for (Session client : clients){
-                if (!client.equals(session))
-                    client.getBasicRemote().sendText(message);
+            MemberDto memberDto = (MemberDto) httpSession.getAttribute("member");
+
+            try {
+                for (Session client : clients) {
+                    String msg = "["+memberDto.getNickname()+"] : "+message;
+
+                    client.getBasicRemote().sendText(msg);
+                }
+            }catch(Exception e){
+                e.printStackTrace();
             }
         }
     }
 
     @OnClose
-    public void onClose(Session session){
+    public void onClose(Session session) {
         clients.remove(session);
     }
 
     @OnError
-    public void onError(Throwable e){
-        e.printStackTrace();
+    public void onError(Session session, Throwable t){
+        t.printStackTrace();
+        clients.remove(session);
     }
 }

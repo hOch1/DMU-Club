@@ -8,7 +8,7 @@
 <body>
 <jsp:include page="sideBar.jsp"/>
 
-<div class="flex flex-col w-full min-h-screen bg-white dark:bg-gray-900">
+<div class="flex flex-col w-full min-h-screen bg-white">
     <header class="flex items-center justify-between h-16 px-4 border-b bg-gray-100 dark:bg-gray-800">
         <div class="flex items-center space-x-2">
             <img

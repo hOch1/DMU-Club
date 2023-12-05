@@ -13,18 +13,7 @@ import java.io.IOException;
 public class WebSocketServlet extends HttpServlet {
 
     @Override
-    public void init() throws ServletException {
-        // 서블릿 초기화 시 WebSocketHandler 등록
-        ServerContainer serverContainer = (ServerContainer) getServletContext().getAttribute(ServerContainer.class.getName());
-        try {
-            serverContainer.addEndpoint(MyWebSocketHandler.class);
-        } catch (DeploymentException e) {
-            throw new ServletException("Failed to add WebSocket endpoint", e);
-        }
-    }
-
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, IOException {
-        req.getRequestDispatcher("/message/message.jsp").forward(req, resp);
+        req.getRequestDispatcher("/message/test.jsp").forward(req, resp);
     }
 }

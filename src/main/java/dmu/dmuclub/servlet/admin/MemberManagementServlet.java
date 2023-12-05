@@ -24,7 +24,7 @@ public class MemberManagementServlet extends HttpServlet {
             List<MemberDto> memberDtoList = memberService.findAll();
 
             request.setAttribute("memberList", memberDtoList);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/adminMember2.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/adminMember3.jsp");
             dispatcher.forward(request, response);
         }catch (SQLException e){
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());

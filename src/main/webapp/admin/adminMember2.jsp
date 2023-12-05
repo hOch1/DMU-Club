@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 99dos
@@ -58,23 +59,22 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${memberList}" var="member">
                     <tr>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 w-10 h-10">
-                                    <img class="w-full h-full rounded-full"
-                                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                                         alt="" />
+                                    <img class="w-full h-full rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" alt="" />
                                 </div>
                                 <div class="ml-3">
                                     <p class="text-gray-900 whitespace-no-wrap">
-                                        김준성
+                                        ${member.username}
                                     </p>
                                 </div>
                             </div>
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">junsung@naver.com</p>
+                            <p class="text-gray-900 whitespace-no-wrap">${member.email}</p>
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <p class="text-gray-900 whitespace-no-wrap">
@@ -91,6 +91,7 @@
                             </span>
                         </td>
                     </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
                 <div class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">

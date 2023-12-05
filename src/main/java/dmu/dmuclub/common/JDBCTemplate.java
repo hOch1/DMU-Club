@@ -15,10 +15,8 @@ public class JDBCTemplate {
             String user = "root";
             String password = "admin";
 
-            Connection con = null;
+            Connection con = DriverManager.getConnection(url, user, password);
 
-
-            con = DriverManager.getConnection(url, user, password);
             return con;
         } catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();

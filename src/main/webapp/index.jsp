@@ -26,9 +26,11 @@
         <h1 class="text-2xl text-white ml-2" >DMU Club</h1>
     </div>
 </header>
-<c:if test="${member == null}">
-    <% response.sendRedirect("/auth/sign-in"); %>
-</c:if>
+<%
+if (session.getAttribute("member") == null)
+    response.sendRedirect("/auth/sign-in");
+%>
+
 
 <% if (session.getAttribute("message") != null) { %>
 <script>
