@@ -54,9 +54,9 @@ List<MemberDto> memberDtoList = (List<MemberDto>) session.getAttribute("memberLi
   <!-- 메인영역  -->
   <main class="flex-grow p-4 overflow-y-auto">
     <h2 class="text-2xl font-bold mb-4">오늘의 추천</h2>
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
-        <% for (MemberDto memberDto : memberDtoList){ %>
+      <% for (MemberDto memberDto : memberDtoList){ %>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <!-- 프로필 1 -->
       <div class="border bg-card text-card-foreground rounded-lg shadow-md overflow-hidden" data-v0-t="card">
         <img src="<%= request.getContextPath() %>/img/default_img.jpg"
@@ -73,7 +73,6 @@ List<MemberDto> memberDtoList = (List<MemberDto>) session.getAttribute("memberLi
           </div>
         </div>
       </div>
-
     </div>
       <% } %>
   </main>
