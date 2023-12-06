@@ -10,7 +10,7 @@
   
   <!-- nav 부분 -->
     <nav class="flex justify-around">
-      <a class="text-center" href="<%= request.getContextPath() %>/matching" rel="ugc">
+      <a class="text-center" href="<%= request.getContextPath() %>/match" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
