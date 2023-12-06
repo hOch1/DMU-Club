@@ -5,17 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1e95653-2f5c-4c75-b005-80cddadfc875" name="변경" comment="">
-<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/src/main/webapp/admin/sideBar.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/adminMember2.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/adminMember2.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/adminPage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/adminPage.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/auth/signUp.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/auth/signUp.jsp" afterDir="false" />
-=======
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/507b4d6d-a98c-4aba-9e0f-303b0d043523.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/507b4d6d-a98c-4aba-9e0f-303b0d043523.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/header.jsp" afterDir="false" />
->>>>>>> 3975ca47f1f64de434ecbec7b14c3ec0b0dbcb72
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

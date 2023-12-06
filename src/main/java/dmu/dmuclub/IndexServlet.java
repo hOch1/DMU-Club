@@ -25,7 +25,12 @@ public class IndexServlet extends HttpServlet {
                     response.sendRedirect("/admin");
                 else {
                     List<MemberDto> memberDtoList = memberService.matchMember(memberDto.getMbti());
-                    session.setAttribute("memberList", memberDtoList);
+
+                    if (memberDtoList.isEmpty())
+                        session.setAttribute("memberList", null);
+                    else
+                        session.setAttribute("memberList", memberDtoList);
+
                     request.getRequestDispatcher("/index.jsp").forward(request, response);
                 }
             }else {

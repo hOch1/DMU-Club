@@ -12,5 +12,4 @@ public class CreateBoardRequest {
     private String title;
     private String content;
     private int member_id;
-
 }

@@ -24,7 +24,6 @@ public class ReportManagementServlet extends HttpServlet {
             List<ReportResponse> reportResponses = reportService.findAll();
 
             request.setAttribute("reportList", reportResponses);
-            // 임시 response
             RequestDispatcher dispatcher = request.getRequestDispatcher("admin/adminReport.jsp");
             dispatcher.forward(request, response);
         } catch (SQLException e){

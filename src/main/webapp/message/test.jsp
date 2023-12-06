@@ -18,7 +18,7 @@
 <div id="messages"></div>
 
 <script>
-  var ws = new WebSocket("ws://localhost:8080/messagePoint");
+  var ws = new WebSocket("ws://localhost:8080/messagePoint/user10");
 
   ws.onopen = function(event) {
     var message = event.data;

@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.Collections.*;
 
-@ServerEndpoint(value = "/messagePoint", configurator = ChatConfig.class)
+@ServerEndpoint(value = "/messagePoint/{nickname}", configurator = ChatConfig.class)
 public class WebSocket {
 
     private static Set<Session> clients = Collections.synchronizedSet(new HashSet<>());
@@ -30,17 +30,19 @@ public class WebSocket {
     }
 
     @OnMessage
-    public void onMessage(String message) {
+    public void onMessage(String message, @PathParam("nickname") String nickname) {
         synchronized (clients){
             MemberDto sendMember = (MemberDto) httpSession.getAttribute("member");
 
             try {
                 for (Session client : clients) {
-                    HttpSession session = (HttpSession) client.getUserProperties().get("httpSession");
-                    MemberDto memberDto = (MemberDto) session.getAttribute("member");
+                    HttpSession toSession = (HttpSession) client.getUserProperties().get("httpSession");
+                    MemberDto memberDto = (MemberDto) toSession.getAttribute("member");
 
-                    String msg = "[" + sendMember.getNickname() + "] : " + message;
-                    client.getBasicRemote().sendText(msg);
+                    if (memberDto.getNickname().equals(nickname) || memberDto.getNickname().equals(sendMember.getNickname())) {
+                        String msg = "[" + sendMember.getNickname() + "] : " + message;
+                        client.getBasicRemote().sendText(msg);
+                    }
                 }
             }catch(Exception e){
                 e.printStackTrace();

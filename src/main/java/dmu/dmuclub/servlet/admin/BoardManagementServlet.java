@@ -32,7 +32,6 @@ public class BoardManagementServlet extends HttpServlet {
             List<ViewBoardResponse> boardResponses = boardService.viewBoardAll();
 
             request.setAttribute("boardList", boardResponses);
-            // 임시 response
             RequestDispatcher dispatcher = request.getRequestDispatcher("admin/adminBoard.jsp");
             dispatcher.forward(request, response);
         } catch (HasNotRoleException e){
