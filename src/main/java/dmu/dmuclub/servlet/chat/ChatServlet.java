@@ -28,12 +28,19 @@ public class ChatServlet extends HttpServlet {
             HttpSession session = req.getSession();
             String nickname = req.getParameter("nickname");
             MemberDto memberDto = (MemberDto) session.getAttribute("member");
+            MemberDto toMember = memberService.findMember_nickname(nickname);
 
-            List<MemberDto> chatDtoList = chatService.findChatList(memberDto.getId());
+            List<MemberDto> chatList = chatService.findChatList(memberDto.getId());
 
 
+            List<ChatLogDto> sendLog = chatService.findChatLog(memberDto.getId());
+            List<ChatLogDto> toLog = chatService.findChatLog(toMember.getId());
+
+
+            req.setAttribute("sendLog", sendLog);
+            req.setAttribute("toLog", toLog);
             req.setAttribute("nickname", nickname);
-            req.setAttribute("chatList", chatDtoList);
+            req.setAttribute("chatList", chatList);
             req.getRequestDispatcher("/message/test.jsp").forward(req, resp);
         } catch (SQLException e) {
             throw new RuntimeException(e);

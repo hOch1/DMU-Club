@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ChatLogDao {
 
-    void save(String message, int id) throws SQLException;
+    void save(String message, int chat_id) throws SQLException;
 
-    List<ChatLogDto> findByChat_id(int id) throws SQLException;
+    List<ChatLogDto> findByChat_id(int chat_id) throws SQLException;
 }

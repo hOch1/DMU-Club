@@ -18,22 +18,22 @@ public class ChatLogDaoImpl implements ChatLogDao {
 
 
     @Override
-    public void save(String message, int id) throws SQLException {
+    public void save(String message, int chat_id) throws SQLException {
         String query = "INSERT INTO chatlog (id , message) VALUES(?,?)";
         try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, chat_id);
             preparedStatement.setString(2, message);
             preparedStatement.executeUpdate();
         }
     }
 
     @Override
-    public List<ChatLogDto> findByChat_id(int id) throws SQLException {
+    public List<ChatLogDto> findByChat_id(int chat_id) throws SQLException {
         List<ChatLogDto> chatDtoList = new ArrayList<>();
         String query = "SELECT * FROM chatlog WHERE id = ? ORDER BY sendTime asc";
 
         try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, chat_id);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
