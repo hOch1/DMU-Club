@@ -13,18 +13,21 @@
             친구목록
         </h2>
         <ul class="divide-y divide-gray-300 dark:divide-gray-700">
+
+            <!--Start Point-->
+            <c:forEach var="item" items='#'>
             <li class="p-4 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer flex items-center space-x-2 justify-between">
                 <div class="flex items-center space-x-2">
                     <img
                             alt="Friend 1"
                             class="rounded-full border-2 border-blue-500"
                             height="40"
-                            src="/placeholder.svg"
+                            src="../img/default_img.jpg"
                             width="40"
                             style="aspect-ratio:40/40;object-fit:cover"
                     />
                     <div>
-                        <h2 class="text-gray-700 dark:text-gray-300">name</h2>
+                        <h2 class="text-gray-700 dark:text-gray-300">item.name</h2>
                     </div>
                 </div>
                 <div class="flex space-x-2">
@@ -43,6 +46,9 @@
                     </button>
                 </div>
             </li>
+            <!--끝-->
+            </c:forEach>
+
     </ul>
     </div>
 </section>
