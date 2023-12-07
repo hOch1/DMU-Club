@@ -12,7 +12,7 @@
 </head>
 <body>
 <header class="flex justify-between items-center p-4 bg-blue-500">
-    <div class="flex items-center" style=cursor:pointer; onclick="location.href='/auth/sign-in'" >
+    <div class="flex items-center" style=cursor:pointer; onclick="location.href='/main'" >
       <img
         src="${pageContext.request.contextPath}/img/logo.png"
         height="40"
@@ -24,8 +24,11 @@
       <h1 class="text-2xl text-white ml-2" >DMU Club</h1>
     </div>
     <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background
-        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input
-        bg-background hover:text-accent-foound h-10 px-4 py-2 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700">
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2  disabled:opacity-50 border border-input
+        bg-background hover:text-accent-foound h-10 px-4 py-2
+        transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+            onclick="location.href='/auth/logout'"
+        >
         Logout
     </button>
   </header>

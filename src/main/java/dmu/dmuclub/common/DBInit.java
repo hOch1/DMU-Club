@@ -66,7 +66,7 @@ public class DBInit implements ServletContextListener {
     }
 
     private void insertInitialData(Connection connection) throws SQLException {
-        executeUpdate(connection, "insert into member(email, password, username, nickname, phone, role) value " +
+        executeUpdate(connection, "insert into member(email, password, username, nickname, phone, role) values " +
                 "('admin@admin.com', 'admin', 'admin', 'admin', '010-1111-1111', 'ADMIN')");
 
         for (int i = 0; i < 30; i++) {
