@@ -16,6 +16,7 @@ public interface MemberDao {
 
     MemberDto findByEmail(String email) throws SQLException;
     MemberDto findById(String id) throws SQLException;
+    MemberDto findByNickname(String nickname) throws SQLException;
     List<MemberDto> findAll() throws SQLException;
     List<MemberDto> findByMBTI(String mbti) throws SQLException;
 }

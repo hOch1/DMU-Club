@@ -14,11 +14,13 @@ public class MemberService {
 
 
     public MemberDto findMember(String memberId) throws SQLException {
-
         MemberDto memberDto = memberDao.findById(memberId);
 
-
         return memberDto;
+    }
+
+    public MemberDto findMember_nickname(String nickname) throws SQLException {
+        return memberDao.findByNickname(nickname);
     }
 
     public List<MemberDto> findAll() throws SQLException {

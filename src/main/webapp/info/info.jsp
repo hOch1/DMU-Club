@@ -4,8 +4,8 @@
 <html>
 <jsp:include page="/header.jsp" flush="false" />
 <body>
-<section class="flex h-screen bg-gray-100 dark:bg-gray-900 justify-center">
-    <div class="w-3/4 bg-white dark:bg-gray-800 overflow-y-auto">
+<section class="flex h-screen bg-gray-100 justify-center">
+    <div class="w-3/4 bg-white overflow-y-auto">
         <div class="p-4 flex flex-col">
             <h1 class="text-2xl text-gray-700 dark:text-gray-300 mb-4">내 정보</h1>
         </div>

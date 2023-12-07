@@ -18,8 +18,12 @@ for (MemberDto memberDto : memberDtoList){ %>
 
 <h1>WebSocket Chat</h1>
 <input type="text" id="message" placeholder="메시지를 입력하세요.">
-<button onsubmit="sendMessage()" onclick="sendMessage()">메시지 보내기</button>
-<div id="messages"></div>
+<button type="submit" onsubmit="sendMessage()" onclick="sendMessage()">메시지 보내기</button>
+<div id="messages">
+  <c:forEach items="${log}" var="logs">
+    <p>${logs.message}</p>
+  </c:forEach>
+</div>
 
 <script>
   <%
@@ -35,12 +39,12 @@ for (MemberDto memberDto : memberDtoList){ %>
     var ws = new WebSocket("ws://localhost:8080/messagePoint/<%=nickname%>");
   }
 
-  ws.onopen = function(event) {
-    var message = event.data;
-    document.getElementById("messages").innerHTML += "<p>" + message + "</p>";
-    console.log("WebSocket 연결 성공");
-    console.log("<%=nickname%>님과의 채팅방")
-  };
+  <%--ws.onopen = function(event) {--%>
+  <%--  var message = event.data;--%>
+  <%--  document.getElementById("messages").innerHTML += "<p>" + message + "</p>";--%>
+  <%--  console.log("WebSocket 연결 성공");--%>
+  <%--  console.log("<%=nickname%>님과의 채팅방")--%>
+  <%--};--%>
 
   ws.onmessage = function(event) {
     var message = event.data;
