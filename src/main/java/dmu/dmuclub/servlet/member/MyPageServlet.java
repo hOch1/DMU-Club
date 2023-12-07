@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -22,15 +23,16 @@ public class MyPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String memberId = request.getParameter("id");
-            MemberDto memberDto = memberService.findMember(memberId);
+            HttpSession session = request.getSession();
+            MemberDto memberDto = (MemberDto) session.getAttribute("member");
+
 
             if (memberDto == null)
                 throw new MemberNotFoundException("회원을 찾지 못하였습니다");
 
             request.setAttribute("member", memberDto);
             request.getRequestDispatcher("info/info.jsp").forward(request, response);
-        } catch (SQLException | MemberNotFoundException e) {
+        } catch (MemberNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

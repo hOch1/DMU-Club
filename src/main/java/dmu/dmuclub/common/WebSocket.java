@@ -1,7 +1,10 @@
 package dmu.dmuclub.common;
 
 import dmu.dmuclub.config.ChatConfig;
+import dmu.dmuclub.dto.chat.ChatDto;
+import dmu.dmuclub.dto.chat.ChatLogDto;
 import dmu.dmuclub.dto.member.MemberDto;
+import dmu.dmuclub.service.chat.ChatService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -11,6 +14,7 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -19,12 +23,13 @@ import static java.util.Collections.*;
 @ServerEndpoint(value = "/messagePoint/{nickname}", configurator = ChatConfig.class)
 public class WebSocket {
 
+    private final ChatService chatService = new ChatService();
     private static Set<Session> clients = Collections.synchronizedSet(new HashSet<>());
     private HttpSession httpSession;
 
 
     @OnOpen
-    public void onOpen(Session session, EndpointConfig config) {
+    public void onOpen(Session session, EndpointConfig config) throws SQLException {
         this.httpSession = (HttpSession) config.getUserProperties().get("httpSession");
         clients.add(session);
     }
@@ -42,6 +47,8 @@ public class WebSocket {
                     if (memberDto.getNickname().equals(nickname) || memberDto.getNickname().equals(sendMember.getNickname())) {
                         String msg = "[" + sendMember.getNickname() + "] : " + message;
                         client.getBasicRemote().sendText(msg);
+                        if (memberDto.getNickname().equals(sendMember.getNickname()))
+                            chatService.WriteChatLog(message, sendMember);
                     }
                 }
             }catch(Exception e){

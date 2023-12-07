@@ -18,8 +18,15 @@ for (MemberDto memberDto : memberDtoList){ %>
 
 <h1>WebSocket Chat</h1>
 <input type="text" id="message" placeholder="메시지를 입력하세요.">
-<button onsubmit="sendMessage()" onclick="sendMessage()">메시지 보내기</button>
-<div id="messages"></div>
+<button type="submit" onsubmit="sendMessage()" onclick="sendMessage()">메시지 보내기</button>
+<div id="messages">
+  <c:forEach items="${slog}" var="s">
+    <p>보낸메세지 : ${s.message}</p>
+  </c:forEach>
+  <c:forEach items="${tlog}" var="t">
+    <p>받은메세지 : ${t.message}</p>
+  </c:forEach>
+</div>
 
 <script>
   <%

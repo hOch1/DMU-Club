@@ -1,4 +1,4 @@
-package dmu.dmuclub.servlet.match;
+package dmu.dmuclub.servlet.member;
 
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.service.member.MemberService;
@@ -8,23 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
-@WebServlet("/match")
-public class MatchServlet extends HttpServlet {
+@WebServlet("/profile")
+public class ProfileServlet extends HttpServlet {
 
     private final MemberService memberService = new MemberService();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            List<MemberDto> memberDtoList = memberService.findAll();
+            String member_id = req.getParameter("id");
+            MemberDto memberDto = memberService.findMember(member_id);
 
-            request.setAttribute("memberList", memberDtoList);
-            request.getRequestDispatcher("/matching/matching.jsp").forward(request, response);
+            req.setAttribute("Profile", memberDto);
+            req.getRequestDispatcher("/").forward(req, resp);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

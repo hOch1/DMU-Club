@@ -1,8 +1,10 @@
 package dmu.dmuclub.servlet.chat;
 
 import dmu.dmuclub.dto.chat.ChatDto;
+import dmu.dmuclub.dto.chat.ChatLogDto;
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.service.chat.ChatService;
+import dmu.dmuclub.service.member.MemberService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,14 +20,17 @@ import java.util.List;
 public class ChatServlet extends HttpServlet {
 
     private final ChatService chatService = new ChatService();
+    private final MemberService memberService = new MemberService();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             HttpSession session = req.getSession();
             String nickname = req.getParameter("nickname");
             MemberDto memberDto = (MemberDto) session.getAttribute("member");
-            List<MemberDto> chatDtoList = chatService.findChat(memberDto.getId());
+
+            List<MemberDto> chatDtoList = chatService.findChatList(memberDto.getId());
+
 
             req.setAttribute("nickname", nickname);
             req.setAttribute("chatList", chatDtoList);

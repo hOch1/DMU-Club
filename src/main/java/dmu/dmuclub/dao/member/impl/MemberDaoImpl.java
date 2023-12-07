@@ -49,12 +49,32 @@ public class MemberDaoImpl implements MemberDao {
         }
     }
 
+
+
     public MemberDto findById(String id) throws SQLException {
         MemberDto memberDto = new MemberDto();
         String query = "SELECT * FROM member WHERE id = ?";
 
         try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
             preparedStatement.setInt(1, Integer.parseInt(id));
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    resultSetToMemberDto(resultSet, memberDto);
+                    return memberDto;
+                }
+                return null;
+            }
+        }
+    }
+
+    @Override
+    public MemberDto findByNickname(String nickname) throws SQLException {
+        MemberDto memberDto = new MemberDto();
+        String query = "SELECT * FROM member WHERE nickname = ?";
+
+        try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
+            preparedStatement.setString(1, nickname);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
