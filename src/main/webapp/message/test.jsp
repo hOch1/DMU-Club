@@ -20,11 +20,8 @@ for (MemberDto memberDto : memberDtoList){ %>
 <input type="text" id="message" placeholder="메시지를 입력하세요.">
 <button type="submit" onsubmit="sendMessage()" onclick="sendMessage()">메시지 보내기</button>
 <div id="messages">
-  <c:forEach items="${sendLog}" var="slog">
-    <p>보낸메세지 : ${slog.message}</p>
-  </c:forEach>
-  <c:forEach items="${toLog}" var="tlog">
-    <p>받은메세지 : ${tlog.message}</p>
+  <c:forEach items="${log}" var="logs">
+    <p>${logs.message}</p>
   </c:forEach>
 </div>
 

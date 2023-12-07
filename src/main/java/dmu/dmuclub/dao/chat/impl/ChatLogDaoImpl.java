@@ -19,7 +19,7 @@ public class ChatLogDaoImpl implements ChatLogDao {
 
     @Override
     public void save(String message, int chat_id) throws SQLException {
-        String query = "INSERT INTO chatlog (id , message) VALUES(?,?)";
+        String query = "INSERT INTO chatlog (chat_id , message) VALUES(?,?)";
         try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
             preparedStatement.setInt(1, chat_id);
             preparedStatement.setString(2, message);
@@ -30,7 +30,7 @@ public class ChatLogDaoImpl implements ChatLogDao {
     @Override
     public List<ChatLogDto> findByChat_id(int chat_id) throws SQLException {
         List<ChatLogDto> chatDtoList = new ArrayList<>();
-        String query = "SELECT * FROM chatlog WHERE id = ? ORDER BY sendTime asc";
+        String query = "SELECT * FROM chatlog WHERE chat_id = ? ORDER BY sendTime asc";
 
         try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
             preparedStatement.setInt(1, chat_id);
