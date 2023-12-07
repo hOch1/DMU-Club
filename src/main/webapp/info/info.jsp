@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<jsp:include page="../header.jsp" flush="false" />
+<jsp:include page="/header.jsp" flush="false" />
 <body>
 <section class="flex h-screen bg-gray-100 dark:bg-gray-900 justify-center">
     <div class="w-3/4 bg-white dark:bg-gray-800 overflow-y-auto">
@@ -31,13 +31,13 @@
                     <button
                             class="inline-flex items-center justify-center rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-10 px-2 py-1 text-sm bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600"
                             type="button"
-                            onclick="showConfirm()"
+                            onclick="rmConfirm()"
                     >
                         Remove
                     </button>
                     <button
                             class="inline-flex items-center justify-center rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-2 py-1 text-sm bg-red-500 hover:bg-red-600 text-white"
-                            type="button"
+                            type="button" onclick="report()"
                     >
                         Report
                     </button>
@@ -48,20 +48,64 @@
 </section>
 
 <script>
-    function showConfirm(){
-        if(confirm("정말로 삭제하시겠습니까?")){
-            //추가해야할 삭제 내용
+    function rmConfirm(){
+        Swal.fire({
+            title: "정말로 삭제하시겠어요?",
+            text: "다시는 만날 수 없을지도 모릅니다!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!."
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "삭제 완료!",
+                    text: "인관간계 정리를 참 잘하시는군요!",
+                    icon: "success"
+                });
+            }
+        });
+    }
+    function report(){
+        (async () => {
+            const { value: text } = await Swal.fire({
+                input: "textarea",
+                inputLabel: "Message",
+                inputPlaceholder: "Type your message here...",
+                inputAttributes: {
+                    "aria-label": "Type your message here"
+                },
+                showCancelButton: true
+            });
+            if (text) {
+                // 서버로 텍스트 전송
+                sendReportToServer(text);
 
+            }
+        })()
+    }
 
-            alert("삭제되었습니다");
-        }else{
-            return;
-        }
+    function sendReportToServer(text) {
+        // AJAX 요청을 사용하여 서버로 텍스트 전송
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/report", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // 서버 응답을 처리할 수 있음
+                Swal.fire('신고가 완료되었습니다!!');
+            }
+        };
+
+        // 텍스트를 JSON 형식으로 변환하여 전송
+        xhr.send(JSON.stringify({ text: text }));
     }
 </script>
 
 <!-- footer 영역 -->
-<jsp:include page="../footer.jsp" flush="false" />
+<jsp:include page="/footer.jsp" flush="false" />
 
 
 </body>

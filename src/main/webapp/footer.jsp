@@ -6,7 +6,7 @@
 <body>
 
 <!-- footer 부분  -->
-  <footer class="border-t p-2 bg-white">
+  <footer class="border-t p-2 bg-white " style="z-index : 1">
   
   <!-- nav 부분 -->
     <nav class="flex justify-around">
@@ -62,7 +62,7 @@
         <span class="text-sm">Main</span>
       </a>
       
-      <a class="text-center" href="<%= request.getContextPath() %>/community" rel="ugc">
+      <a class="text-center" onclick="location.href='/board'" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -84,7 +84,7 @@
       </a>
       
       
-      <a class="text-center" href="<%= request.getContextPath() %>/info" rel="ugc">
+      <a class="text-center" rel="ugc " onclick="location.href='/info'">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

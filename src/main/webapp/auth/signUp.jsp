@@ -96,7 +96,7 @@
 
             <script>
               //각종 체크 bmti도 확인
-              function checkData(){
+              function checkData() {
                 var pw1 = document.getElementById("pw1").value;
                 var pw2 = document.getElementById("pw2").value;
 
@@ -104,19 +104,21 @@
                 var ei = document.querySelector('input[name="EI"]:checked');
                 var sn = document.querySelector('input[name="SN"]:checked');
                 var ft = document.querySelector('input[name="FT"]:checked');
-                var jp= document.querySelector('input[name="JP"]:checked');
+                var jp = document.querySelector('input[name="JP"]:checked');
 
 
                 // 비밀번호
-                if(pw1 !== pw2) {
-                  alert("비밀번호가 다릅니다 다시 입력해주세요");
+                if (pw1 !== pw2) {
+                  failAlert();
                   return false;
                 }
-                if (!ei || !sn || !ft || !jp ) {
-                  alert("mbti를 골라주세요!.");
+                if (!ei || !sn || !ft || !jp) {
+                  failmbti();
                   return false;
+                } else {
+                  succesAlert();
+                  return true;
                 }
-                return true;
               }
 
               // 텍스트 수 제한
@@ -148,5 +150,33 @@
     </div>
   </div>
 </section>
+
+<!--Alert script 영역 -->
+<script>
+  // 회원가입 성공
+  function succesAlert() {
+    Swal.fire('성공!', '회원가입이 완료되었습니다!.', 'success');
+  }
+
+  // 비밀번호 틀림
+  function failAlert() {
+    Swal.fire({
+      icon: "error",
+      title: "이런..",
+      text: "비밀번호가 다릅니다!",
+      footer: "다시 확인해보세요"
+    });
+  }
+
+  //mbti 틀림
+  function failmbti() {
+    Swal.fire({
+      icon: "error",
+      title: "이런..",
+      text: "mbti를 전부 선택해주세요",
+      footer: "빈칸은 안돼요!!~"
+    });
+  }
+</script>
 </body>
 </html>
