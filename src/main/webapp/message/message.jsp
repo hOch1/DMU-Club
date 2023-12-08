@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,20 +10,22 @@
         <main class="w-3/4 bg-white dark:bg-gray-800 overflow-y-auto">
           <ul class="divide-y divide-gray-300 dark:divide-gray-700">
 
+              <c:forEach var="chat" items="#">
             <li class="p-4 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer flex items-center space-x-2">
               <img
-                alt="User 1"
+                alt="상대방 이미지"
                 class="rounded-full border-2 border-blue-500"
                 height="40"
-                src="/placeholder.svg"
+                src="/img/default_img.jpg"
                 width="40"
                 style="aspect-ratio:40/40;object-fit:cover"
               />
               <div>
-                <h2 class="text-gray-700 dark:text-gray-300">Chat 1 - User 1</h2>
-                <p class="text-gray-500 dark:text-gray-400 text-sm">Last message preview...</p>
+                <h2 class="text-gray-700 dark:text-gray-300">chat.name</h2>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">chat.lastChat</p>
               </div>
             </li>
+            </c:forEach>
 
           </ul>
         </main>

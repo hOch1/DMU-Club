@@ -12,7 +12,7 @@
 <body>
 <h1>채팅방 리스트</h1>
 <% List<MemberDto> memberDtoList = (List<MemberDto>) request.getAttribute("chatList");
-for (MemberDto memberDto : memberDtoList){ %>
+  for (MemberDto memberDto : memberDtoList){ %>
 <a href="/message?nickname=<%=memberDto.getNickname()%>"><%=memberDto.getNickname()%></a>
 <%}%>
 
