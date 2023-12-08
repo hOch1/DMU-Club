@@ -7,8 +7,6 @@
 </head>
 <body>
 <div class="flex">
-<jsp:include page="sideBar.jsp"/>
-
 <div class="flex flex-col w-full min-h-screen bg-white">
     <header class="flex items-center justify-between h-16 px-4 border-b bg-gray-100 dark:bg-gray-800">
         <div class="flex items-center space-x-2">
@@ -27,7 +25,7 @@
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
                 <div class="flex flex-col space-y-1.5 p-6 pb-2">
-                    <h3 class="text-2xl font-semibold leading-none tracking-tight">Post Management</h3>
+                    <h3 class="text-2xl font-semibold leading-none tracking-tight">게시물 관리</h3>
                 </div>
                 <div class="p-6">
                     <button class="inline-flex items-center
@@ -43,7 +41,7 @@
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
                 <div class="flex flex-col space-y-1.5 p-6 pb-2">
-                    <h3 class="text-2xl font-semibold leading-none tracking-tight">Reporting</h3>
+                    <h3 class="text-2xl font-semibold leading-none tracking-tight">고객 지원</h3>
                 </div>
                 <div class="p-6">
                     <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground h-10 px-4 py-2 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700">
@@ -53,7 +51,7 @@
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
                 <div class="flex flex-col space-y-1.5 p-6 pb-2">
-                    <h3 class="text-2xl font-semibold leading-none tracking-tight">Member Management</h3>
+                    <h3 class="text-2xl font-semibold leading-none tracking-tight">회원 관리</h3>
                 </div>
                 <div class="p-6">
                     <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground h-10 px-4 py-2 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700">

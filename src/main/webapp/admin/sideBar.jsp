@@ -2,6 +2,7 @@
 <html>
 <head>
     <script src="https://cdn.tailwindcss.com"></script> <!--테일윈드 라이브러리-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--sweetalert2 -->
     <title>admin Page</title>
     <meta charset="UTF-8">
 </head>
@@ -51,7 +52,7 @@
                     </div>
                 </a>
 
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
                 <a onclick="location.href='/auth/logout'">
                     <div  role="button" tabindex="0" class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-blue-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
