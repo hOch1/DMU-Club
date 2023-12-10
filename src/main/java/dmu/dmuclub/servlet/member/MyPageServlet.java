@@ -35,8 +35,6 @@ public class MyPageServlet extends HttpServlet {
 
             List<MemberDto> friendList = friendService.findFriends(memberDto.getId());
 
-            System.out.println(friendList);
-
             request.setAttribute("friendList", friendList);
             request.setAttribute("member", memberDto);
             request.getRequestDispatcher("info/info.jsp").forward(request, response);

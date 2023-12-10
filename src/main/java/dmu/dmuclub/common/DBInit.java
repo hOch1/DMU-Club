@@ -34,6 +34,7 @@ public class DBInit implements ServletContextListener {
                 executeSqlScript(connection, "initDB/friend.sql");
                 executeSqlScript(connection, "initDB/chat.sql");
                 executeSqlScript(connection, "initDB/chatlog.sql");
+                executeSqlScript(connection, "initDB/images.sql");
 
                 insertInitialData(connection);
             } catch (SQLException | IOException e) {
@@ -57,6 +58,7 @@ public class DBInit implements ServletContextListener {
                 dropTables(statement, "friend");
                 dropTables(statement, "chatlog");
                 dropTables(statement, "chat");
+                dropTables(statement, "images");
                 dropTables(statement, "member");
 
             } catch (SQLException e) {

@@ -91,7 +91,6 @@
             if (text) {
                 // 서버로 텍스트 전송
                 sendReportToServer(text);
-
             }
         })()
     }
