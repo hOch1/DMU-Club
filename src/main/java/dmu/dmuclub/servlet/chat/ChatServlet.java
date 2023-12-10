@@ -43,7 +43,7 @@ public class ChatServlet extends HttpServlet {
             req.setAttribute("log", createFinalLog(sendLog, toLog));
             req.setAttribute("nickname", nickname);
             req.setAttribute("chatList", chatList);
-            req.getRequestDispatcher("/message/test.jsp").forward(req, resp);
+            req.getRequestDispatcher("/message/chat.jsp").forward(req, resp);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -27,8 +27,8 @@ public class ChatService {
 
     public List<ChatLogDto> findChatLog(int memberId) throws SQLException {
         ChatDto chatDto = chatDao.findByFrom_member_id(memberId);
-        System.out.println("Chat Table id : "+chatDto.getId());
         List<ChatLogDto> chatLogDtoList = chatLogDao.findByChat_id(chatDto.getId());
+
         return chatLogDtoList;
     }
 

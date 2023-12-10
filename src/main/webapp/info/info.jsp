@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <jsp:include page="/header.jsp" flush="false" />
@@ -15,7 +17,7 @@
         <ul class="divide-y divide-gray-300 dark:divide-gray-700">
 
             <!--Start Point-->
-            <c:forEach var="item" items='#'>
+            <c:forEach var="friend" items='${friendList}'>
             <li class="p-4 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer flex items-center space-x-2 justify-between">
                 <div class="flex items-center space-x-2">
                     <img
@@ -27,7 +29,7 @@
                             style="aspect-ratio:40/40;object-fit:cover"
                     />
                     <div>
-                        <h2 class="text-gray-700 dark:text-gray-300">item.name</h2>
+                        <h2 class="text-gray-700 dark:text-gray-300">${friend.nickname}</h2>
                     </div>
                 </div>
                 <div class="flex space-x-2">

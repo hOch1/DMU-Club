@@ -5,4 +5,6 @@ import lombok.Data;
 @Data
 public class FriendDto {
 
+
+    private int friend;
 }
