@@ -3,6 +3,12 @@
 <!DOCTYPE html>
 <html>
 
+<style>
+  .custom-pointer {
+    cursor: pointer;
+  }
+</style>
+
 <body>
 
 <!-- footer 부분  -->
@@ -10,7 +16,7 @@
   
   <!-- nav 부분 -->
     <nav class="flex justify-around">
-      <a class="text-center" href="<%= request.getContextPath() %>/match" rel="ugc">
+      <a class="text-center custom-pointer" onclick="location.href='/match'" rel="ugc" >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -28,7 +34,7 @@
         <span class="text-sm">Matching</span>
       </a>
       
-      <a class="text-center" href="<%= request.getContextPath() %>/message" rel="ugc">
+      <a class="text-center custom-pointer" onclick="location.href='/message'" rel="ugc">
         <svg xmlns="http://www.w3.org/2000/svg"
              fill="none"
              viewBox="0 0 24 24"
@@ -43,7 +49,7 @@
         <span class="text-sm">Message</span>
       </a>
       
-      <a class="text-center" href="index.jsp" rel="ugc">
+      <a class="text-center custom-pointer" onclick="location.href='/main'" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -62,7 +68,7 @@
         <span class="text-sm">Main</span>
       </a>
       
-      <a class="text-center" onclick="location.href='/board'" rel="ugc">
+      <a class="text-center custom-pointer" onclick="location.href='/board'" rel="ugc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -84,7 +90,7 @@
       </a>
       
       
-      <a class="text-center" rel="ugc " onclick="location.href='/info'">
+      <a class="text-center custom-pointer" rel="ugc " onclick="location.href='/info'">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
