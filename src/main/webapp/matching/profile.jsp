@@ -72,7 +72,7 @@
         <div class="flex flex-col items-center -mt-20">
             <img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">
             <div class="flex items-center space-x-2 mt-2">
-                <p class="text-2xl">Amanda Ross</p>
+                <p class="text-2xl">${profile.nickname}</p>
                 <span class="bg-blue-500 rounded-full p-1" title="Verified">
                         <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
@@ -107,23 +107,23 @@
                 <ul class="mt-2 text-gray-700">
                     <li class="flex border-y py-2">
                         <span class="font-bold w-24">이름</span>
-                        <span class="text-gray-700">귀염둥이 준성</span>
+                        <span class="text-gray-700">${profile.username}</span>
                     </li>
 
 
                     <li class="flex border-b py-2">
                         <span class="font-bold w-24">이메일</span>
-                        <span class="text-gray-700">cutejuns@example.com</span>
+                        <span class="text-gray-700">${profile.email}</span>
                     </li>
 
                     <li class="flex border-b py-2">
                         <span class="font-bold w-24">별명</span>
-                        <span class="text-gray-700">동공 챌린져</span>
+                        <span class="text-gray-700">${profile.nickname}</span>
                     </li>
 
                     <li class="flex border-b py-2">
                         <span class="font-bold w-24">취미</span>
-                        <span class="text-gray-700">술먹기</span>
+                        <span class="text-gray-700">${profile.hobby}</span>
                     </li>
 
 

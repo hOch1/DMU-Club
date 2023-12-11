@@ -43,7 +43,7 @@ public class ChatService {
         return memberDtoList;
     }
 
-    public void createChat(int memberId) throws SQLException {
-
+    public void createChat(int member1_id, int member2_id) throws SQLException {
+        chatDao.save(member1_id, member2_id);
     }
 }

@@ -3,6 +3,20 @@
 <!DOCTYPE html>
 <html>
 
+<%
+    if (session.getAttribute("member") == null)
+        response.sendRedirect("/auth/sign-in");
+%>
+
+
+<% if (session.getAttribute("message") != null) { %>
+<script>
+    alert("<%= session.getAttribute("message") %>");
+</script>
+<% session.removeAttribute("message");
+}
+%>
+
 <head>
     <script src="https://cdn.tailwindcss.com"></script> <!--tailwind css-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--sweetalert2 -->
