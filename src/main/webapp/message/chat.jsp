@@ -17,6 +17,44 @@
 </head>
 <body>
 
+
+<script>
+
+    var ws = new WebSocket("ws://localhost:8080/messagePoint/${nickname}");
+
+    <%--ws.onopen = function(event) {--%>
+    <%--  var message = event.data;--%>
+    <%--  document.getElementById("messages").innerHTML += "<p>" + message + "</p>";--%>
+    <%--  console.log("WebSocket 연결 성공");--%>
+    <%--  console.log("<%=nickname%>님과의 채팅방")--%>
+    <%--};--%>
+
+    ws.onmessage = function(event) {
+        var message = event.data;
+        var htmlContent =
+            '<div class="flex items-center justify-start flex-row-reverse">' +
+            '<div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">' +
+            '<!-- Add content here if needed -->' +
+            '</div>' +
+            '<div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">' +
+            '<div>'+message+'</div>' +
+            '</div>' +
+            '</div>';
+
+        document.getElementById("messages").innerHTML += htmlContent;
+
+
+
+
+
+    };
+
+    function sendMessage() {
+        var message = document.getElementById("message").value;
+        ws.send(message);
+    }
+</script>
+
 <!-- 헤더 부분 -->
 <header class="flex justify-between items-center p-4 bg-blue-500">
     <div class="flex items-center" style=cursor:pointer; onclick="location.href='/main'" >
@@ -117,74 +155,41 @@
         <!--대화 시작 -->
 
         <div class="flex flex-col flex-auto h-full p-6">
-            <div
-                    class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4"
-            >
+            <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4">
                 <div class="flex flex-col h-full overflow-x-auto mb-4">
                     <div class="flex flex-col h-full">
+
                         <div class="grid grid-cols-12 gap-y-2">
-
-                            <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                                <div class="flex flex-row items-center">
-                                    <div
-                                            class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                                    >
-                                        <%-- a.name.substring(0,1); --%>
-                                    </div>
-                                    <div
-                                            class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                                    >
-                                        <div>상대황 대화가 여기에 표시 <!-- --></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 나의 채팅 시작  -->
-                            <div class="col-start-6 col-end-13 p-3 rounded-lg">
-                                <div class="flex items-center justify-start flex-row-reverse">
-                                    <div
-                                            class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                                    >
-                                        <%-- a.name.substring(0,1); --%>
-                                    </div>
-                                    <div
-                                            class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                                    >
-                                        <div><!--${chat.chat}-->나의 대화가 여기에 표시</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--나의 채팅 끝-->
-
-                            <div class="col-start-6 col-end-13 p-3 rounded-lg">
-                                <div class="flex items-center justify-start flex-row-reverse">
-                                    <div
-                                            class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                                    >
-                                        <%-- a.name.substring(0,1); --%>
-                                    </div>
-                                    <div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
-                                        <div>
-                                            나의 대화가 여기에 표시나의 대화가 여기에 표시나의 대화가 여기에 표시
+                            <c:forEach items="${logs}" var="log">
+                                <c:choose>
+                                    <c:when test="${log.myText}">
+                                        <div id="messages" class="col-start-6 col-end-13 p-3 rounded-lg">
+                                            <div class="flex items-center justify-start flex-row-reverse">
+                                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                                                        <%-- a.name.substring(0,1); --%>
+                                                </div>
+                                                <div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
+                                                    <div>${log.message}</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                                <div class="flex flex-row items-center">
-                                    <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                                        B <%-- a.name.substring(0,1); --%>
-                                    </div>
-                                    <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
-                                        <div>상대황 대화가 여기에 표시 </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 대화 끝 -->
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div id="messages" class="col-start-1 col-end-8 p-3 rounded-lg">
+                                            <div class="flex flex-row items-center">
+                                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                                                        <%-- a.name.substring(0,1); --%>
+                                                </div>
+                                                <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+                                                    <div>${log.message}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
                         </div>
+
                     </div>
                 </div>
                 <div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
@@ -208,10 +213,7 @@
                     </div>
                     <div class="flex-grow ml-4">
                         <div class="relative w-full">
-                            <input
-                                    type="text"
-                                    class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
-                            />
+                            <input type="text" id="message" class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"/>
                             <button
                                     class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600"
                             >
@@ -233,9 +235,8 @@
                         </div>
                     </div>
                     <div class="ml-4">
-                        <button
-                                class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0"
-                        >
+                        <button class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0"
+                        onclick="sendMessage()">
                             <span>Send</span>
                             <span class="ml-2">
                 <svg
@@ -261,39 +262,5 @@
     </div>
 </div>
 <!-- 끝 -->
-
-<!-- script 영역 -->
-<script>
-    <%
-    String nickname=null;
-    if (request.getAttribute("nickname") != null) {
-      nickname = request.getAttribute("nickname").toString();
-    }
-
-   %>
-    if ("<%=nickname%>" == null){
-        var ws = new WebSocket("ws://localhost:8080/messagePoint");
-    }else{
-        var ws = new WebSocket("ws://localhost:8080/messagePoint/<%=nickname%>");
-    }
-
-    <%--ws.onopen = function(event) {--%>
-    <%--  var message = event.data;--%>
-    <%--  document.getElementById("messages").innerHTML += "<p>" + message + "</p>";--%>
-    <%--  console.log("WebSocket 연결 성공");--%>
-    <%--  console.log("<%=nickname%>님과의 채팅방")--%>
-    <%--};--%>
-
-    ws.onmessage = function(event) {
-        var message = event.data;
-        document.getElementById("messages").innerHTML += "<p>" + message + "</p>";
-    };
-
-    function sendMessage() {
-        var message = document.getElementById("message").value;
-        ws.send(message);
-    }
-</script>
-
 </body>
 </html>

@@ -50,6 +50,13 @@ public class MessageServlet extends HttpServlet {
 
     private List<ChatLogDto> createFinalLog(List<ChatLogDto> sendLog, List<ChatLogDto> toLog){
         List<ChatLogDto> finalLog = new ArrayList<>();
+
+        for (ChatLogDto chatLogDto : sendLog)
+            chatLogDto.setMyText(true);
+
+        for (ChatLogDto chatLogDto : toLog)
+            chatLogDto.setMyText(false);
+
         finalLog.addAll(sendLog);
         finalLog.addAll(toLog);
 
