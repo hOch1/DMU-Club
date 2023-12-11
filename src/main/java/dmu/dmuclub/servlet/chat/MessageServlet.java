@@ -3,6 +3,7 @@ package dmu.dmuclub.servlet.chat;
 import dmu.dmuclub.dto.chat.ChatLogDto;
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.service.chat.ChatService;
+import dmu.dmuclub.service.member.MemberService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,22 +18,31 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-@WebServlet("/chat")
-public class ChatServlet extends HttpServlet {
+@WebServlet("/message")
+public class MessageServlet extends HttpServlet {
 
     private final ChatService chatService = new ChatService();
+    private final MemberService memberService = new MemberService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             HttpSession session = req.getSession();
+            String nickname = req.getParameter("nickname");
             MemberDto memberDto = (MemberDto) session.getAttribute("member");
+            MemberDto toMember = memberService.findMember_nickname(nickname);
 
             List<MemberDto> chatList = chatService.findChatList(memberDto.getId());
 
+            List<ChatLogDto> sendLog = chatService.findChatLog(memberDto.getId());
+            List<ChatLogDto> toLog = chatService.findChatLog(toMember.getId());
+
+
+            req.setAttribute("log", createFinalLog(sendLog, toLog));
+            req.setAttribute("nickname", nickname);
             req.setAttribute("chatList", chatList);
             req.setAttribute("member", memberDto);
-            req.getRequestDispatcher("/message/message.jsp").forward(req, resp);
+            req.getRequestDispatcher("/message/chat.jsp").forward(req, resp);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -40,6 +50,13 @@ public class ChatServlet extends HttpServlet {
 
     private List<ChatLogDto> createFinalLog(List<ChatLogDto> sendLog, List<ChatLogDto> toLog){
         List<ChatLogDto> finalLog = new ArrayList<>();
+
+        for (ChatLogDto chatLogDto : sendLog)
+            chatLogDto.setMyText(true);
+
+        for (ChatLogDto chatLogDto : toLog)
+            chatLogDto.setMyText(false);
+
         finalLog.addAll(sendLog);
         finalLog.addAll(toLog);
 

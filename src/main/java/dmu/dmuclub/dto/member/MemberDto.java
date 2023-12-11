@@ -16,7 +16,7 @@ public class MemberDto {
     private String phone;
     private String mbti;
     private String role;
-    private String filepath;
+    private String filename;
 
     public void updateNickname(String nickname){
         this.nickname = nickname;

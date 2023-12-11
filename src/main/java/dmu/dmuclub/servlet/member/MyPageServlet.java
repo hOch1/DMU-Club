@@ -23,9 +23,7 @@ import java.util.List;
 @WebServlet("/info")
 public class MyPageServlet extends HttpServlet {
 
-    private final MemberService memberService = new MemberService();
     private final FriendService friendService = new FriendService();
-    private final ProfileService profileService = new ProfileService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,9 +35,7 @@ public class MyPageServlet extends HttpServlet {
                 throw new MemberNotFoundException("회원을 찾지 못하였습니다");
 
             List<MemberDto> friendList = friendService.findFriends(memberDto.getId());
-            ImgDto imgDto = profileService.findByMember_id(memberDto.getId());
 
-            request.setAttribute("img", imgDto);
             request.setAttribute("friendList", friendList);
             request.setAttribute("member", memberDto);
             request.getRequestDispatcher("info/info.jsp").forward(request, response);

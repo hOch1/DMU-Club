@@ -10,4 +10,5 @@ public class ChatLogDto {
     private int chat_id;
     private String message;
     private LocalDateTime sendTime;
+    private boolean myText;
 }

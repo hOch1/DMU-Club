@@ -123,9 +123,17 @@ public class DBInit implements ServletContextListener {
                 "(5,2)");
 
         executeUpdate(connection, "insert into chat(from_member, to_member) value "+
-                "(2,4)");
+                "(2,3)");
+        executeUpdate(connection, "insert into chat(from_member, to_member) value "+
+                "(3,2)");
         executeUpdate(connection, "insert into chat(from_member, to_member) value "+
                 "(4,2)");
+        executeUpdate(connection, "insert into chat(from_member, to_member) value "+
+                "(2,4)");
+        executeUpdate(connection, "insert into chat(from_member, to_member) value "+
+                "(5,2)");
+        executeUpdate(connection, "insert into chat(from_member, to_member) value "+
+                "(2,5)");
 
     }
 

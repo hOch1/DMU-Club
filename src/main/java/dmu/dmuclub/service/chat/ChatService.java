@@ -29,6 +29,7 @@ public class ChatService {
         ChatDto chatDto = chatDao.findByFrom_member_id(memberId);
         List<ChatLogDto> chatLogDtoList = chatLogDao.findByChat_id(chatDto.getId());
 
+
         return chatLogDtoList;
     }
 

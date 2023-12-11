@@ -67,7 +67,17 @@
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 w-10 h-10">
-                                    <img class="w-full h-full rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" alt="" />
+                                    <c:choose>
+                                        <c:when test="${not empty member.filename}">
+                                            <img class="w-full h-full rounded-full"
+                                                 src="/img/${member.filename}" alt="image"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <!-- 기본 이미지를 여기에 추가 -->
+                                            <img class="w-full h-full rounded-full"
+                                                 src="/img/default_img.jpg" alt="default image"/>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                                 <div class="ml-3">
                                     <p class="text-gray-900 whitespace-no-wrap">
