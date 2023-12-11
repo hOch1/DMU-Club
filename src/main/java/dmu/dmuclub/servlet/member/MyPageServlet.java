@@ -37,9 +37,7 @@ public class MyPageServlet extends HttpServlet {
                 throw new MemberNotFoundException("회원을 찾지 못하였습니다");
 
             List<MemberDto> friendList = friendService.findFriends(memberDto.getId());
-            ImgDto imgDto = profileService.findByMember_id(memberDto.getId());
 
-            request.setAttribute("img", imgDto);
             request.setAttribute("friendList", friendList);
             request.setAttribute("member", memberDto);
             request.getRequestDispatcher("info/info.jsp").forward(request, response);
