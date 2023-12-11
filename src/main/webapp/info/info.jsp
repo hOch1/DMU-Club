@@ -25,7 +25,7 @@
                         alt="My Profile"
                         class="rounded-full border-2 border-blue-500"
                         height="80"
-                        src="${member.filepath}"
+                        src="${member.filename}"
                         width="80"
                         style="aspect-ratio:80/80;object-fit:cover"
                 />
