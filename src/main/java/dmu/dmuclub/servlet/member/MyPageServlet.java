@@ -23,9 +23,7 @@ import java.util.List;
 @WebServlet("/info")
 public class MyPageServlet extends HttpServlet {
 
-    private final MemberService memberService = new MemberService();
     private final FriendService friendService = new FriendService();
-    private final ProfileService profileService = new ProfileService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

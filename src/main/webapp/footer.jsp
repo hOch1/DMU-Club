@@ -34,7 +34,7 @@
         <span class="text-sm">Matching</span>
       </a>
       
-      <a class="text-center custom-pointer" onclick="location.href='/message'" rel="ugc">
+      <a class="text-center custom-pointer" onclick="location.href='/chat'" rel="ugc">
         <svg xmlns="http://www.w3.org/2000/svg"
              fill="none"
              viewBox="0 0 24 24"
