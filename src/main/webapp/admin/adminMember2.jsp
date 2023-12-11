@@ -4,6 +4,7 @@
 <%@ page import="dmu.dmuclub.dto.board.ViewBoardResponse" %>
 <html>
 <body>
+<!--가나다라마바사 아자차카타파하-->
 <div class="flex">
 <jsp:include page="sideBar.jsp" flush="false" />
 <!-- component -->
