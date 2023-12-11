@@ -79,8 +79,6 @@
                         </svg>
                     </span>
             </div>
-            <p class="text-gray-700">Senior Software Engineer at Tailwind CSS</p>
-            <p class="text-sm text-gray-500">New York, USA</p>
         </div>
         <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
             <div class="flex items-center space-x-4 mt-2">
@@ -122,8 +120,8 @@
                     </li>
 
                     <li class="flex border-b py-2">
-                        <span class="font-bold w-24">취미</span>
-                        <span class="text-gray-700">${profile.hobby}</span>
+                        <span class="font-bold w-24">MBTI</span>
+                        <span class="text-gray-700">${profile.mbti}</span>
                     </li>
 
 
