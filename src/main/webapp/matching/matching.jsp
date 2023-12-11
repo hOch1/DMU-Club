@@ -13,7 +13,6 @@
     <div class="container px-5 py-5 mx-auto">
         <div class="flex flex-wrap -m-4">
 
-
             <c:forEach var="item" items='${memberList}'>
                 <!---프로필-->
                 <div class="p-4 md:w-1/3" >
@@ -33,7 +32,7 @@
 
 
                         <img class="lg:h-48 md:h-36 w-full object-cover object-center"
-                             src="img/default_img.jpg" alt="image"/>
+                             src="" alt="image"/>
                         <div class="p-4">
                             <h2 class="tracking-widest text-xs title-font font-bold text-green-400 mb-1 uppercase ">${item.mbti}</h2>
                             <h1 class="title-font text-lg font-medium text-gray-900 mb-3">${item.username}</h1>

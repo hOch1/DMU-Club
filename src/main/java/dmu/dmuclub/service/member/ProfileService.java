@@ -7,6 +7,7 @@ import dmu.dmuclub.dto.member.MemberDto;
 import org.apache.commons.fileupload.FileItem;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ProfileService {
@@ -29,8 +30,17 @@ public class ProfileService {
         }
     }
 
-    public ImgDto findByMember_id(int member_Id){
-        return  null;
+    public ImgDto findByMember_id(int member_Id) throws SQLException {
+        ImgDto imgDto = imgDao.findByMember_id(member_Id);
+        return imgDto;
+    }
+
+    public List<ImgDto> findAll() throws SQLException {
+        List<ImgDto> imgDtoList = imgDao.findAll();
+
+
+
+        return imgDtoList;
     }
 
     private String getFileExtension(String fileName) {

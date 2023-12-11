@@ -1,11 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="dmu.dmuclub.dto.member.MemberDto"%>
+<%@ page import="dmu.dmuclub.dto.board.ViewBoardResponse" %>
 <html>
+<% List<ViewBoardResponse> boardResponses = (List<ViewBoardResponse>) request.getAttribute("boardList"); %>
 <body>
 <div class="flex">
-<jsp:include page="sideBar.jsp" flush="false"/>
+<jsp:include page="sideBar.jsp" flush="false" />
 <!-- component -->
 <div class="bg-white p-8 rounded-md w-full">
     <div class=" flex items-center justify-between pb-6">
@@ -62,7 +63,7 @@
                     <tbody>
 
 
-                    <c:forEach var="item" items='${memberList}' varStatus="loop">
+                    <c:forEach items="${memberList}" var="member">
                     <tr>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <div class="flex items-center">
@@ -71,26 +72,26 @@
                                 </div>
                                 <div class="ml-3">
                                     <p class="text-gray-900 whitespace-no-wrap">
-                                        ${item.username}
+                                        ${member.username}
                                     </p>
                                 </div>
                             </div>
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">${item.email}</p>
+                            <p class="text-gray-900 whitespace-no-wrap">${member.email}</p>
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <p class="text-gray-900 whitespace-no-wrap">
-                                ${item.nickname}
+                                ${member.nickname}
                             </p>
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <input id="check_${loop.index}" type="checkbox" class="ml-2 form-checkbox h-5 w-5 text-green-600" />
+                            <input type="checkbox" class="ml-2 form-checkbox h-5 w-5 text-green-600" />
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                 <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                <span class="relative">활동 중</span>
+                                <span class="relative">활동중</span>
                             </span>
                         </td>
                     </tr>

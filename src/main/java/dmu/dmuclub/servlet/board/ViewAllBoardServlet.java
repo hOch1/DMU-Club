@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/community")
+@WebServlet("/board")
 public class ViewAllBoardServlet extends HttpServlet {
 
     private final BoardService boardService = new BoardService();

@@ -1,10 +1,12 @@
 package dmu.dmuclub.servlet.member;
 
 import dmu.dmuclub.dto.friend.FriendDto;
+import dmu.dmuclub.dto.img.ImgDto;
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.exception.member.MemberNotFoundException;
 import dmu.dmuclub.service.friend.FriendService;
 import dmu.dmuclub.service.member.MemberService;
+import dmu.dmuclub.service.member.ProfileService;
 import org.json.simple.JSONObject;
 
 import javax.servlet.RequestDispatcher;
@@ -23,6 +25,7 @@ public class MyPageServlet extends HttpServlet {
 
     private final MemberService memberService = new MemberService();
     private final FriendService friendService = new FriendService();
+    private final ProfileService profileService = new ProfileService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +37,9 @@ public class MyPageServlet extends HttpServlet {
                 throw new MemberNotFoundException("회원을 찾지 못하였습니다");
 
             List<MemberDto> friendList = friendService.findFriends(memberDto.getId());
+            ImgDto imgDto = profileService.findByMember_id(memberDto.getId());
 
+            request.setAttribute("img", imgDto);
             request.setAttribute("friendList", friendList);
             request.setAttribute("member", memberDto);
             request.getRequestDispatcher("info/info.jsp").forward(request, response);

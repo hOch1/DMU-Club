@@ -32,7 +32,7 @@ public class BoardManagementServlet extends HttpServlet {
             List<ViewBoardResponse> boardResponses = boardService.viewBoardAll();
 
             request.setAttribute("boardList", boardResponses);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("admin/adminBoard.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/adminBoard.jsp");
             dispatcher.forward(request, response);
         } catch (HasNotRoleException e){
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());

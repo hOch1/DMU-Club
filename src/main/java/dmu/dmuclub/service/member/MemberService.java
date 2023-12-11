@@ -2,6 +2,7 @@ package dmu.dmuclub.service.member;
 
 import dmu.dmuclub.dao.member.MemberDao;
 import dmu.dmuclub.dao.member.impl.MemberDaoImpl;
+import dmu.dmuclub.dto.img.ImgDto;
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.exception.member.MemberNotFoundException;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public class MemberService {
 
     private final MemberDao memberDao = new MemberDaoImpl();
+    private final ProfileService profileService = new ProfileService();
 
 
     public MemberDto findMember(String memberId) throws SQLException {
@@ -25,6 +27,14 @@ public class MemberService {
 
     public List<MemberDto> findAll() throws SQLException {
         List<MemberDto> memberDtoList = memberDao.findAll();
+        List<ImgDto> imgDtoList = profileService.findAll();
+
+        for (MemberDto memberDto : memberDtoList){
+            for (ImgDto imgDto : imgDtoList){
+                if (memberDto.getId() == imgDto.getMember_id())
+                    memberDto.setFilepath(imgDto.getFilepath());
+            }
+        }
 
         return memberDtoList;
     }

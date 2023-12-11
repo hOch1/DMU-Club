@@ -154,7 +154,7 @@ async function insertImg (){
         //서버에 전송
         var xhr= new XMLHttpRequest();
         //api 경로 추가
-        xhr.open('POST', '/', true);
+        xhr.open('POST', '/member/updateImg', true);
         // 업로드 완료 시의 처리를 정의
         xhr.onload = function () {
             if (xhr.status === 200) {
@@ -172,7 +172,6 @@ async function insertImg (){
         Swal.fire('이미지를 선택하세요.');
         console.error('이미지 선택이 되지 않음');
     }
-
 }
 </script>
 
