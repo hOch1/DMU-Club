@@ -38,8 +38,8 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${boardList}" var="board">
-            <a onclick="location.href='/community/view?id=#}'">
+        <c:forEach items="${boardList}" var="board" varStatus="loop">
+            <a onclick="location.href='/community/view?id=${loop.index}'">
                 <tr class="border-t border-gray-300">
                     <td class="py-4">${board.id}</td>
                     <td>${board.title}</td>
