@@ -32,7 +32,7 @@ public class MemberService {
         for (MemberDto memberDto : memberDtoList){
             for (ImgDto imgDto : imgDtoList){
                 if (memberDto.getId() == imgDto.getMember_id())
-                    memberDto.setFilepath(imgDto.getFilepath());
+                    memberDto.setFilename(imgDto.getFilename());
             }
         }
 

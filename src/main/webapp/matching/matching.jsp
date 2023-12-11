@@ -31,8 +31,17 @@
                         </div>
 
 
-                        <img class="lg:h-48 md:h-36 w-full object-cover object-center"
-                             src="" alt="image"/>
+                        <c:choose>
+                            <c:when test="${not empty item.filename}">
+                                <img class="lg:h-48 md:h-36 w-full object-cover object-center"
+                                     src="/img/${item.filename}" alt="image"/>
+                            </c:when>
+                            <c:otherwise>
+                                <!-- 기본 이미지를 여기에 추가 -->
+                                <img class="lg:h-48 md:h-36 w-full object-cover object-center"
+                                     src="/img/default_img.jpg" alt="default image"/>
+                            </c:otherwise>
+                        </c:choose>
                         <div class="p-4">
                             <h2 class="tracking-widest text-xs title-font font-bold text-green-400 mb-1 uppercase ">${item.mbti}</h2>
                             <h1 class="title-font text-lg font-medium text-gray-900 mb-3">${item.username}</h1>
