@@ -36,18 +36,12 @@ public class BoardDaoImpl implements BoardDao {
         String query = "SELECT * FROM board";
 
         try (PreparedStatement preparedStatement = CON.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery()){
-
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             List<ViewBoardResponse> boardResponses = new ArrayList<>();
 
-            while(resultSet.next()){
-                ViewBoardResponse  boardResponse = ViewBoardResponse.builder()
-                        .title(resultSet.getString("title"))
-                        .content(resultSet.getString("content"))
-                        .createDate(resultSet.getString("createDate"))
-                        .author(resultSet.getString("member_id"))
-                        .build();
-
+            while (resultSet.next()) {
+                ViewBoardResponse boardResponse = new ViewBoardResponse();
+                resultSetToBoardResponse(resultSet, boardResponse);
                 boardResponses.add(boardResponse);
             }
             return boardResponses;
@@ -62,19 +56,15 @@ public class BoardDaoImpl implements BoardDao {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    return ViewBoardResponse.builder()
-                            .id(resultSet.getInt("id"))
-                            .title(resultSet.getString("title"))
-                            .content(resultSet.getString("content"))
-                            .createDate(resultSet.getString("createDate"))
-                            .author(resultSet.getString("member_id"))
-                            .build();
-                } else {
-                    return null;
+                    ViewBoardResponse boardResponse = new ViewBoardResponse();
+                    resultSetToBoardResponse(resultSet, boardResponse);
+                    return boardResponse;
                 }
             }
         }
+        return null;
     }
+
 
     @Override
     public void deleteById(String id) throws SQLException {
@@ -83,6 +73,14 @@ public class BoardDaoImpl implements BoardDao {
             preparedStatement.setInt(1, Integer.parseInt(id));
             preparedStatement.executeUpdate();
         }
+    }
+
+    private void resultSetToBoardResponse(ResultSet resultSet, ViewBoardResponse boardResponse) throws SQLException {
+        boardResponse.setId(resultSet.getInt("id"));
+        boardResponse.setTitle(resultSet.getString("title"));
+        boardResponse.setContent(resultSet.getString("content"));
+        boardResponse.setCreateDate(resultSet.getString("createDate"));
+        boardResponse.setAuthor(resultSet.getString("member_id"));
     }
 }
 

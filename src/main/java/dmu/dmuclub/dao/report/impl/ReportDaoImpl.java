@@ -40,16 +40,19 @@ public class ReportDaoImpl implements ReportDao {
             List<ReportResponse> reportResponses = new ArrayList<>();
 
             while (resultSet.next()) {
-                ReportResponse response = ReportResponse.builder()
-                        .title(resultSet.getString("title"))
-                        .content(resultSet.getString("content"))
-                        .solve(resultSet.getBoolean("solve"))
-                        .author(resultSet.getString("member_id"))
-                        .build();
-
+                ReportResponse response = new ReportResponse();
+                resultSetToReportResponse(resultSet, response);
                 reportResponses.add(response);
             }
             return reportResponses;
         }
+    }
+
+    private void resultSetToReportResponse(ResultSet resultSet, ReportResponse response) throws SQLException {
+        response.setId(resultSet.getInt("id"));
+        response.setTitle(resultSet.getString("title"));
+        response.setContent(resultSet.getString("content"));
+        response.setSolve(resultSet.getBoolean("solve"));
+        response.setAuthor(resultSet.getString("member_id"));
     }
 }
