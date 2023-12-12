@@ -18,6 +18,20 @@
                     프로필 사진 등록하기
                 </button>
             </h1>
+            <img
+                    alt="내 프로필"
+                    class="rounded-full border-2 border-blue-500"
+                    height="40"
+                    src="${member.filename}"
+                    width="40"
+                    style="aspect-ratio:40/40;object-fit:cover"
+            />
+            <p>나의 이메일 : ${member.email}</p>
+            <p>이름 : ${member.username}</p>
+            <p>별명 : ${member.nickname}</p>
+            <p>번호 : ${member.phone}</p>
+            <p>MBTI : ${member.mbti}</p>
+
         </div>
         <h2 class="text-xl text-gray-700 dark:text-gray-300 p-4 border-t border-gray-300 dark:border-gray-700">
             친구목록
@@ -116,6 +130,9 @@ function sendReportToServer(text) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             // 서버 응답을 처리할 수 있음
             Swal.fire('신고가 완료되었습니다!!');
+        } else{
+            console.error('Error: ', xhr.statusText);
+            console.error('Error response:', xhr.responseText);
         }
     };
 
