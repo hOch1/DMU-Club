@@ -20,15 +20,14 @@ public class ChatService {
     private final ChatLogDao chatLogDao = new ChatLogDaoImpl();
     private final MemberDao memberDao = new MemberDaoImpl();
 
-    public void WriteChatLog(String message, MemberDto sendMember) throws SQLException {
-        ChatDto chatDto = chatDao.findByFrom_member_id(sendMember.getId());
+    public void WriteChatLog(String message, MemberDto sendMember, MemberDto toMember) throws SQLException {
+        ChatDto chatDto = chatDao.findByFrom_member_idAndTo_member_id(sendMember.getId(), toMember.getId());
         chatLogDao.save(message, chatDto.getId());
     }
 
-    public List<ChatLogDto> findChatLog(int memberId) throws SQLException {
-        ChatDto chatDto = chatDao.findByFrom_member_id(memberId);
+    public List<ChatLogDto> findChatLog(int From_memberId, int To_memberId) throws SQLException {
+        ChatDto chatDto = chatDao.findByFrom_member_idAndTo_member_id(From_memberId, To_memberId);
         List<ChatLogDto> chatLogDtoList = chatLogDao.findByChat_id(chatDto.getId());
-
 
         return chatLogDtoList;
     }

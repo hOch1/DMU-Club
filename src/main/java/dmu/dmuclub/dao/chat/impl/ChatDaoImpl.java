@@ -49,6 +49,24 @@ public class ChatDaoImpl implements ChatDao {
         return null;
     }
 
+    @Override
+    public ChatDto findByFrom_member_idAndTo_member_id(int from_member_id, int to_member_id) throws SQLException {
+        String query = "SELECT * FROM chat WHERE from_member = ? AND to_member = ?";
+        try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
+            preparedStatement.setInt(1, from_member_id);
+            preparedStatement.setInt(2, to_member_id);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    ChatDto chatDto = new ChatDto();
+                    resultSetToChatDto(resultSet, chatDto);
+                    System.out.println(chatDto);
+                    return chatDto;
+                }
+            }
+        }
+        return null;
+    }
 
     @Override
     public List<ChatDto> findChat(int from_member_id) throws SQLException {

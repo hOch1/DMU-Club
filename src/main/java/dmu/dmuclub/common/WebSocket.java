@@ -6,6 +6,7 @@ import dmu.dmuclub.dto.chat.ChatLogDto;
 import dmu.dmuclub.dto.chat.MessageDto;
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.service.chat.ChatService;
+import dmu.dmuclub.service.member.MemberService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -25,6 +26,7 @@ import static java.util.Collections.*;
 public class WebSocket {
 
     private final ChatService chatService = new ChatService();
+    private final MemberService memberService = new MemberService();
     private static Set<Session> clients = Collections.synchronizedSet(new HashSet<>());
     private HttpSession httpSession;
 
@@ -36,22 +38,27 @@ public class WebSocket {
     }
 
     @OnMessage
-    public void onMessage(String message, @PathParam("nickname") String nickname) {
+    public void onMessage(String message, @PathParam("nickname") String nickname) throws SQLException {
         synchronized (clients){
             MemberDto sendMember = (MemberDto) httpSession.getAttribute("member");
-
+            MemberDto memberDto = memberService.findMember_nickname(nickname);
+            chatService.WriteChatLog(message, sendMember, memberDto);
             try {
                 for (Session client : clients) {
                     HttpSession toSession = (HttpSession) client.getUserProperties().get("httpSession");
-                    MemberDto memberDto = (MemberDto) toSession.getAttribute("member");
+                    MemberDto toMember = (MemberDto) toSession.getAttribute("member");
                     MessageDto msg = new MessageDto();
                     msg.setMember_id(sendMember.getId());
                     msg.setMsg(message);
-                    if (memberDto.getNickname().equals(nickname) || memberDto.getNickname().equals(sendMember.getNickname())) {
+                    if (toMember.getNickname().equals(nickname))
                         client.getBasicRemote().sendObject(msg);
-                        if (memberDto.getNickname().equals(sendMember.getNickname()))
-                            chatService.WriteChatLog(message, sendMember);
-                    }
+
+                    if (toMember.getNickname().equals(sendMember.getNickname()))
+                        client.getBasicRemote().sendObject(msg);
+
+
+
+
                 }
             }catch(Exception e){
                 e.printStackTrace();

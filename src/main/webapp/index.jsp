@@ -47,7 +47,7 @@
                             <div class="flex items-center flex-wrap ">
 
                                 <!--여기서 상대방 프로필 보기 페이지로 넘김-->
-                                <a href="#" class="text-green-800  md:mb-2 lg:mb-0">
+                                <a href="/profile?id=${item.id}" class="text-green-800  md:mb-2 lg:mb-0">
                                 <p class="inline-flex items-center">상대방 정보 더보기
                                 <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M5 12h14"></path>
