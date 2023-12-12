@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/board/detail")
+@WebServlet("/community/view")
 public class ViewDetailBoardServlet extends HttpServlet {
 
     private final BoardService boardService = new BoardService();

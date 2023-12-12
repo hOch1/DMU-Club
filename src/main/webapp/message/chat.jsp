@@ -34,6 +34,7 @@
 
         console.log(msg);
         var meText =
+            '<div class="col-start-6 col-end-13 p-3 rounded-lg">' +
             '<div class="flex items-center justify-start flex-row-reverse">' +
             '<div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">' +
             '<!-- Add content here if needed -->' +
@@ -41,38 +42,30 @@
             '<div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">' +
             '<div>'+msg+'</div>' +
             '</div>' +
+            '</div>' +
             '</div>';
 
+
+
         var elseText =
+            '<div class="col-start-1 col-end-13 p-3 rounded-lg">' +
             '<div class="flex flex-row items-center">' +
             '<div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">' +
             '<!-- Add content here if needed -->' +
             '</div>' +
-            '<div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">' +
+            '<div class="relative mr-3 text-sm bg-white py-2 px-4 shadow rounded-xl">' +
             '<div>'+msg+'</div>' +
+            '</div>' +
             '</div>' +
             '</div>';
 
 
         if (member === ${member.id}) {
-            document.getElementById("viewMessage").innerHTML += '<div class="flex items-center justify-start flex-row-reverse">' +
-                '<div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">' +
-                '<!-- Add content here if needed -->' +
-                '</div>' +
-                '<div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">' +
-                '<div>'+message.msg+'</div>' +
-                '</div>' +
-                '</div>';
+            document.getElementById("viewMessage").innerHTML += meText;
         } else {
             // 다른 사용자가 보낸 메시지인 경우
-            document.getElementById("viewMessage").innerHTML += '<div class="flex flex-row items-center">' +
-                '<div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">' +
-                '<!-- Add content here if needed -->' +
-                '</div>' +
-                '<div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">' +
-                '<div>'+msg+'</div>' +
-                '</div>' +
-                '</div>';
+            document.getElementById("viewMessage").innerHTML += elseText;
+
         }
     };
 
@@ -159,6 +152,7 @@
                 <!-- 대화가능 유저 시작 -->
                 <div class="flex flex-col space-y-1 mt-4 -mx-2 h-48 overflow-y-auto">
                     <c:forEach items="${chatList}" var="chat">
+                        <a href="/message?nickname=${chat.nickname}">
                     <button class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2">
                         <div class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full">
                             <c:set var="chatName" value="${chat.nickname}" />
@@ -170,8 +164,8 @@
                         <div class="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-4 w-4 rounded leading-none" >3
                             <!-- 알림숫자 !-->
                         </div>
-
                     </button>
+                        </a>
                     </c:forEach>
 
                     <!--대화가능 유저 끝 -->
@@ -185,7 +179,7 @@
             <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4">
                 <div class="flex flex-col h-full overflow-x-auto mb-4">
                     <div class="flex flex-col h-full">
-                        <div class="grid grid-cols-12 gap-y-2">
+                        <div id="viewMessage" class="grid grid-cols-12 gap-y-2">
                             <c:forEach items="${logs}" var="log">
                                 <c:choose>
                                     <c:when test="${log.myText}">
@@ -214,14 +208,8 @@
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
-
                         </div>
 
-
-<%--                        실시간 채팅 내역--%>
-                        <div id="viewMessage" class="col-start-1 col-end-8 p-3 rounded-lg">
-
-                        </div>
                     </div>
                 </div>
                 <div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
