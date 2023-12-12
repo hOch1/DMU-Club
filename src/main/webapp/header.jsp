@@ -11,7 +11,7 @@
 
 <% if (session.getAttribute("message") != null) { %>
 <script>
-    alert("<%= session.getAttribute("message") %>");
+    Swal.fire("반갑습니다 ${member.username} 님 <%= session.getAttribute("message") %>");
 </script>
 <% session.removeAttribute("message");
 }

@@ -114,9 +114,13 @@
 </div>
 <script>
   function rmConfirm(){
-    box = document.getElementById('checkbox').value;
-    //check box에 value값이 존재하면 진행
-    if(box){
+    // 모든 체크박스 확인
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    var selectedCheck = Array.from(checkboxes).some(function(checkbox) {
+      return checkbox.checked;
+    });
+    if(selectedCheck){
       Swal.fire({
         title: "정말로 삭제하시겠어요?",
         text: "db에서 삭제작업 진행합니다.!",

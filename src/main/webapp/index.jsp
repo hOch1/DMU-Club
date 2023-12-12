@@ -16,15 +16,15 @@
 <jsp:include page="header.jsp"></jsp:include>
 
  <!-- 헤더 영역 -->
-<section class="text-gray-600 body-font">
+<section class="flex h-screen bg-gray-100 justify-center">
     <div class="container px-5 py-5 mx-auto">
         <div class="flex flex-wrap -m-4">
 
 
         <c:forEach var="item" items='${memberList}'>
     <!---프로필-->
-            <div class="p-4 md:w-1/3" >
-                <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+            <div class="p-4 md:w-1/3">
+                <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden bg-white">
                     <div class="w-full">
                         <div class="w-full flex p-2">
                             <div class="p-2 ">
