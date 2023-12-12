@@ -113,15 +113,10 @@
   </div>
 </div>
 <script>
-  // check box가 하나라도 선택되어있으면 실행
   function rmConfirm(){
-    var check = document.querySelectorAll('input[type="checkbox"]');
-    var selectedCheck = Array.from(check).some(function(checkbox) {
-              return checkbox.checked;
-            }
-    )
+    box = document.getElementById('checkbox').value;
     //check box에 value값이 존재하면 진행
-    if(selectedCheck){x
+    if(box){
       Swal.fire({
         title: "정말로 삭제하시겠어요?",
         text: "db에서 삭제작업 진행합니다.!",
@@ -137,7 +132,7 @@
             text: "DB에서 삭제 완료하였습니다!!",
             icon: "success"
           });
-          //삭제 내용 구성 id 값 가져와서 보내기
+          //삭제 내용 구성
         }
       });
     }

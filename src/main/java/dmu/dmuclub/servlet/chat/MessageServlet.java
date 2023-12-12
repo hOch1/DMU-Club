@@ -38,7 +38,7 @@ public class MessageServlet extends HttpServlet {
             List<ChatLogDto> toLog = chatService.findChatLog(toMember.getId());
 
 
-            req.setAttribute("log", createFinalLog(sendLog, toLog));
+            req.setAttribute("logs", createFinalLog(sendLog, toLog));
             req.setAttribute("nickname", nickname);
             req.setAttribute("chatList", chatList);
             req.setAttribute("member", memberDto);

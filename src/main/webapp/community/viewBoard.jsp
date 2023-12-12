@@ -95,7 +95,7 @@
     function sendReportToServer(text) {
         // AJAX 요청을 사용하여 서버로 텍스트 전송
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "/admin/report", true);
+        xhr.open("POST", "/report", true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
         xhr.onreadystatechange = function () {

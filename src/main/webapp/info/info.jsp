@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="dmu.dmuclub.dto.member.MemberDto" %>
-<%@ page import="java.util.List" %>
 
 <!DOCTYPE html>
 <html>
@@ -20,31 +18,13 @@
                     프로필 사진 등록하기
                 </button>
             </h1>
-            <div class="flex items-center space-x-4 mb-4">
-                <img
-                        alt="My Profile"
-                        class="rounded-full border-2 border-blue-500"
-                        height="80"
-                        src="${member.filename}"
-                        width="80"
-                        style="aspect-ratio:80/80;object-fit:cover"
-                />
-                <div>
-                    <h2 class="text-gray-700 dark:text-gray-300">${member.username}</h2>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">${member.nickname}</p>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">${member.email}</p>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">    ${member.mbti}</p>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">${member.phone}</p>
-                </div>
-            </div>
-            </div>
+        </div>
         <h2 class="text-xl text-gray-700 dark:text-gray-300 p-4 border-t border-gray-300 dark:border-gray-700">
             친구목록
         </h2>
-        <ul class="divide-y divide- gray-300 dark:divide-gray-700">
+        <ul class="divide-y divide-gray-300 dark:divide-gray-700">
 
             <!--Start Point-->
-            <c:forEach var="item" items="${friendList}" >
 
             <li class="p-4 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer flex items-center space-x-2 justify-between">
                 <div class="flex items-center space-x-2">
@@ -57,7 +37,7 @@
                             style="aspect-ratio:40/40;object-fit:cover"
                     />
                     <div>
-                        <h2 class="text-gray-700 dark:text-gray-300">${item.username}</h2>
+                        <h2 class="text-gray-700 dark:text-gray-300">별명</h2>
                     </div>
                 </div>
                 <div class="flex space-x-2">
@@ -77,7 +57,6 @@
                 </div>
             </li>
             <!--끝-->
-            </c:forEach>
 
     </ul>
     </div>
@@ -100,7 +79,7 @@ function rmConfirm(){
                 text: "인관간계 정리를 참 잘하시는군요!",
                 icon: "success"
             });
-            //친구 삭제 내용 작성 id 가져와서 넘기기
+            //친구 삭제 내용 작성
 
         }
     });
@@ -130,7 +109,7 @@ function report(){
 function sendReportToServer(text) {
     // AJAX 요청을 사용하여 서버로 텍스트 전송
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/admin/report", true);
+    xhr.open("POST", "/report", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function () {

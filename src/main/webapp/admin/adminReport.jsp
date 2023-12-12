@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="dmu.dmuclub.dto.board.ViewBoardResponse" %>
 <html>
+<% List<ViewBoardResponse> boardResponses = (List<ViewBoardResponse>) request.getAttribute("boardList"); %>
 <body>
 <section class="flex h-screen bg-gray-100 ">
   <jsp:include page="sideBar.jsp" />
@@ -16,7 +17,7 @@
     <ul class="divide-y divide-gray-300 dark:divide-gray-700">
 
       <!--Start Point-->
-      <c:forEach var="report" items='reportList'>
+      <c:forEach var="report" items='#'>
         <li class="p-4 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer flex items-center space-x-2 justify-between">
           <div class="flex items-center space-x-2">
             <img
@@ -47,7 +48,7 @@
 
 <script>
   function reportText(){
-    Swal.fire("report.text");
+    Swal.fire("{report.text}");
   }
 </script>
 </c:forEach>

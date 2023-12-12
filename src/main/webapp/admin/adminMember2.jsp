@@ -3,8 +3,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="dmu.dmuclub.dto.board.ViewBoardResponse" %>
 <html>
+<% List<ViewBoardResponse> boardResponses = (List<ViewBoardResponse>) request.getAttribute("boardList"); %>
 <body>
-<!--가나다라마바사 아자차카타파하-->
 <div class="flex">
 <jsp:include page="sideBar.jsp" flush="false" />
 <!-- component -->
@@ -63,7 +63,7 @@
                     <tbody>
 
 
-                    <c:forEach items="${memberList}" var="member" varStatus="loop">
+                    <c:forEach items="${memberList}" var="member">
                     <tr>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <div class="flex items-center">
@@ -96,8 +96,7 @@
                             </p>
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <input id='check_${loop.index}' type="checkbox" class="ml-2 form-checkbox h-5 w-5 text-green-600" />
-                            <label for="check_${loop.index}"></label>
+                            <input type="checkbox" class="ml-2 form-checkbox h-5 w-5 text-green-600" />
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
@@ -133,14 +132,8 @@
 </div>
 <script>
     function rmConfirm(){
-        // 모든 체크박스 확인
-        var check = document.querySelectorAll('input[type="checkbox"]');
-        var selectedCheck = Array.from(check).some(function(checkbox) {
-                return checkbox.checked;
-            }
-        )
-
-        if(selectedCheck){
+        btn = document.getElementById('checkbox').value;
+        if(btn){
         Swal.fire({
             title: "정말로 삭제하시겠어요?",
             text: "db에서 삭제작업 진행합니다.!",
@@ -148,7 +141,7 @@
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "네 지워주세요."
+            confirmButtonText: "Yes, delete it!."
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
@@ -157,9 +150,6 @@
                     icon: "success"
                 });
                 //삭제 내용 구성
-                // id 값들을 가져와서 넘기기
-
-
 
             }
         });

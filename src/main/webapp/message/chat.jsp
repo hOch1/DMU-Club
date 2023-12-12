@@ -22,31 +22,55 @@
 
     var ws = new WebSocket("ws://localhost:8080/messagePoint/${nickname}");
 
-    <%--ws.onopen = function(event) {--%>
-    <%--  var message = event.data;--%>
-    <%--  document.getElementById("messages").innerHTML += "<p>" + message + "</p>";--%>
-    <%--  console.log("WebSocket 연결 성공");--%>
-    <%--  console.log("<%=nickname%>님과의 채팅방")--%>
-    <%--};--%>
+    // ws.onopen = function(event) {
+    //   var message = event.data;
+    //   document.getElementById("messages").innerHTML += "<p>" + message + "</p>";
+    // };
 
     ws.onmessage = function(event) {
-        var message = event.data;
-        var htmlContent =
+        var message = JSON.parse(event.data);
+        console.log(message.msg);
+        var meText =
             '<div class="flex items-center justify-start flex-row-reverse">' +
             '<div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">' +
             '<!-- Add content here if needed -->' +
             '</div>' +
             '<div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">' +
-            '<div>'+message+'</div>' +
+            '<div>'+message.msg+'</div>' +
             '</div>' +
             '</div>';
 
-        document.getElementById("messages").innerHTML += htmlContent;
+        var elseText =
+            '<div class="flex flex-row items-center">' +
+            '<div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">' +
+            '<!-- Add content here if needed -->' +
+            '</div>' +
+            '<div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">' +
+            '<div>'+message.msg+'</div>' +
+            '</div>' +
+            '</div>';
 
 
-
-
-
+        if (msg.member_id === ${member.id}) {
+            document.getElementById("viewMessage").innerHTML += '<div class="flex items-center justify-start flex-row-reverse">' +
+                '<div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">' +
+                '<!-- Add content here if needed -->' +
+                '</div>' +
+                '<div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">' +
+                '<div>'+message.msg+'</div>' +
+                '</div>' +
+                '</div>';
+        } else {
+            // 다른 사용자가 보낸 메시지인 경우
+            document.getElementById("viewMessage").innerHTML += '<div class="flex flex-row items-center">' +
+                '<div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">' +
+                '<!-- Add content here if needed -->' +
+                '</div>' +
+                '<div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">' +
+                '<div>'+message.msg+'</div>' +
+                '</div>' +
+                '</div>';
+        }
     };
 
     function sendMessage() {
@@ -158,7 +182,6 @@
             <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4">
                 <div class="flex flex-col h-full overflow-x-auto mb-4">
                     <div class="flex flex-col h-full">
-
                         <div class="grid grid-cols-12 gap-y-2">
                             <c:forEach items="${logs}" var="log">
                                 <c:choose>
@@ -188,8 +211,14 @@
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
+
                         </div>
 
+
+<%--                        실시간 채팅 내역--%>
+                        <div id="viewMessage" class="col-start-1 col-end-8 p-3 rounded-lg">
+
+                        </div>
                     </div>
                 </div>
                 <div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
@@ -214,33 +243,18 @@
                     <div class="flex-grow ml-4">
                         <div class="relative w-full">
                             <input type="text" id="message" class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"/>
-                            <button
-                                    class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600"
-                            >
-                                <svg
-                                        class="w-6 h-6"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    ></path>
+                            <button class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                             </button>
                         </div>
                     </div>
                     <div class="ml-4">
-                        <button class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0"
-                        onclick="sendMessage()">
+                        <button class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0" onclick="sendMessage()">
                             <span>Send</span>
                             <span class="ml-2">
-                <svg
-                        class="w-4 h-4 transform rotate-45 -mt-px"
+                <svg class="w-4 h-4 transform rotate-45 -mt-px"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"

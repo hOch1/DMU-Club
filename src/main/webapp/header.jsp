@@ -3,15 +3,6 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <script src="https://cdn.tailwindcss.com"></script> <!--tailwind css-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--sweetalert2 -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>DMU Club</title>
-</head>
-
 <%
     if (session.getAttribute("member") == null)
         response.sendRedirect("/auth/sign-in");
@@ -20,11 +11,20 @@
 
 <% if (session.getAttribute("message") != null) { %>
 <script>
-    Swal.fire("${member.nickname} 님 환영합니다 <%= session.getAttribute("message") %>");
+    alert("<%= session.getAttribute("message") %>");
 </script>
 <% session.removeAttribute("message");
 }
 %>
+
+<head>
+    <script src="https://cdn.tailwindcss.com"></script> <!--tailwind css-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--sweetalert2 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DMU Club</title>
+</head>
 <body>
 <header class="flex justify-between items-center p-4 bg-blue-500">
     <div class="flex items-center" style=cursor:pointer; onclick="location.href='/main'" >
