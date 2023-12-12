@@ -1,3 +1,4 @@
+<%@ page import="dmu.dmuclub.dto.chat.MessageDto" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
@@ -17,7 +18,6 @@
 </head>
 <body>
 
-
 <script>
 
     var ws = new WebSocket("ws://localhost:8080/messagePoint/${nickname}");
@@ -29,14 +29,17 @@
 
     ws.onmessage = function(event) {
         var message = JSON.parse(event.data);
-        console.log(message.msg);
+        var msg = message.msg;
+        var member = message.member_id;
+
+        console.log(msg);
         var meText =
             '<div class="flex items-center justify-start flex-row-reverse">' +
             '<div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">' +
             '<!-- Add content here if needed -->' +
             '</div>' +
             '<div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">' +
-            '<div>'+message.msg+'</div>' +
+            '<div>'+msg+'</div>' +
             '</div>' +
             '</div>';
 
@@ -46,12 +49,12 @@
             '<!-- Add content here if needed -->' +
             '</div>' +
             '<div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">' +
-            '<div>'+message.msg+'</div>' +
+            '<div>'+msg+'</div>' +
             '</div>' +
             '</div>';
 
 
-        if (msg.member_id === ${member.id}) {
+        if (member === ${member.id}) {
             document.getElementById("viewMessage").innerHTML += '<div class="flex items-center justify-start flex-row-reverse">' +
                 '<div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">' +
                 '<!-- Add content here if needed -->' +
@@ -67,7 +70,7 @@
                 '<!-- Add content here if needed -->' +
                 '</div>' +
                 '<div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">' +
-                '<div>'+message.msg+'</div>' +
+                '<div>'+msg+'</div>' +
                 '</div>' +
                 '</div>';
         }
