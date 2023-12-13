@@ -90,15 +90,15 @@
                             <div class="mt-4 px-4 h-full overflow-auto">
 
                                 <!--시작-->
-                                <div class="p-2 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100"
-                                >
+                                <c:forEach items="${askFriend}" var="ask">
+                                <div class="p-2 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100">
                                     <div class="p-2 w-12"><img
                                             src="https://dummyimage.com/50x50/bababa/0011ff&amp;text=50x50" alt="상대방 이미지?">
                                     </div>
                                     <div class="flex-auto text-sm w-32">
-                                        <div class="font-bold">이름</div>
-                                        <div class="truncate">별명</div>
-                                        <div class="text-gray-400">mbti</div>
+                                        <div class="font-bold">${ask.username}</div>
+                                        <div class="truncate">${ask.nickname}</div>
+                                        <div class="text-gray-400">${ask.mbti}</div>
                                     </div>
                                     <div class="flex flex-col w-18 font-medium items-end">
                                         <div class="w-4 h-4 mb-6 hover:bg-green-200 rounded-full cursor-pointer text-blue-700">
@@ -109,19 +109,24 @@
                                             </svg>
                                         </div>
                                         <div class="flex items-end">
+                                            <form action="/member/acceptFriend?id=${ask.id}" method="post">
                                             <button
                                                     class="inline-flex items-center justify-center rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-8 px-2 py-1 text-sm bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600"
-                                                    type="button">
+                                                    type="submit">
                                                 accept
                                             </button>
+                                            </form>
+                                            <form action="/member/refuseFriend?id=${ask.id}" method="post">
                                             <button
                                                     class="inline-flex items-center justify-center rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-8 px-2 py-1 text-sm bg-red-500 hover:bg-red-600 text-white"
-                                                    type="button">
+                                                    type="submit">
                                                 refuse
                                             </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
+                                </c:forEach>
                                 <!--끝-->
 
                             </div>

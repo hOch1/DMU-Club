@@ -29,8 +29,6 @@ public class MatchServlet extends HttpServlet {
             MemberDto memberDto = (MemberDto) session.getAttribute("member");
             List<MemberDto> memberDtoList = memberService.findAll();
 
-            System.out.println(memberDtoList);
-
             request.setAttribute("memberList", changeList(memberDtoList, memberDto));
             request.getRequestDispatcher("/matching/matching.jsp").forward(request, response);
         } catch (SQLException e) {

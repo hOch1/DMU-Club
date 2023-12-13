@@ -1,6 +1,7 @@
 package dmu.dmuclub;
 
 import dmu.dmuclub.dto.member.MemberDto;
+import dmu.dmuclub.service.friend.FriendService;
 import dmu.dmuclub.service.member.MemberService;
 
 import java.io.*;
@@ -13,6 +14,7 @@ import javax.servlet.annotation.*;
 @WebServlet("/main")
 public class IndexServlet extends HttpServlet {
     private final MemberService memberService = new MemberService();
+    private final FriendService friendService = new FriendService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,11 +27,17 @@ public class IndexServlet extends HttpServlet {
                     response.sendRedirect("/admin");
                 else {
                     List<MemberDto> memberDtoList = memberService.matchMember(memberDto.getMbti());
+                    List<MemberDto> askFriends = friendService.findAskFriend(memberDto.getId());
 
                     if (memberDtoList.isEmpty())
                         session.setAttribute("memberList", null);
                     else
                         session.setAttribute("memberList", memberDtoList);
+
+                    if (askFriends.isEmpty())
+                        session.setAttribute("askFriend", null);
+                    else
+                        session.setAttribute("askFriend", askFriends);
 
                     request.getRequestDispatcher("/index.jsp").forward(request, response);
                 }

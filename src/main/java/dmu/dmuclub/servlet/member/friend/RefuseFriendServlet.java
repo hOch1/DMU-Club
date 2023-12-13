@@ -1,8 +1,7 @@
-package dmu.dmuclub.servlet.member;
+package dmu.dmuclub.servlet.member.friend;
 
 import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.service.friend.FriendService;
-import dmu.dmuclub.service.member.MemberService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,9 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/member/addfriend")
-public class AddFriendServlet extends HttpServlet {
-
+@WebServlet("/member/refuseFriend")
+public class RefuseFriendServlet extends HttpServlet {
     private final FriendService friendService = new FriendService();
 
     @Override
@@ -23,9 +21,10 @@ public class AddFriendServlet extends HttpServlet {
         try {
             HttpSession session = req.getSession();
             MemberDto memberDto = (MemberDto) session.getAttribute("member");
+            int id = Integer.parseInt(req.getParameter("id"));
 
-            int member_id = Integer.parseInt(req.getParameter("member_id"));
-            friendService.addFriend(memberDto.getId(), member_id);
+            friendService.refuseFried(id, memberDto.getId());
+            resp.sendRedirect("/main");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

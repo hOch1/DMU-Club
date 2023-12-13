@@ -35,6 +35,7 @@ public class DBInit implements ServletContextListener {
                 executeSqlScript(connection, "initDB/chat.sql");
                 executeSqlScript(connection, "initDB/chatlog.sql");
                 executeSqlScript(connection, "initDB/images.sql");
+                executeSqlScript(connection, "initDB/askfriend.sql");
 
                 insertInitialData(connection);
             } catch (SQLException | IOException e) {

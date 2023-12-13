@@ -1,6 +1,7 @@
 package dmu.dmuclub.servlet.board;
 
 import dmu.dmuclub.dto.board.CreateBoardRequest;
+import dmu.dmuclub.dto.member.MemberDto;
 import dmu.dmuclub.service.board.BoardService;
 
 import javax.servlet.ServletException;
@@ -23,6 +24,7 @@ public class CreateBoardServlet extends HttpServlet {
             HttpSession session = request.getSession();
             boardService.createBoard(createBoardRequest(request), session);
 
+            response.sendRedirect("/board");
         } catch (RuntimeException | SQLException | ClassNotFoundException e){
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
