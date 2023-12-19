@@ -92,21 +92,17 @@ function deleteFriend(friendId){
     }).then((result) => {
 
         if (result.isConfirmed) {
-            Swal.fire({
-                title: "삭제 완료!",
-                text: "인관간계 정리를 참 잘하시는군요!",
-                icon: "success"
-            });
+
 
             //친구 삭제 내용 작성
             const xhr = new XMLHttpRequest();
 
             // POST 요청 설정
-            xhr.open("POST", "/friend/delete", true);
+            xhr.open("POST", "/member/deleteFriend", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
             // POST 요청 본문 데이터 생성
-            const requestData = `id=${profile.id}`;
+            const requestData = `id=`+friendId;
 
             // 요청 전송
             xhr.send(requestData);
@@ -116,13 +112,16 @@ function deleteFriend(friendId){
                 if (xhr.status >= 200 && xhr.status < 300) {
                     // 성공적으로 요청이 완료된 경우
                     console.log("POST 요청이 성공적으로 완료되었습니다.");
-                    Swal.fire('친구요청 완료!')
+                    Swal.fire({
+                        title: "삭제 완료!",
+                        text: "인관간계 정리를 참 잘하시는군요!",
+                        icon: "success"
+                    });
                 } else {
                     // 요청이 실패한 경우
                     console.error("POST 요청이 실패하였습니다.");
                 }
             };
-            location.href=`/member/deleteFriend?id=`+ id;
         }
     });
 }
