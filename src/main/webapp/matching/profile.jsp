@@ -70,7 +70,7 @@
             <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" class="w-full h-full rounded-tl-lg rounded-tr-lg">
         </div>
         <div class="flex flex-col items-center -mt-20">
-            <img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">
+            <img src="/img/default_img.jpg" class="w-40 border-4 border-white rounded-full">
             <div class="flex items-center space-x-2 mt-2">
                 <p class="text-2xl">${profile.nickname}</p>
                 <span class="bg-blue-500 rounded-full p-1" title="Verified">
@@ -82,7 +82,8 @@
         </div>
         <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
             <div class="flex items-center space-x-4 mt-2">
-                <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100" >
+                <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100"
+                onclick="addFriend()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
                     </svg>
@@ -127,18 +128,38 @@
 
                 </ul>
             </div>
-
-
-
-
-
-
           </div>
         </div>
 
     <script>
     //친구추가
+    function addFriend(){
+        // XMLHttpRequest 생성
+        const xhr = new XMLHttpRequest();
 
+        // POST 요청 설정
+        xhr.open("POST", "/member/askFriend", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        // POST 요청 본문 데이터 생성
+        const requestData = `id=${profile.id}`;
+
+        // 요청 전송
+        xhr.send(requestData);
+
+        // 요청 완료 후의 처리
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // 성공적으로 요청이 완료된 경우
+                console.log("POST 요청이 성공적으로 완료되었습니다.");
+                Swal.fire('친구요청 완료!')
+            } else {
+                // 요청이 실패한 경우
+                console.error("POST 요청이 실패하였습니다.");
+            }
+        };
+
+    }
     </script>
 <jsp:include page="/footer.jsp" flush="false" />
 </body>

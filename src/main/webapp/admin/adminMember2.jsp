@@ -45,6 +45,9 @@
                     <thead>
                     <tr>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            No
+                        </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             이름
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -65,12 +68,12 @@
 
 
                     <c:forEach items="${memberList}" var="member" varStatus="loop">
-                        <%! ArrayList<Integer> al = new ArrayList<>();%>
-                        <%al.add(%>
-                        ${loop.index}
-                        <%);%>
-
                     <tr>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <p class="text-gray-900 whitespace-no-wrap">
+                                    ${member.id}
+                            </p>
+                        </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 w-10 h-10">
@@ -160,8 +163,32 @@
                     text: "DB에서 삭제 완료하였습니다!.!",
                     icon: "success"
                 });
-                //삭제 내용 구성
-                location.href='/admin/member/delete?id=${loop.index}'
+                // XMLHttpRequest 생성
+                const xhr = new XMLHttpRequest();
+
+                // POST 요청 설정
+                xhr.open("POST", "/admin/member/delete", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                // POST 요청 본문 데이터 생성
+                const requestData = `id=${profile.id}`;
+
+                // 요청 전송
+                xhr.send(requestData);
+
+                // 요청 완료 후의 처리
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        // 성공적으로 요청이 완료된 경우
+                        console.log("POST 요청이 성공적으로 완료되었습니다.");
+
+
+                    } else {
+                        // 요청이 실패한 경우
+                        console.error("POST 요청이 실패하였습니다.");
+
+                    }
+                };
             }
         });
     }
