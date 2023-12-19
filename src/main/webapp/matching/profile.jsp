@@ -82,17 +82,17 @@
         </div>
         <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
             <div class="flex items-center space-x-4 mt-2">
-                <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100" >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
                     </svg>
-                    <span>Connect</span>
+                    <span> 친구 추가</span>
                 </button>
                 <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
                     </svg>
-                    <span>Message</span>
+                    <span>메시지</span>
                 </button>
             </div>
         </div>
@@ -137,44 +137,9 @@
         </div>
 
     <script>
+    //친구추가
 
-    const DATA_SET_VERTICAL_BAR_CHART_1 = [68.106, 26.762, 94.255, 72.021, 74.082, 64.923, 85.565, 32.432, 54.664, 87.654, 43.013, 91.443];
-
-    const labels_vertical_bar_chart = ['January', 'February', 'Mart', 'April', 'May', 'Jun', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-    const dataVerticalBarChart= {
-        labels: labels_vertical_bar_chart,
-        datasets: [
-            {
-                label: 'Revenue',
-                data: DATA_SET_VERTICAL_BAR_CHART_1,
-                borderColor: 'rgb(54, 162, 235)',
-                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-            }
-        ]
-    };
-    const configVerticalBarChart = {
-        type: 'bar',
-        data: dataVerticalBarChart,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Last 12 Months'
-                }
-            }
-        },
-    };
-
-    var verticalBarChart = new Chart(
-        document.getElementById('verticalBarChart'),
-        configVerticalBarChart
-    );
-</script>
+    </script>
 <jsp:include page="/footer.jsp" flush="false" />
 </body>
 </html>

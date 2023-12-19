@@ -72,6 +72,8 @@
     function sendMessage() {
         var message = document.getElementById("message").value;
         ws.send(message);
+
+        document.getElementById("message").value ='' ;
     }
 </script>
 
@@ -145,26 +147,26 @@
                 <div class="flex flex-row items-center justify-between text-xs">
                     <span class="font-bold">대화 가능한 유저</span>
                     <span class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full">
-            <%--메시지 가능한 인원 수--%>
-            </span>
+                        <%--메시지 가능한 인원 수--%>
+                    </span>
                 </div>
 
                 <!-- 대화가능 유저 시작 -->
                 <div class="flex flex-col space-y-1 mt-4 -mx-2 h-48 overflow-y-auto">
                     <c:forEach items="${chatList}" var="chat">
                         <a href="/message?nickname=${chat.nickname}">
-                    <button class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2">
-                        <div class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full">
-                            <c:set var="chatName" value="${chat.nickname}" />
-                            <c:set var="firstCharacter" value="${fn:substring(chatName, 0, 1)}" />
-                            ${firstCharacter}
-                            <!-- 프로필 안에 성-->
-                        </div>
-                        <div class="ml-2 text-sm font-semibold">${chat.nickname}</div>
-                        <div class="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-4 w-4 rounded leading-none" >3
-                            <!-- 알림숫자 !-->
-                        </div>
-                    </button>
+                            <button class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2">
+                                <div class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full">
+                                    <c:set var="chatName" value="${chat.nickname}" />
+                                    <c:set var="firstCharacter" value="${fn:substring(chatName, 0, 1)}" />
+                                        ${firstCharacter}
+                                    <!-- 프로필 안에 성-->
+                                </div>
+                                <div class="ml-2 text-sm font-semibold">${chat.nickname}</div>
+                                <div class="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-4 w-4 rounded leading-none" >3
+                                    <!-- 알림숫자 !-->
+                                </div>
+                            </button>
                         </a>
                     </c:forEach>
 
@@ -246,10 +248,10 @@
                             <span>Send</span>
                             <span class="ml-2">
                 <svg class="w-4 h-4 transform rotate-45 -mt-px"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24"
+                     xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                           stroke-linecap="round"

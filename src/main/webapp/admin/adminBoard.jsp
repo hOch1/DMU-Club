@@ -84,7 +84,7 @@
                   </p>
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <input type="checkbox" class="ml-2 form-checkbox h-5 w-5 text-green-600" />
+                  <input type="checkbox" class="ml-2 form-checkbox h-5 w-5 text-green-600" id="${board.id}" />
                 </td>
               </tr>
             </c:forEach>
@@ -137,6 +137,7 @@
             icon: "success"
           });
           //삭제 내용 구성
+
         }
       });
     }

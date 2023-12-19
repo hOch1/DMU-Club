@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="dmu.dmuclub.dto.board.ViewBoardResponse" %>
+<%@ page import="java.util.ArrayList" %>
 <html>
 <% List<ViewBoardResponse> boardResponses = (List<ViewBoardResponse>) request.getAttribute("boardList"); %>
 <body>
@@ -63,7 +64,12 @@
                     <tbody>
 
 
-                    <c:forEach items="${memberList}" var="member">
+                    <c:forEach items="${memberList}" var="member" varStatus="loop">
+                        <%! ArrayList<Integer> al = new ArrayList<>();%>
+                        <%al.add(%>
+                        ${loop.index}
+                        <%);%>
+
                     <tr>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <div class="flex items-center">
@@ -155,7 +161,7 @@
                     icon: "success"
                 });
                 //삭제 내용 구성
-
+                location.href='/admin/member/delete?id=${loop.index}'
             }
         });
     }

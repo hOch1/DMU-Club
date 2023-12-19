@@ -39,45 +39,48 @@
         <ul class="divide-y divide-gray-300 dark:divide-gray-700">
 
             <!--Start Point-->
-
+            <c:forEach var="item" items="${friendList}" varStatus="loop">
             <li class="p-4 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer flex items-center space-x-2 justify-between">
                 <div class="flex items-center space-x-2">
                     <img
                             alt="Friend 1"
                             class="rounded-full border-2 border-blue-500"
                             height="40"
-                            src="../img/default_img.jpg"
+                            src="/img/default_img.jpg"
                             width="40"
                             style="aspect-ratio:40/40;object-fit:cover"
                     />
                     <div>
-                        <h2 class="text-gray-700 dark:text-gray-300">별명</h2>
+                        <h2 class="text-gray-700 dark:text-gray-300">${item.username}</h2>
                     </div>
                 </div>
                 <div class="flex space-x-2">
                     <button
                             class="inline-flex items-center justify-center rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-10 px-2 py-1 text-sm bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600"
                             type="button"
-                            onclick="rmConfirm()"
+                            onclick="deleteFriend(${item.id})"
                     >
                         Remove
                     </button>
                     <button
                             class="inline-flex items-center justify-center rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-2 py-1 text-sm bg-red-500 hover:bg-red-600 text-white"
-                            type="button" onclick="report()"
+                            type="button" onclick="report(${item.id})"
                     >
                         Report
                     </button>
                 </div>
             </li>
+            </c:forEach>
             <!--끝-->
 
     </ul>
     </div>
 </section>
 
-<script> //삭제 alert
-function rmConfirm(){
+<script>
+    //삭제 alert + 친구 삭제기능
+function deleteFriend(friendId){
+    let id = friendId;
     Swal.fire({
         title: "정말로 삭제하시겠어요?",
         text: "다시는 만날 수 없을지도 모릅니다!",
@@ -87,14 +90,17 @@ function rmConfirm(){
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!."
     }).then((result) => {
+
         if (result.isConfirmed) {
+
             Swal.fire({
                 title: "삭제 완료!",
                 text: "인관간계 정리를 참 잘하시는군요!",
                 icon: "success"
             });
-            //친구 삭제 내용 작성
 
+            //친구 삭제 내용 작성
+            location.href=`/member/deleteFriend?id=`+id;
         }
     });
 }
@@ -114,7 +120,7 @@ function report(){
         if (text) {
             // 서버로 텍스트 전송
             sendReportToServer(text);
-
+            Swal.fire('신고가 완료되었습니다!!');
         }
     })()
 }

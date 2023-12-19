@@ -7,7 +7,7 @@
 <html>
 <head>
     <script src="https://cdn.tailwindcss.com"></script> <!--테일윈드 라이브러리-->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script> <!--=Alpine.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script> <!--Alpine.js -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

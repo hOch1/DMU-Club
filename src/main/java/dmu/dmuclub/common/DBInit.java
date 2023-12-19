@@ -60,7 +60,9 @@ public class DBInit implements ServletContextListener {
                 dropTables(statement, "chatlog");
                 dropTables(statement, "chat");
                 dropTables(statement, "images");
+                dropTables(statement,"askfriend");
                 dropTables(statement, "member");
+
 
             } catch (SQLException e) {
                 e.printStackTrace();

@@ -12,8 +12,8 @@
         <div class="flex items-center">
             <img src="img/default_img.png" alt="이미지" class="rounded-full h-10 w-10" width="40" height="40" style="aspect-ratio: 40 / 40; object-fit: cover;"/>
             <div class="ml-3">
-                <div class="text-sm font-medium">user</div>
-                <div class="text-xs text-gray-500">createDate</div>
+                <div class="text-sm font-medium">${board.author}</div>
+                <div class="text-xs text-gray-500">${board.createDate}</div>
             </div>
         </div>
 
@@ -28,8 +28,8 @@
     </div>
 
     <div class="py-4">
-        <h2 class="text-lg font-semibold">title</h2>
-        <p class="text-sm text-gray-600 mt-1">contents</p>
+        <h2 class="text-lg font-semibold">${board.title}</h2>
+        <p class="text-sm text-gray-600 mt-1">${board.content}</p>
     </div>
 
     <div class="flex items-center space-x-4">
@@ -66,7 +66,7 @@
 </div>
 <button
         class="inline-flex items-center justify-center rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-10 px-2 py-1 text-sm bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600"
-        type="button" onclick="location.href='/community'"
+        type="button" onclick="location.href='/board'"
 >
     글 목록
 </button>
