@@ -33,6 +33,22 @@ public class ChatDaoImpl implements ChatDao {
     }
 
     @Override
+    public void deleteByFrom_Member_IdAndTo_Member_Id(int from_member_id, int to_member_id) throws SQLException {
+        String query = "DELETE FROM chat WHERE member1_id = ? AND member2_id = ?";
+
+        try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
+            preparedStatement.setInt(1, from_member_id);
+            preparedStatement.setInt(2, to_member_id);
+            preparedStatement.executeUpdate();
+        }
+        try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
+            preparedStatement.setInt(1, to_member_id);
+            preparedStatement.setInt(2, from_member_id);
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    @Override
     public ChatDto findByFrom_member_id(int from_member_id) throws SQLException {
         String query = "SELECT * FROM chat WHERE from_member = ?";
         try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {

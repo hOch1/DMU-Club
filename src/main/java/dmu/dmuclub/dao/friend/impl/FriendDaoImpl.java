@@ -34,6 +34,22 @@ public class FriendDaoImpl implements FriendDao {
     }
 
     @Override
+    public void deleteByMember1_idAndMember2_id(int member1_id, int member2_id) throws SQLException {
+        String query = "DELETE FROM friend WHERE member1_id = ? AND member2_id = ?";
+
+        try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
+            preparedStatement.setInt(1, member1_id);
+            preparedStatement.setInt(2, member2_id);
+            preparedStatement.executeUpdate();
+        }
+        try (PreparedStatement preparedStatement = CON.prepareStatement(query)) {
+            preparedStatement.setInt(1, member2_id);
+            preparedStatement.setInt(2, member1_id);
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    @Override
     public List<FriendDto> findById(int member_id) throws SQLException{
         String query = "SELECT * FROM friend where member1_id = ?";
         List<FriendDto> friendDtoList = new ArrayList<>();

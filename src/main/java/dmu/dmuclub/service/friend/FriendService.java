@@ -1,5 +1,7 @@
 package dmu.dmuclub.service.friend;
 
+import dmu.dmuclub.dao.chat.ChatDao;
+import dmu.dmuclub.dao.chat.impl.ChatDaoImpl;
 import dmu.dmuclub.dao.friend.AskFriendDao;
 import dmu.dmuclub.dao.friend.FriendDao;
 import dmu.dmuclub.dao.friend.impl.AskFriendDaoImpl;
@@ -20,11 +22,17 @@ public class FriendService {
     private final FriendDao friendDao = new FriendDaoImpl();
     private final AskFriendDao askFriendDao = new AskFriendDaoImpl();
     private final MemberDao memberDao = new MemberDaoImpl();
+    private final ChatDao chatDao = new ChatDaoImpl();
     private final ChatService chatService = new ChatService();
 
     public void addFriend(int member1_id, int member2_id) throws SQLException {
         friendDao.save(member1_id, member2_id);
         chatService.createChat(member1_id, member2_id);
+    }
+
+    public void deleteFriend(int member1_id, int member2_id) throws SQLException {
+        friendDao.deleteByMember1_idAndMember2_id(member1_id,member2_id);
+        chatDao.deleteByFrom_Member_IdAndTo_Member_Id(member1_id, member2_id);
     }
 
     public void addAskFriend(int from_member, int to_member) throws SQLException {

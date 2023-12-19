@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/member/askfriend")
-public class AskFriendServlet extends HttpServlet {
+@WebServlet("/member/deleteFriend")
+public class DeleteFriendServlet extends HttpServlet {
 
     private final FriendService friendService = new FriendService();
 
@@ -21,12 +21,12 @@ public class AskFriendServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             int id = Integer.parseInt(req.getParameter("id"));
+
             HttpSession session = req.getSession();
             MemberDto memberDto = (MemberDto) session.getAttribute("member");
 
-            friendService.addAskFriend(memberDto.getId(), id);
-
-            resp.sendRedirect("/main");
+            friendService.deleteFriend(memberDto.getId(), id);
+            resp.sendRedirect("/info");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
