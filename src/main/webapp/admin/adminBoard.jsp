@@ -145,7 +145,33 @@
             icon: "success"
           });
           //삭제 내용 구성
+          checkboxes.forEach(function(checkbox){
+            if(checkbox.checked){
+              //친구 삭제 내용 작성
+              const xhr = new XMLHttpRequest();
 
+              // POST 요청 설정
+              xhr.open("POST", "/admin/board/delete", true);
+              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+              // POST 요청 본문 데이터 생성
+              const requestData = `id=`+checkbox.id;
+
+              // 요청 전송
+              xhr.send(requestData);
+
+              // 요청 완료 후의 처리
+              xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                  // 성공적으로 요청이 완료된 경우
+                  console.log("POST 요청이 성공적으로 완료되었습니다.");
+                } else {
+                  // 요청이 실패한 경우
+                  console.error("POST 요청이 실패하였습니다.");
+                }
+              };
+            }
+          })
         }
       });
     }

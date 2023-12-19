@@ -80,7 +80,6 @@
 <script>
     //삭제 alert + 친구 삭제기능
 function deleteFriend(friendId){
-    let id = friendId;
     Swal.fire({
         title: "정말로 삭제하시겠어요?",
         text: "다시는 만날 수 없을지도 모릅니다!",
@@ -92,7 +91,11 @@ function deleteFriend(friendId){
     }).then((result) => {
 
         if (result.isConfirmed) {
-
+            Swal.fire({
+                title: "삭제 완료!",
+                text: "인관간계 정리를 참 잘하시는군요!",
+                icon: "success"
+            });
 
             //친구 삭제 내용 작성
             const xhr = new XMLHttpRequest();
@@ -112,11 +115,7 @@ function deleteFriend(friendId){
                 if (xhr.status >= 200 && xhr.status < 300) {
                     // 성공적으로 요청이 완료된 경우
                     console.log("POST 요청이 성공적으로 완료되었습니다.");
-                    Swal.fire({
-                        title: "삭제 완료!",
-                        text: "인관간계 정리를 참 잘하시는군요!",
-                        icon: "success"
-                    });
+                    location.reload();
                 } else {
                     // 요청이 실패한 경우
                     console.error("POST 요청이 실패하였습니다.");
@@ -124,6 +123,7 @@ function deleteFriend(friendId){
             };
         }
     });
+
 }
 
 // 신고 alert

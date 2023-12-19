@@ -62,8 +62,7 @@
                         console.error('Error: ', xhr.statusText);
                         console.error('Error response:', xhr.responseText);
                     }
-                };x
-
+                };
                     // Ajax 요청 실패 처리
                 xhr.onerror = function() {
                     console.error('Request failed');
