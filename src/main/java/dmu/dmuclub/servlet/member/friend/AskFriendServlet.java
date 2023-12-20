@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/member/askfriend")
+@WebServlet("/member/askFriend")
 public class AskFriendServlet extends HttpServlet {
 
     private final FriendService friendService = new FriendService();

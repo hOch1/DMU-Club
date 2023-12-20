@@ -22,7 +22,6 @@ public class ProfileServlet extends HttpServlet {
             String member_id = req.getParameter("id");
             MemberDto memberDto = memberService.findMember(member_id);
 
-            System.out.println(memberDto);
             req.setAttribute("profile", memberDto);
             req.getRequestDispatcher("/matching/profile.jsp").forward(req, resp);
         } catch (SQLException e) {

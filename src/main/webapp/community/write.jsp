@@ -57,6 +57,7 @@
                             text: "게시판에 업로드 되었습니다!",
                             icon: "success"
                         });
+                        window.location.replace("http://localhost:8080/board");
                     } else {
                         // 서버에서 오류 응답을 받았을 때 처리
                         console.error('Error: ', xhr.statusText);
