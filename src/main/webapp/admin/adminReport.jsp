@@ -29,7 +29,7 @@
                     style="aspect-ratio:40/40;object-fit:cover"
             />
             <div>
-              <h2 class="text-gray-700 dark:text-gray-300">report.name</h2>
+              <h2 class="text-gray-700 dark:text-gray-300">jun</h2>
             </div>
           </div>
           <div class="flex space-x-2">
@@ -48,7 +48,7 @@
 
 <script>
   function reportText(){
-    Swal.fire("{report.text}");
+    Swal.fire("신고내역");
   }
 </script>
 </c:forEach>

@@ -24,7 +24,7 @@ public class ReportManagementServlet extends HttpServlet {
             List<ReportResponse> reportResponses = reportService.findAll();
 
             request.setAttribute("reportList", reportResponses);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("admin/adminReport.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/adminReport.jsp");
             dispatcher.forward(request, response);
         } catch (SQLException e){
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());

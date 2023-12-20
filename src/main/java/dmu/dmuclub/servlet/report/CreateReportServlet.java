@@ -18,15 +18,13 @@ public class CreateReportServlet extends HttpServlet {
     private final ReportService reportService = new ReportService();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
             reportService.createReport(createReportRequest(request), session);
 
-            // 임시 Response
-            response.setContentType("text/html");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().println("게시물 생성 완료");
+
+            response.sendRedirect("/main");
         }catch (RuntimeException | SQLException e){
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
